@@ -1,0 +1,11 @@
+# Secrets: never commit API keys
+.env
+
+# Local data cache (CORD images + ground truth, re-downloadable from Hugging Face)
+data/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
