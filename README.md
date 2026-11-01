@@ -1,15 +1,42 @@
 # interfaze-consistency-eval
 
-**Gemini 3.5 Flash scored higher than Interfaze on every field under strict scoring** (all 4 fields
-correct: 41.6% vs 32.8% of 125 receipt-runs). Per field the margin is 2–9 receipt-runs, less than 2
-receipts' worth. Both models got every price value right once formatting was ignored.
+A small, reproducible benchmark of accuracy and run-to-run consistency on receipt extraction:
+Interfaze (`interfaze-1`) vs Gemini 3.5 Flash, on 25 receipts from CORD v2 with 5 runs each at
+temperature 0. Interfaze's paper reports accuracy but not consistency; this measures both.
 
-**Interfaze was more consistent byte for byte** (5 identical outputs on 84% vs 68% of receipts).
-Most of Gemini's extra variation is formatting, and after normalisation the gap is 84% vs 80%
-(21 vs 20 receipts). Neither model gave the same content every time at temperature 0.
+## Findings, in plain words
 
-This is a 25-receipt pilot on one domain: differences of one or two receipts are within noise.
-Interfaze was slower (median 12.9 s vs 4.6 s) and cost about 2.3× more per call here.
+1. **For simple extraction, sending the image straight to a vision-language model (VLM) may be the
+   better route.** Interfaze first runs OCR, then gives the OCR result to its main model as extra
+   input. Gemini reads the image directly. On these receipts, Gemini was:
+   - at least as accurate: it tied on 17 of 25 receipts, did better on 7 and worse on 1;
+   - about 2.3× cheaper per receipt, because Interfaze's OCR output adds about 9× more input tokens;
+   - about 2–2.5× faster under normal conditions.
+
+   Every price Interfaze got wrong (20 of 20) was already wrong in its OCR text and was copied into
+   the answer. An OCR step earns its cost when you need word positions and confidence scores. When
+   you only need the values, a direct VLM looks like the better fit. This is one small task, so treat
+   it as a hypothesis to test, not a proven rule.
+
+2. **Interfaze's OCR step is very consistent; the variation comes from the step after it.** Its OCR
+   text was identical in all 5 runs on 24 of 25 receipts. Its final answer was identical on 21 of 25
+   (84%), against 68% for Gemini byte for byte and 80% after normalising formatting. On every receipt
+   where Interfaze's final answer changed, its OCR text had not changed. So the variation comes from
+   the model that writes the answer, even at temperature 0.
+
+3. **The OCR flagged its own mistakes, but the final answer used them anyway.** Interfaze's OCR gives
+   every word a confidence score, and the median is 0.99. Its clearest misreads scored far lower:
+
+   | Misread | Confidence |
+   |---|---|
+   | a size `L` read as `1` | 0.66 |
+   | `28,000` read as `28.000` | 0.63 |
+   | `Rp 38.000` read as `RP38,000` | 0.59 |
+
+   All three went straight into the final answer. Re-checking or flagging low-confidence words looks
+   like a simple improvement. The signal isn't perfect: on one receipt a wrong price scored 0.96.
+
+`python ocr_analysis.py` recomputes findings 2 and 3 from the saved responses.
 
 ## Method
 
@@ -136,6 +163,7 @@ python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env              # add INTERFAZE_API_KEY and GEMINI_API_KEY
 .venv/bin/python -m pytest        # metric tests
 .venv/bin/python run_eval.py --n 25 --runs 5
+.venv/bin/python ocr_analysis.py  # findings 2 and 3, from saved responses only
 ```
 
 `run_eval.py` downloads and caches the receipts under `data/` (gitignored). It saves every raw API
@@ -151,6 +179,7 @@ To re-score the committed raw responses without calling any API:
 | `extract.py` | the prompt, schema, model configs, and the API call with retries |
 | `metrics.py` | pure scoring functions (normalisation, accuracy, consistency, latency, cost) |
 | `run_eval.py` | collects responses (resume-safe), scores them, writes the CSVs |
+| `ocr_analysis.py` | reads Interfaze's saved OCR output: its stability and the confidence of misread words |
 | `tests/` | pytest tests for every metric function |
 | `DECISIONS.md` | every design choice and why |
 
