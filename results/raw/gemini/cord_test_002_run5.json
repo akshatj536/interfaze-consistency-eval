@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_002",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T16:09:33.695985+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1387299 bytes, sha256=571ac6af26e75de8c06747a8c536c778f19a4562879090813571eddc74603d34>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "NmTnasH3INzt694PpaDhoAY",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"28,000\",\"subtotal_price\":\"28,000\",\"items\":[{\"name\":\"1 JASMINE MT ( L )\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "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"
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549373,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 38,
+   "prompt_tokens": 1202,
+   "total_tokens": 2357,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 8.009344769001473,
+ "attempts": 1
+}

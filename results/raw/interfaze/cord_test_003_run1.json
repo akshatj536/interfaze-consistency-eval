@@ -1,0 +1,857 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_003",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T14:17:32.679351+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1278906 bytes, sha256=8f73f0c4803ea8815040a50e3389d4f3fa15e8c28cb6d50ea9854f6f6c22bd63>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-996e096f-cd60-4825-8334-e990d25b78ed",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"11,000\",\"subtotal_price\":\"11,000\",\"items\":[{\"name\":\"DONAT GULA\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793542652,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 719,
+   "prompt_tokens": 10979,
+   "total_tokens": 11698,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "D\n...... . ....\n1X\n@11000\nDONAT GULA\n11,000\n1.00×ITEMs\nSUBTOTAL\n11,000\nTOTAL\n11,000\nCASH\n11,000",
+     "sections": [
+      {
+       "text": "D\n...... . ....\n1X\n@11000\nDONAT GULA\n11,000\n1.00×ITEMs\nSUBTOTAL\n11,000\nTOTAL\n11,000\nCASH\n11,000",
+       "lines": [
+        {
+         "text": "D",
+         "words": [
+          {
+           "text": "D",
+           "bounds": {
+            "top_left": {
+             "x": 161,
+             "y": 262
+            },
+            "top_right": {
+             "x": 221,
+             "y": 262
+            },
+            "bottom_right": {
+             "x": 223,
+             "y": 394
+            },
+            "bottom_left": {
+             "x": 163,
+             "y": 395
+            },
+            "width": 60,
+            "height": 132.5
+           },
+           "confidence": 0.87
+          }
+         ],
+         "average_confidence": 0.87,
+         "bounds": {
+          "top_left": {
+           "x": 161,
+           "y": 262
+          },
+          "top_right": {
+           "x": 223,
+           "y": 262
+          },
+          "bottom_right": {
+           "x": 223,
+           "y": 395
+          },
+          "bottom_left": {
+           "x": 161,
+           "y": 395
+          },
+          "width": 62,
+          "height": 132.5
+         }
+        },
+        {
+         "text": "...... . ....",
+         "words": [
+          {
+           "text": "......",
+           "bounds": {
+            "top_left": {
+             "x": 278,
+             "y": 269
+            },
+            "top_right": {
+             "x": 362,
+             "y": 268
+            },
+            "bottom_right": {
+             "x": 362,
+             "y": 287
+            },
+            "bottom_left": {
+             "x": 278,
+             "y": 287
+            },
+            "width": 84,
+            "height": 18.5
+           },
+           "confidence": 0.4
+          },
+          {
+           "text": ".",
+           "bounds": {
+            "top_left": {
+             "x": 379,
+             "y": 268
+            },
+            "top_right": {
+             "x": 388,
+             "y": 268
+            },
+            "bottom_right": {
+             "x": 388,
+             "y": 287
+            },
+            "bottom_left": {
+             "x": 379,
+             "y": 287
+            },
+            "width": 9,
+            "height": 19
+           },
+           "confidence": 0.57
+          },
+          {
+           "text": "....",
+           "bounds": {
+            "top_left": {
+             "x": 407,
+             "y": 268
+            },
+            "top_right": {
+             "x": 465,
+             "y": 267
+            },
+            "bottom_right": {
+             "x": 465,
+             "y": 284
+            },
+            "bottom_left": {
+             "x": 407,
+             "y": 286
+            },
+            "width": 58,
+            "height": 17.5
+           },
+           "confidence": 0.92
+          }
+         ],
+         "average_confidence": 0.63,
+         "bounds": {
+          "top_left": {
+           "x": 278,
+           "y": 267
+          },
+          "top_right": {
+           "x": 465,
+           "y": 267
+          },
+          "bottom_right": {
+           "x": 465,
+           "y": 287
+          },
+          "bottom_left": {
+           "x": 278,
+           "y": 287
+          },
+          "width": 187,
+          "height": 18.5
+         }
+        },
+        {
+         "text": "1X",
+         "words": [
+          {
+           "text": "1X",
+           "bounds": {
+            "top_left": {
+             "x": 151,
+             "y": 667
+            },
+            "top_right": {
+             "x": 177,
+             "y": 667
+            },
+            "bottom_right": {
+             "x": 178,
+             "y": 696
+            },
+            "bottom_left": {
+             "x": 151,
+             "y": 697
+            },
+            "width": 26.5,
+            "height": 29.5
+           },
+           "confidence": 0.88
+          }
+         ],
+         "average_confidence": 0.88,
+         "bounds": {
+          "top_left": {
+           "x": 151,
+           "y": 667
+          },
+          "top_right": {
+           "x": 178,
+           "y": 667
+          },
+          "bottom_right": {
+           "x": 178,
+           "y": 697
+          },
+          "bottom_left": {
+           "x": 151,
+           "y": 697
+          },
+          "width": 27,
+          "height": 29.5
+         }
+        },
+        {
+         "text": "@11000",
+         "words": [
+          {
+           "text": "@11000",
+           "bounds": {
+            "top_left": {
+             "x": 390,
+             "y": 655
+            },
+            "top_right": {
+             "x": 489,
+             "y": 648
+            },
+            "bottom_right": {
+             "x": 490,
+             "y": 680
+            },
+            "bottom_left": {
+             "x": 392,
+             "y": 688
+            },
+            "width": 98.5,
+            "height": 32.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 390,
+           "y": 648
+          },
+          "top_right": {
+           "x": 490,
+           "y": 648
+          },
+          "bottom_right": {
+           "x": 490,
+           "y": 688
+          },
+          "bottom_left": {
+           "x": 390,
+           "y": 688
+          },
+          "width": 100,
+          "height": 32.5
+         }
+        },
+        {
+         "text": "DONAT GULA",
+         "words": [
+          {
+           "text": "DONAT",
+           "bounds": {
+            "top_left": {
+             "x": 149,
+             "y": 706
+            },
+            "top_right": {
+             "x": 232,
+             "y": 702
+            },
+            "bottom_right": {
+             "x": 233,
+             "y": 734
+            },
+            "bottom_left": {
+             "x": 151,
+             "y": 738
+            },
+            "width": 82.5,
+            "height": 32
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "GULA",
+           "bounds": {
+            "top_left": {
+             "x": 245,
+             "y": 702
+            },
+            "top_right": {
+             "x": 310,
+             "y": 699
+            },
+            "bottom_right": {
+             "x": 311,
+             "y": 729
+            },
+            "bottom_left": {
+             "x": 246,
+             "y": 733
+            },
+            "width": 65,
+            "height": 30.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 149,
+           "y": 699
+          },
+          "top_right": {
+           "x": 311,
+           "y": 699
+          },
+          "bottom_right": {
+           "x": 311,
+           "y": 738
+          },
+          "bottom_left": {
+           "x": 149,
+           "y": 738
+          },
+          "width": 162,
+          "height": 32
+         }
+        },
+        {
+         "text": "11,000",
+         "words": [
+          {
+           "text": "11,000",
+           "bounds": {
+            "top_left": {
+             "x": 576,
+             "y": 683
+            },
+            "top_right": {
+             "x": 672,
+             "y": 677
+            },
+            "bottom_right": {
+             "x": 675,
+             "y": 710
+            },
+            "bottom_left": {
+             "x": 578,
+             "y": 717
+            },
+            "width": 96.5,
+            "height": 33.5
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 576,
+           "y": 677
+          },
+          "top_right": {
+           "x": 675,
+           "y": 677
+          },
+          "bottom_right": {
+           "x": 675,
+           "y": 717
+          },
+          "bottom_left": {
+           "x": 576,
+           "y": 717
+          },
+          "width": 99,
+          "height": 33.5
+         }
+        },
+        {
+         "text": "1.00×ITEMs",
+         "words": [
+          {
+           "text": "1.00×ITEMs",
+           "bounds": {
+            "top_left": {
+             "x": 333,
+             "y": 738
+            },
+            "top_right": {
+             "x": 493,
+             "y": 728
+            },
+            "bottom_right": {
+             "x": 494,
+             "y": 761
+            },
+            "bottom_left": {
+             "x": 335,
+             "y": 770
+            },
+            "width": 159.5,
+            "height": 32.5
+           },
+           "confidence": 0.81
+          }
+         ],
+         "average_confidence": 0.81,
+         "bounds": {
+          "top_left": {
+           "x": 333,
+           "y": 728
+          },
+          "top_right": {
+           "x": 494,
+           "y": 728
+          },
+          "bottom_right": {
+           "x": 494,
+           "y": 770
+          },
+          "bottom_left": {
+           "x": 333,
+           "y": 770
+          },
+          "width": 161,
+          "height": 32.5
+         }
+        },
+        {
+         "text": "SUBTOTAL",
+         "words": [
+          {
+           "text": "SUBTOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 157,
+             "y": 784
+            },
+            "top_right": {
+             "x": 282,
+             "y": 779
+            },
+            "bottom_right": {
+             "x": 283,
+             "y": 812
+            },
+            "bottom_left": {
+             "x": 157,
+             "y": 815
+            },
+            "width": 125.5,
+            "height": 32
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 157,
+           "y": 779
+          },
+          "top_right": {
+           "x": 283,
+           "y": 779
+          },
+          "bottom_right": {
+           "x": 283,
+           "y": 815
+          },
+          "bottom_left": {
+           "x": 157,
+           "y": 815
+          },
+          "width": 126,
+          "height": 32
+         }
+        },
+        {
+         "text": "11,000",
+         "words": [
+          {
+           "text": "11,000",
+           "bounds": {
+            "top_left": {
+             "x": 583,
+             "y": 765
+            },
+            "top_right": {
+             "x": 678,
+             "y": 759
+            },
+            "bottom_right": {
+             "x": 680,
+             "y": 794
+            },
+            "bottom_left": {
+             "x": 585,
+             "y": 800
+            },
+            "width": 95,
+            "height": 35
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 583,
+           "y": 759
+          },
+          "top_right": {
+           "x": 680,
+           "y": 759
+          },
+          "bottom_right": {
+           "x": 680,
+           "y": 800
+          },
+          "bottom_left": {
+           "x": 583,
+           "y": 800
+          },
+          "width": 97,
+          "height": 35
+         }
+        },
+        {
+         "text": "TOTAL",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 164,
+             "y": 824
+            },
+            "top_right": {
+             "x": 303,
+             "y": 819
+            },
+            "bottom_right": {
+             "x": 303,
+             "y": 852
+            },
+            "bottom_left": {
+             "x": 165,
+             "y": 857
+            },
+            "width": 138.5,
+            "height": 33
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 164,
+           "y": 819
+          },
+          "top_right": {
+           "x": 303,
+           "y": 819
+          },
+          "bottom_right": {
+           "x": 303,
+           "y": 857
+          },
+          "bottom_left": {
+           "x": 164,
+           "y": 857
+          },
+          "width": 139,
+          "height": 33
+         }
+        },
+        {
+         "text": "11,000",
+         "words": [
+          {
+           "text": "11,000",
+           "bounds": {
+            "top_left": {
+             "x": 585,
+             "y": 804
+            },
+            "top_right": {
+             "x": 681,
+             "y": 798
+            },
+            "bottom_right": {
+             "x": 683,
+             "y": 835
+            },
+            "bottom_left": {
+             "x": 587,
+             "y": 841
+            },
+            "width": 96,
+            "height": 37
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 585,
+           "y": 798
+          },
+          "top_right": {
+           "x": 683,
+           "y": 798
+          },
+          "bottom_right": {
+           "x": 683,
+           "y": 841
+          },
+          "bottom_left": {
+           "x": 585,
+           "y": 841
+          },
+          "width": 98,
+          "height": 37
+         }
+        },
+        {
+         "text": "CASH",
+         "words": [
+          {
+           "text": "CASH",
+           "bounds": {
+            "top_left": {
+             "x": 159,
+             "y": 864
+            },
+            "top_right": {
+             "x": 270,
+             "y": 859
+            },
+            "bottom_right": {
+             "x": 270,
+             "y": 893
+            },
+            "bottom_left": {
+             "x": 160,
+             "y": 898
+            },
+            "width": 110.5,
+            "height": 34
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 159,
+           "y": 859
+          },
+          "top_right": {
+           "x": 270,
+           "y": 859
+          },
+          "bottom_right": {
+           "x": 270,
+           "y": 898
+          },
+          "bottom_left": {
+           "x": 159,
+           "y": 898
+          },
+          "width": 111,
+          "height": 34
+         }
+        },
+        {
+         "text": "11,000",
+         "words": [
+          {
+           "text": "11,000",
+           "bounds": {
+            "top_left": {
+             "x": 587,
+             "y": 847
+            },
+            "top_right": {
+             "x": 684,
+             "y": 840
+            },
+            "bottom_right": {
+             "x": 687,
+             "y": 875
+            },
+            "bottom_left": {
+             "x": 589,
+             "y": 883
+            },
+            "width": 97.5,
+            "height": 35.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 587,
+           "y": 840
+          },
+          "top_right": {
+           "x": 687,
+           "y": 840
+          },
+          "bottom_right": {
+           "x": 687,
+           "y": 883
+          },
+          "bottom_left": {
+           "x": 587,
+           "y": 883
+          },
+          "width": 100,
+          "height": 35.5
+         }
+        }
+       ],
+       "page": 1,
+       "width": 864,
+       "height": 1296
+      }
+     ],
+     "width": 864,
+     "height": 1296
+    }
+   }
+  ]
+ },
+ "latency_s": 11.852870333997998,
+ "attempts": 1
+}

@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_024",
+ "run": 3,
+ "timestamp_utc": "2026-11-01T16:08:52.392651+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 883056 bytes, sha256=57989ab2c73a37b1c80d1774a07ed3e8adfbc1145566d3f7efb683c1bfe48824>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "EWTnauuKNdDu694P0MnNiQI",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"Rp.118.000\",\"subtotal_price\":null,\"items\":[{\"name\":\"5001-Corn Flakes Cookies\"},{\"name\":\"5003-Chokoreto Cookies\"},{\"name\":\"6002-Plastic Bag Medium\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EoEHCv4GAWkUfRPmMtgD6dxDNy5hnVa4NAIKWJpgtNhNyQq6mU86G8iILHdOHf0v/i1xN22JH8pOT4XonNjRb3kgS2ngoDlYYaIiTXa4nLgTmqL39lFzFil9vjsH2Szz43oLdkvBErMNbFExQz5AUpe+M0EmZp9iuokIr/nVkhi+KyhIAQYaKdy6WRrx6uWCn7D9CM35ptIB1O+6K4IPpOdhlWqVaZpMrTCX3VAJhIQCmejAY+BKizsWaYE2onYb9RzXNsqTfqxPIvXa9L4bilcDoLUYMZgLEK237pdKjM7PLwdnl9I9N6KQ25E3Mr4+KCBu3fNNcuvxKz+iklc9hefPGbwOdR1zvyNPk+5XlREZRR9CDYJdY1deAvqKcEluiT/QqRugZXVRp3LgCMnqQzHdVggrbK5cKjBFhzHePB2Zw8ESZs2wj6Y0Dh1WkOL77AfZyAqByHfjc9Ew0ufEzJIAfuCWwD80xrg84DMCR6Mry4jss8lOKVq19IMiqV4z78YnN23cP2EShJCXku90yqYFP4Irk6csSU7YUFzyMDix60BkHrCHmLV2W0nyVee53GlA1HTsNOBcMYOsIyP994Vnxnpnct0Y4+ToubyHs7cKF/Md0Kjb+f01lqmKrrNbkAvrXLxc0GeXdkpvVzVf8wNjIvwrnjyhp3XE5WvFxcvDcscpD3sYx58Yan2xdNoslSDnEkZqrg9+FOVXHU5ratVHw8RfsAFngEHfJr+r6UPbITO4nhgSnYaPPIqoK/BCoVKRqN+iJeyWVHIsWHQPBocnggJUzcG6NpOQZhGadENFwXFkXV2HSUn/6OBqtzDWzahjQiFO5UQOxEZki91dcpA8ojmIOYy4haBtaDYxYpk1iuxc+N1WjpoO57wwFwvnFUgSpymU3lgDySqLaXiXgUFwAbAC2MeBVNMepNfxIxIjQ9bmtiEtjHMFJETlrym0oRgA/n5CnHQPXE3vENdeIYdeYyuU86PRfKMXXGf1Hc6nS5mHG0zTirdxJejn5O7z0mCpFqFOcRv6hTrn72sD2Vqbk9Oq/RrZRdnCKGqRdHdt4eslsftfeuWHMhFeCaGEHxAyhPcssSrGeq1McxfS0uWX0ImM9Q0xmlvaCAaj+svAY6QxAqefiFJqH3GldJq68vqgYg5YPfDipsX8QJMu6qMBcxCOOndQu1/Sqmga1s0HZqO9"
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549332,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 61,
+   "prompt_tokens": 1202,
+   "total_tokens": 1572,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.2757451019933796,
+ "attempts": 1
+}

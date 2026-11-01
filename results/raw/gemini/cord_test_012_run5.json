@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_012",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T16:09:40.422287+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 760078 bytes, sha256=b5f8a3a9a5431b8e38a8e5a16011d6a5a457f7ae4c4ef31da77e589c0b1ad882>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "QmTnavugArju694PvZi6oQU",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"120,000\",\"subtotal_price\":null,\"items\":[{\"name\":\"0571-1854 BLUS WANITA\"},{\"name\":\"1002-0060 SHOPPING BAG\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EvsECvgEAWkUfRNT5vClwbJ3mhYMu3eoP/hB0aUJCOxYYP589A8IghX9cM63FGPs6nawZtgK6MXG+ybiPD2C5I/6RetBjQ511N6dg9d3FvyPDSoGZm/04IejOldtB8cGyO//vxtdZF3wMlqN05q44RiUSfePCE9iGHs++e7PaM3rkzFSe0F9OtNm2mztdAsxTAT5oSrQLIsjvTQlY7L2tfdLszXMPGYW/aMX2hSGcZw+2tXwt3u6SvGTgSejPQ5BNl5HvhcifOEPS7bRW5MuAwy9DVamLcU88AWCNG4LaTtKBT6TJ6O0SE6RZcLlIzJEPEZYtZxvezkEh25Y5kNz7vYWUKI9EZzBfaeSQb8Laml2Xfano01JoeBTUYYodIc/1KyNSnD+QiCK5TDD9AS7O4NdvX5YQBsmsUFQ5qaN16i4955byqofkz8rJc259BMQH2ppLomJi2PjFswRA7lFjLWj5As0QZxhJFxcM70AdgLwhZ+CMV4VGolpnH30kmXDJoX7LMWUdB/djVExMVjOuwBT5eQZPjMzQhD0s9ey9nHrtesgXhIY0Ttna68Fk3YL36ANvUYq5zObOlNQrFBKOZNeOYtfe9gx1xVYnIzZQuOfQZiCntkULTr2Nnl7skSaBYfnWFLe1aDVWrZSNlyQ9uXEWgYEO1LKzPx23bSs0oNGEpk/42USviXOQWpVJMXUSNs/a3yi7iaQdud6xvTUtBtJ6BDCraCD+xZAO8SED+JRimgVpIpqFujE0T9zNsx5KjactquYTX2WoVH9VyPVJ9JU8LirpJ9X0pcThLmnYlIDFqW6dUXvV9voOpqMxWbEwMUITFlBN0bVKm7smho="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549380,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 54,
+   "prompt_tokens": 1202,
+   "total_tokens": 1487,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.214736465997703,
+ "attempts": 1
+}

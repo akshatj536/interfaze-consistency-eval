@@ -1,0 +1,773 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_019",
+ "run": 2,
+ "timestamp_utc": "2026-11-01T14:51:04.352686+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 746233 bytes, sha256=b076921ed83bdf900cab539f219cac8dddfaa4a99c13f7d66d7303d9f8c4c8c7>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-3af2564c-72e4-4be6-8bd8-adb3f272dd81",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"176000\",\"subtotal_price\":\"160000\",\"items\":[{\"name\":\"4 AMBUSH DBL CHS\"},{\"name\":\"10 AMBUSH CHS BUR\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793544664,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 714,
+   "prompt_tokens": 10968,
+   "total_tokens": 11682,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "e\n4 AMBUSH DBL CHS 60000\n10 AMBUSH CHS BUR 100000\nNET SALES 160000\nTAX\n16000\nAMOUNT DUE 176000",
+     "sections": [
+      {
+       "text": "e\n4 AMBUSH DBL CHS 60000\n10 AMBUSH CHS BUR 100000\nNET SALES 160000\nTAX\n16000\nAMOUNT DUE 176000",
+       "lines": [
+        {
+         "text": "e",
+         "bounds": {
+          "top_left": {
+           "x": 11,
+           "y": 135
+          },
+          "top_right": {
+           "x": 0,
+           "y": 135
+          },
+          "bottom_right": {
+           "x": 0,
+           "y": 116
+          },
+          "bottom_left": {
+           "x": 11,
+           "y": 116
+          },
+          "width": -11,
+          "height": -19
+         },
+         "average_confidence": 0.99,
+         "words": [
+          {
+           "text": "e",
+           "bounds": {
+            "top_left": {
+             "x": 10,
+             "y": 135
+            },
+            "top_right": {
+             "x": 1,
+             "y": 135
+            },
+            "bottom_right": {
+             "x": 1,
+             "y": 116
+            },
+            "bottom_left": {
+             "x": 10,
+             "y": 116
+            },
+            "width": -9,
+            "height": -19
+           },
+           "confidence": 0.99
+          }
+         ]
+        },
+        {
+         "text": "4 AMBUSH DBL CHS 60000",
+         "words": [
+          {
+           "text": "4",
+           "bounds": {
+            "top_left": {
+             "x": 96,
+             "y": 425
+            },
+            "top_right": {
+             "x": 110,
+             "y": 426
+            },
+            "bottom_right": {
+             "x": 109,
+             "y": 456
+            },
+            "bottom_left": {
+             "x": 94,
+             "y": 455
+            },
+            "width": 14.5,
+            "height": 30
+           },
+           "confidence": 1
+          },
+          {
+           "text": "AMBUSH",
+           "bounds": {
+            "top_left": {
+             "x": 122,
+             "y": 426
+            },
+            "top_right": {
+             "x": 206,
+             "y": 430
+            },
+            "bottom_right": {
+             "x": 205,
+             "y": 460
+            },
+            "bottom_left": {
+             "x": 121,
+             "y": 456
+            },
+            "width": 84,
+            "height": 30
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "DBL",
+           "bounds": {
+            "top_left": {
+             "x": 218,
+             "y": 430
+            },
+            "top_right": {
+             "x": 264,
+             "y": 432
+            },
+            "bottom_right": {
+             "x": 262,
+             "y": 462
+            },
+            "bottom_left": {
+             "x": 217,
+             "y": 460
+            },
+            "width": 45.5,
+            "height": 30
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "CHS",
+           "bounds": {
+            "top_left": {
+             "x": 280,
+             "y": 433
+            },
+            "top_right": {
+             "x": 327,
+             "y": 435
+            },
+            "bottom_right": {
+             "x": 326,
+             "y": 464
+            },
+            "bottom_left": {
+             "x": 278,
+             "y": 463
+            },
+            "width": 47.5,
+            "height": 29.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "60000",
+           "bounds": {
+            "top_left": {
+             "x": 357,
+             "y": 437
+            },
+            "top_right": {
+             "x": 431,
+             "y": 440
+            },
+            "bottom_right": {
+             "x": 430,
+             "y": 467
+            },
+            "bottom_left": {
+             "x": 355,
+             "y": 465
+            },
+            "width": 74.5,
+            "height": 27.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 94,
+           "y": 425
+          },
+          "top_right": {
+           "x": 431,
+           "y": 425
+          },
+          "bottom_right": {
+           "x": 431,
+           "y": 467
+          },
+          "bottom_left": {
+           "x": 94,
+           "y": 467
+          },
+          "width": 337,
+          "height": 30
+         }
+        },
+        {
+         "text": "10 AMBUSH CHS BUR 100000",
+         "words": [
+          {
+           "text": "10",
+           "bounds": {
+            "top_left": {
+             "x": 79,
+             "y": 466
+            },
+            "top_right": {
+             "x": 105,
+             "y": 467
+            },
+            "bottom_right": {
+             "x": 103,
+             "y": 497
+            },
+            "bottom_left": {
+             "x": 76,
+             "y": 496
+            },
+            "width": 26.5,
+            "height": 30
+           },
+           "confidence": 0.94
+          },
+          {
+           "text": "AMBUSH",
+           "bounds": {
+            "top_left": {
+             "x": 119,
+             "y": 468
+            },
+            "top_right": {
+             "x": 200,
+             "y": 471
+            },
+            "bottom_right": {
+             "x": 198,
+             "y": 501
+            },
+            "bottom_left": {
+             "x": 117,
+             "y": 498
+            },
+            "width": 81,
+            "height": 30
+           },
+           "confidence": 0.84
+          },
+          {
+           "text": "CHS",
+           "bounds": {
+            "top_left": {
+             "x": 214,
+             "y": 472
+            },
+            "top_right": {
+             "x": 260,
+             "y": 474
+            },
+            "bottom_right": {
+             "x": 258,
+             "y": 504
+            },
+            "bottom_left": {
+             "x": 212,
+             "y": 502
+            },
+            "width": 46,
+            "height": 30
+           },
+           "confidence": 1
+          },
+          {
+           "text": "BUR",
+           "bounds": {
+            "top_left": {
+             "x": 276,
+             "y": 474
+            },
+            "top_right": {
+             "x": 320,
+             "y": 476
+            },
+            "bottom_right": {
+             "x": 318,
+             "y": 506
+            },
+            "bottom_left": {
+             "x": 274,
+             "y": 504
+            },
+            "width": 44,
+            "height": 30
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "100000",
+           "bounds": {
+            "top_left": {
+             "x": 338,
+             "y": 477
+            },
+            "top_right": {
+             "x": 428,
+             "y": 482
+            },
+            "bottom_right": {
+             "x": 427,
+             "y": 510
+            },
+            "bottom_left": {
+             "x": 336,
+             "y": 507
+            },
+            "width": 90.5,
+            "height": 29
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.95,
+         "bounds": {
+          "top_left": {
+           "x": 76,
+           "y": 466
+          },
+          "top_right": {
+           "x": 428,
+           "y": 466
+          },
+          "bottom_right": {
+           "x": 428,
+           "y": 510
+          },
+          "bottom_left": {
+           "x": 76,
+           "y": 510
+          },
+          "width": 352,
+          "height": 30
+         }
+        },
+        {
+         "text": "NET SALES 160000",
+         "words": [
+          {
+           "text": "NET",
+           "bounds": {
+            "top_left": {
+             "x": 118,
+             "y": 510
+            },
+            "top_right": {
+             "x": 162,
+             "y": 512
+            },
+            "bottom_right": {
+             "x": 160,
+             "y": 541
+            },
+            "bottom_left": {
+             "x": 116,
+             "y": 540
+            },
+            "width": 44,
+            "height": 29.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "SALES",
+           "bounds": {
+            "top_left": {
+             "x": 174,
+             "y": 513
+            },
+            "top_right": {
+             "x": 245,
+             "y": 516
+            },
+            "bottom_right": {
+             "x": 243,
+             "y": 546
+            },
+            "bottom_left": {
+             "x": 172,
+             "y": 542
+            },
+            "width": 71,
+            "height": 29.5
+           },
+           "confidence": 0.94
+          },
+          {
+           "text": "160000",
+           "bounds": {
+            "top_left": {
+             "x": 337,
+             "y": 523
+            },
+            "top_right": {
+             "x": 430,
+             "y": 525
+            },
+            "bottom_right": {
+             "x": 429,
+             "y": 553
+            },
+            "bottom_left": {
+             "x": 336,
+             "y": 552
+            },
+            "width": 93,
+            "height": 28.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.97,
+         "bounds": {
+          "top_left": {
+           "x": 116,
+           "y": 510
+          },
+          "top_right": {
+           "x": 430,
+           "y": 510
+          },
+          "bottom_right": {
+           "x": 430,
+           "y": 553
+          },
+          "bottom_left": {
+           "x": 116,
+           "y": 553
+          },
+          "width": 314,
+          "height": 29.5
+         }
+        },
+        {
+         "text": "TAX",
+         "words": [
+          {
+           "text": "TAX",
+           "bounds": {
+            "top_left": {
+             "x": 117,
+             "y": 551
+            },
+            "top_right": {
+             "x": 156,
+             "y": 553
+            },
+            "bottom_right": {
+             "x": 154,
+             "y": 581
+            },
+            "bottom_left": {
+             "x": 116,
+             "y": 578
+            },
+            "width": 38.5,
+            "height": 27.5
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 116,
+           "y": 551
+          },
+          "top_right": {
+           "x": 156,
+           "y": 551
+          },
+          "bottom_right": {
+           "x": 156,
+           "y": 581
+          },
+          "bottom_left": {
+           "x": 116,
+           "y": 581
+          },
+          "width": 40,
+          "height": 27.5
+         }
+        },
+        {
+         "text": "16000",
+         "words": [
+          {
+           "text": "16000",
+           "bounds": {
+            "top_left": {
+             "x": 347,
+             "y": 567
+            },
+            "top_right": {
+             "x": 424,
+             "y": 568
+            },
+            "bottom_right": {
+             "x": 423,
+             "y": 597
+            },
+            "bottom_left": {
+             "x": 347,
+             "y": 595
+            },
+            "width": 76.5,
+            "height": 28.5
+           },
+           "confidence": 0.68
+          }
+         ],
+         "average_confidence": 0.68,
+         "bounds": {
+          "top_left": {
+           "x": 347,
+           "y": 567
+          },
+          "top_right": {
+           "x": 424,
+           "y": 567
+          },
+          "bottom_right": {
+           "x": 424,
+           "y": 597
+          },
+          "bottom_left": {
+           "x": 347,
+           "y": 597
+          },
+          "width": 77,
+          "height": 28.5
+         }
+        },
+        {
+         "text": "AMOUNT DUE 176000",
+         "words": [
+          {
+           "text": "AMOUNT",
+           "bounds": {
+            "top_left": {
+             "x": 118,
+             "y": 592
+            },
+            "top_right": {
+             "x": 203,
+             "y": 600
+            },
+            "bottom_right": {
+             "x": 201,
+             "y": 628
+            },
+            "bottom_left": {
+             "x": 117,
+             "y": 621
+            },
+            "width": 84.5,
+            "height": 28.5
+           },
+           "confidence": 0.92
+          },
+          {
+           "text": "DUE",
+           "bounds": {
+            "top_left": {
+             "x": 213,
+             "y": 601
+            },
+            "top_right": {
+             "x": 258,
+             "y": 604
+            },
+            "bottom_right": {
+             "x": 256,
+             "y": 633
+            },
+            "bottom_left": {
+             "x": 211,
+             "y": 629
+            },
+            "width": 45,
+            "height": 28.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "176000",
+           "bounds": {
+            "top_left": {
+             "x": 337,
+             "y": 609
+            },
+            "top_right": {
+             "x": 427,
+             "y": 613
+            },
+            "bottom_right": {
+             "x": 426,
+             "y": 642
+            },
+            "bottom_left": {
+             "x": 335,
+             "y": 638
+            },
+            "width": 90.5,
+            "height": 29
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.97,
+         "bounds": {
+          "top_left": {
+           "x": 117,
+           "y": 592
+          },
+          "top_right": {
+           "x": 427,
+           "y": 592
+          },
+          "bottom_right": {
+           "x": 427,
+           "y": 642
+          },
+          "bottom_left": {
+           "x": 117,
+           "y": 642
+          },
+          "width": 310,
+          "height": 28.5
+         }
+        }
+       ],
+       "page": 1,
+       "width": 576,
+       "height": 864
+      }
+     ],
+     "width": 576,
+     "height": 864
+    }
+   }
+  ]
+ },
+ "latency_s": 65.42987192900182,
+ "attempts": 1
+}

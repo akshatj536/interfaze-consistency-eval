@@ -1,0 +1,679 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_004",
+ "run": 3,
+ "timestamp_utc": "2026-11-01T15:03:05.108035+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1643699 bytes, sha256=8f3eee7068c96e86cdb2e4b5c53085cb5e1439462edd55c373548cb1962801ad>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-4074b010-04ea-4661-a2ba-06f92fcc1b39",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"174,600\",\"subtotal_price\":\"194,000\",\"items\":[{\"name\":\"ICE BLACKCOFFE\"},{\"name\":\"AVOCADO COFFEE\"},{\"name\":\"CHIKEN KATSU FF\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793545383,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 1103,
+   "prompt_tokens": 11005,
+   "total_tokens": 12108,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "ICE BLACKCOFFE 2 82,000\nAVOCADO COFFEE 1 61,000\nCHIKEN KATSU FF 1 51,000\nSUB TOTAL 194,000\nDISCOUNT 19,400\nTOTAL 174,600\nCASH 200,000\nCHANGE 25,400",
+     "sections": [
+      {
+       "text": "ICE BLACKCOFFE 2 82,000\nAVOCADO COFFEE 1 61,000\nCHIKEN KATSU FF 1 51,000\nSUB TOTAL 194,000\nDISCOUNT 19,400\nTOTAL 174,600\nCASH 200,000\nCHANGE 25,400",
+       "lines": [
+        {
+         "text": "ICE BLACKCOFFE 2 82,000",
+         "bounds": {
+          "top_left": {
+           "x": 0,
+           "y": 8
+          },
+          "top_right": {
+           "x": 95,
+           "y": 8
+          },
+          "bottom_right": {
+           "x": 95,
+           "y": 52
+          },
+          "bottom_left": {
+           "x": 0,
+           "y": 52
+          },
+          "width": 95,
+          "height": 42
+         },
+         "average_confidence": 0.73,
+         "words": [
+          {
+           "text": "ICE",
+           "bounds": {
+            "top_left": {
+             "x": 0,
+             "y": 10
+            },
+            "top_right": {
+             "x": 59,
+             "y": 8
+            },
+            "bottom_right": {
+             "x": 60,
+             "y": 50
+            },
+            "bottom_left": {
+             "x": 0,
+             "y": 52
+            },
+            "width": 59.5,
+            "height": 42
+           },
+           "confidence": 0.72
+          },
+          {
+           "text": "BLACKCOFFE",
+           "bounds": {
+            "top_left": {
+             "x": 67,
+             "y": 8
+            },
+            "top_right": {
+             "x": 94,
+             "y": 8
+            },
+            "bottom_right": {
+             "x": 95,
+             "y": 49
+            },
+            "bottom_left": {
+             "x": 69,
+             "y": 50
+            },
+            "width": 26.5,
+            "height": 41.5
+           },
+           "confidence": 0.68
+          },
+          {
+           "text": "2",
+           "confidence": 0.78
+          },
+          {
+           "text": "82,000",
+           "confidence": 0.75
+          }
+         ]
+        },
+        {
+         "text": "AVOCADO COFFEE 1 61,000",
+         "bounds": {
+          "top_left": {
+           "x": 0,
+           "y": 53
+          },
+          "top_right": {
+           "x": 241,
+           "y": 53
+          },
+          "bottom_right": {
+           "x": 241,
+           "y": 113
+          },
+          "bottom_left": {
+           "x": 0,
+           "y": 113
+          },
+          "width": 241,
+          "height": 54
+         },
+         "average_confidence": 0.74,
+         "words": [
+          {
+           "text": "AVOCADO",
+           "bounds": {
+            "top_left": {
+             "x": 1,
+             "y": 58
+            },
+            "top_right": {
+             "x": 91,
+             "y": 56
+            },
+            "bottom_right": {
+             "x": 91,
+             "y": 111
+            },
+            "bottom_left": {
+             "x": 0,
+             "y": 113
+            },
+            "width": 90.5,
+            "height": 55
+           },
+           "confidence": 0.7
+          },
+          {
+           "text": "COFFEE",
+           "bounds": {
+            "top_left": {
+             "x": 101,
+             "y": 56
+            },
+            "top_right": {
+             "x": 161,
+             "y": 54
+            },
+            "bottom_right": {
+             "x": 161,
+             "y": 108
+            },
+            "bottom_left": {
+             "x": 101,
+             "y": 110
+            },
+            "width": 60,
+            "height": 54
+           },
+           "confidence": 0.71
+          },
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 172,
+             "y": 54
+            },
+            "top_right": {
+             "x": 240,
+             "y": 53
+            },
+            "bottom_right": {
+             "x": 241,
+             "y": 104
+            },
+            "bottom_left": {
+             "x": 172,
+             "y": 108
+            },
+            "width": 68.5,
+            "height": 52.5
+           },
+           "confidence": 0.8
+          },
+          {
+           "text": "61,000",
+           "confidence": 0.76
+          }
+         ]
+        },
+        {
+         "text": "CHIKEN KATSU FF 1 51,000",
+         "bounds": {
+          "top_left": {
+           "x": 0,
+           "y": 133
+          },
+          "top_right": {
+           "x": 72,
+           "y": 133
+          },
+          "bottom_right": {
+           "x": 72,
+           "y": 190
+          },
+          "bottom_left": {
+           "x": 0,
+           "y": 190
+          },
+          "width": 72,
+          "height": 54
+         },
+         "average_confidence": 0.63,
+         "words": [
+          {
+           "text": "CHIKEN",
+           "bounds": {
+            "top_left": {
+             "x": 0,
+             "y": 136
+            },
+            "top_right": {
+             "x": 69,
+             "y": 133
+            },
+            "bottom_right": {
+             "x": 72,
+             "y": 187
+            },
+            "bottom_left": {
+             "x": 0,
+             "y": 190
+            },
+            "width": 70.5,
+            "height": 54
+           },
+           "confidence": 0.6
+          },
+          {
+           "text": "KATSU",
+           "confidence": 0.65
+          },
+          {
+           "text": "FF",
+           "confidence": 0.4
+          },
+          {
+           "text": "1",
+           "confidence": 0.78
+          },
+          {
+           "text": "51,000",
+           "confidence": 0.74
+          }
+         ]
+        },
+        {
+         "text": "SUB TOTAL 194,000",
+         "bounds": {
+          "top_left": {
+           "x": 0,
+           "y": 264
+          },
+          "top_right": {
+           "x": 60,
+           "y": 264
+          },
+          "bottom_right": {
+           "x": 60,
+           "y": 325
+          },
+          "bottom_left": {
+           "x": 0,
+           "y": 325
+          },
+          "width": 60,
+          "height": 56.5
+         },
+         "average_confidence": 0.76,
+         "words": [
+          {
+           "text": "SUB",
+           "bounds": {
+            "top_left": {
+             "x": 0,
+             "y": 268
+            },
+            "top_right": {
+             "x": 56,
+             "y": 264
+            },
+            "bottom_right": {
+             "x": 60,
+             "y": 320
+            },
+            "bottom_left": {
+             "x": 0,
+             "y": 325
+            },
+            "width": 58,
+            "height": 56.5
+           },
+           "confidence": 0.75
+          },
+          {
+           "text": "TOTAL",
+           "confidence": 0.77
+          },
+          {
+           "text": "194,000",
+           "confidence": 0.76
+          }
+         ]
+        },
+        {
+         "text": "DISCOUNT 19,400",
+         "bounds": {
+          "top_left": {
+           "x": 0,
+           "y": 410
+          },
+          "top_right": {
+           "x": 83,
+           "y": 410
+          },
+          "bottom_right": {
+           "x": 83,
+           "y": 469
+          },
+          "bottom_left": {
+           "x": 0,
+           "y": 469
+          },
+          "width": 83,
+          "height": 55.5
+         },
+         "average_confidence": 0.75,
+         "words": [
+          {
+           "text": "DISCOUNT",
+           "bounds": {
+            "top_left": {
+             "x": 0,
+             "y": 410
+            },
+            "top_right": {
+             "x": 83,
+             "y": 415
+            },
+            "bottom_right": {
+             "x": 80,
+             "y": 469
+            },
+            "bottom_left": {
+             "x": 0,
+             "y": 467
+            },
+            "width": 81.5,
+            "height": 55.5
+           },
+           "confidence": 0.74
+          },
+          {
+           "text": "19,400",
+           "confidence": 0.75
+          }
+         ]
+        },
+        {
+         "text": "TOTAL 174,600",
+         "bounds": {
+          "top_left": {
+           "x": 0,
+           "y": 477
+          },
+          "top_right": {
+           "x": 95,
+           "y": 477
+          },
+          "bottom_right": {
+           "x": 95,
+           "y": 541
+          },
+          "bottom_left": {
+           "x": 0,
+           "y": 541
+          },
+          "width": 95,
+          "height": 50
+         },
+         "average_confidence": 0.77,
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 0,
+             "y": 491
+            },
+            "top_right": {
+             "x": 89,
+             "y": 477
+            },
+            "bottom_right": {
+             "x": 95,
+             "y": 527
+            },
+            "bottom_left": {
+             "x": 5,
+             "y": 541
+            },
+            "width": 89.5,
+            "height": 50
+           },
+           "confidence": 0.76
+          },
+          {
+           "text": "174,600",
+           "confidence": 0.77
+          }
+         ]
+        },
+        {
+         "text": "CASH 200,000",
+         "bounds": {
+          "top_left": {
+           "x": 24,
+           "y": 558
+          },
+          "top_right": {
+           "x": 95,
+           "y": 558
+          },
+          "bottom_right": {
+           "x": 95,
+           "y": 610
+          },
+          "bottom_left": {
+           "x": 24,
+           "y": 610
+          },
+          "width": 71,
+          "height": 50.5
+         },
+         "average_confidence": 0.78,
+         "words": [
+          {
+           "text": "CASH",
+           "bounds": {
+            "top_left": {
+             "x": 24,
+             "y": 558
+            },
+            "top_right": {
+             "x": 95,
+             "y": 559
+            },
+            "bottom_right": {
+             "x": 94,
+             "y": 610
+            },
+            "bottom_left": {
+             "x": 24,
+             "y": 608
+            },
+            "width": 70.5,
+            "height": 50.5
+           },
+           "confidence": 0.78
+          },
+          {
+           "text": "200,000",
+           "confidence": 0.78
+          }
+         ]
+        },
+        {
+         "text": "CHANGE 25,400",
+         "bounds": {
+          "top_left": {
+           "x": 104,
+           "y": 542
+          },
+          "top_right": {
+           "x": 325,
+           "y": 542
+          },
+          "bottom_right": {
+           "x": 325,
+           "y": 590
+          },
+          "bottom_left": {
+           "x": 104,
+           "y": 590
+          },
+          "width": 221,
+          "height": 39
+         },
+         "average_confidence": 0.77,
+         "words": [
+          {
+           "text": "CHANGE",
+           "bounds": {
+            "top_left": {
+             "x": 106,
+             "y": 542
+            },
+            "top_right": {
+             "x": 155,
+             "y": 545
+            },
+            "bottom_right": {
+             "x": 153,
+             "y": 583
+            },
+            "bottom_left": {
+             "x": 104,
+             "y": 582
+            },
+            "width": 49,
+            "height": 39
+           },
+           "confidence": 0.77
+          },
+          {
+           "text": "25,400",
+           "bounds": {
+            "top_left": {
+             "x": 168,
+             "y": 545
+            },
+            "top_right": {
+             "x": 325,
+             "y": 553
+            },
+            "bottom_right": {
+             "x": 323,
+             "y": 590
+            },
+            "bottom_left": {
+             "x": 166,
+             "y": 584
+            },
+            "width": 157,
+            "height": 38
+           },
+           "confidence": 0.76
+          }
+         ]
+        }
+       ],
+       "page": 1,
+       "width": 864,
+       "height": 1296
+      }
+     ],
+     "width": 864,
+     "height": 1296
+    }
+   }
+  ]
+ },
+ "latency_s": 120.0475024979969,
+ "attempts": 1
+}

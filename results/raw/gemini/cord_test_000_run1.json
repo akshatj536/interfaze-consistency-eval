@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_000",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T16:07:07.926455+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 338392 bytes, sha256=8612d04b70f430f3aef07fbbd5200e382dcc4152b344cc2eff9f735f05a257c8>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "pWPnaqCfJs3u694P2ImK4AY",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"60.000\",\"subtotal_price\":\"60.000\",\"items\":[{\"name\":\"901016 -TICKET CP\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "ErMTCrATAWkUfRM4BhYSTZUYJHol+Wox/qaGLm7HNRSgik9p87IiD/BbG9w6rHOxPCV92VHGFrEg3S8zteymBHSGDDa90yej5ZW/pKMiHdhjdHQVJ7SMW33TWfa3/G65xBXEESC18wHM4GMZBeVgUQ1/Z0vTkgf0N9aBqk3CwPwYPAf3MCpIxeZ83AagdRK62dpSoZrEI/8zVmzcJCDqZUuYCiAx/qp+OimOrT8e5/oW++1FqXfo1XnuQL3Efcifspd3idDpWQIak6hV38Cnjo8kHEZHQZls7g0GhJqcBYbjLq6xoSQqmhqkCF3+h2eV5TuMflubCU//HsfSER6tN8QJfFe17EZdacF+0KsQkLbPAQEDJtbjVHMi3FCgI0w1LlOptAGjy54DqWBXrZuJLhN0YDhkUnR7hrevKuncTzJslA1cENtbYGlw4vLO5vKhWQolYeq2GrINugstTCLQQ9FjzKuFT6omCp17gXX3fEcnJPXo0BqM6wFEVCUYa8OyyvrmtLdY/PCGNU1nRrBQfppvDcSltpg4iz/xnfQ2S6vL0RMljwe0i+k5urxhdHMSDebkrWqkJVYdBCM4aKAY+LjZHpyQw/tJ7bGkx2MMIGtek4C6pBUSCWQFcUj4wMbn3NmyzWl63jlKblBQAPIWp57sxkEiuR4YWsTXXKr0nX4t9QIDjYDceDjv8aVeTZnkOXrl7XCPFHuZ1kNkgkkVGzoG4qOgVxK1RS4eWSrE0ZjjLbmLDDu2fo2Glxnq3lytO+hcNMGUW3M6K8A/n/oy78koJ1j31qJ4r/yY+j0TUEgLGKN+kpRzA9lLHYsmMdsL+SEr/QiBzXerJ5KuVWhjSC0KTZQX+EmdB5CWLK96tFQlqiA0X8hz6oBT+jwcsUXm4ZLYAZ0i0hb1RrkC8dRVk82IEiV24sJ6QngUwZHeJQOhjOYSZ3NbqVgqJ8RQdETd6cG9wg5xv+p4R8gkhfU5QIW6C4z3Pm6WvQ2Ei0fUVP4yqlkon5l2ShJkqw5Ua69kKtX23vPd6CNSCDjK4o+T70SUAjuS1T13SMtwMvg6TmC75ggDKE1ueqMDtf2gphVNyznYICNo3y5TD6lLSQFkJmLQh1zWElwrK+tdHyQzQjqvM+C1aTROgJS5qFTFUcCfK0y7s8yb1y1MWTdekSUtmFCORduVygp04LnDE+XdlW7/gffwx5d1ZOib1OxNZhkxx0tshMaPYNfsVCd6wxMFyJQNX6WG+8k/H+4uixF4GF6dywrtka7jHMDAG75mGu/eA8CL60YJ3/UprlXhmVtKIrizeYbgaWp4b5BQUO2QZlSr0ENSYYH/3pwyoZSMqUzRzYog2JKUFhSbNs03k97PsYxuHYA6l3hi+FOD1fIpGUH824BN4k7bqBM8ENlkFEhwkK3azG1sLGRTzA4UQqp7imC9GW2THgMu3VuwmQ06+IPDIjnoZGJkZYLfPsB3W421y77Cc/cL8nkW9jlT3Od5negBSKWEznJKGV7JnLRXsJKK+Q+fGv7yfV6v+VO6vcrNcf14MhVb+J3d9sGjnXodILWHa3aaWJK2j5TD7CoPAIOycarTtaSDm8SOTQE8aduqmjkzeXkQfjQYE0U+9xHWkRqnfwKchyKCCgz+5XBGU7zjgnn2RDG/aLwBI8HAtFBjGLtrTfvOUMDPb3iXyuXlP3vwUbhkPMtbNxlVfliU7QHQm8Oq+Zk6bf3XMzAelvSWL4OIG4xk7COGmIit/MAsag9/Amg78lmtfVv4+KzyWYHtkJ6xVF7jdjQkwf+wG1yjuCQE81XFPC0u5Yl1BdYrvWmY/b6oVYpIUD2sNVo5QGpauQVg5IE7mMwpwEPZPlZtjGrYRPDXJSmfo/mzp1tn6tJji/r8Mqbdi6uRfFxJc80PTyKvabffaPYDXVUx6BLVOyxBCR+ti6FNTfFAKgJuBrrnZTu69CpnFAZz2dcqwQIujtiTOYY3+Y1SRGVvYM7PunSTI7rvsE2DeyyF4ccbo9ziarcF+cll4Q+kDPt+dpYSOrVNHmoO7V1VHvsmaXiajygRqsamm9i9dFUjNDoIXQaDgFbHj/J8zS7szSddOPf4w1UYel7l0UUY1uvm8SDHDSHlF4UtZFFsOWbQMgG3+FNsNTtK2iNOA0IIWWzSS6ooFpStU2usQ8L2o9kme+akMpx8QwbEITokK/2fhBIIYvtaC1L506XyqyuwsXgiL/sO3LLLB+q3YQI4vag/+R15SQD3a2UN3dG4wfZBsHWIztorTRAClJGUL90RWyMjyCcEO9RNwCtgZBuIwrO67gTWQlfdQX4QJ4CNVHAGLV1ZKtRNRO4Y7UH5WPoMGQKDYCTNn1pzezzRW2pYliRSE1pGlgFO0cFGycBeY+4Lra5vcwIUfqUJXAh8lMYbIW/EhFC5qeI8IYS2H18ilq5GD6pbdVZ09jHoWspHCaQSTryUDUwmO/k5i2F8/PXDrIDHUtlAvuwEdI66uTJ7aFyoMI0wPHw3ulZ0xTdZjNKGKQw2I9vWxdBvQsYWaaXbicA6w+Xb4u7N2SUPqZdM3TzCqOPuVPPP1OQzZFXhpAemMrFNF5njLcvFJg0bqFdLWX5UvOFIQor2guKIz8dto41y2OANola7RhTbCMHhXjCpRAbipLr7YSegsn+1URjsEOsHthPPjKVHump+qhIDK4w9bztT+8MUGGJp/U5aVViP0jozJfG0Lj8aQB6jiDASLMNqbllT2LfySwYrGKb7/ul1zkuGRayWURR2+LJOjE6I1OonYvUzE8hQkwtkyv0nZak5PFbeVKa/LwZlIhWmUPb8j1tx0MlxSQgs+FtdafeG/e44VVxXTTal0b2Qi2YbpVt/R0Elre2VhLOoRstMfay6JbFFD9yvPemLKOvqgwIyKElrwVvYL6f4A1dbu+FTYzONVwSqKnkZ1qshR7eVv/Mmxzb6loJqngXRMgxVjxe1xluITJhBOJHJ4sV0U/fJG9YqiBhApWJkRfj10qaqj61Lr3RnJJp4fhXtMtNTPY8O99z334LsXOhxjVA0Q1bv8BkuFW7dnIAC/MEnmwgTGwQ6IXL6+tqSoR9XOQrOAr9zGDXlmAHsN8gVj5dCSX+XUYOhBUmkfXb0kyhl4xDk+vU4qbh4jrXximc46uhSs03S/eyzr1rCkbV1n6E7pGFDp4q4EF8Ih/iH4cgUb3Sd5o5rGd8oQf9mFBL6bBdWuqwroUtjsyptUt6m0tBWGqc6X0qlJ03i1OXsKzP8t1JQEFQ2acStbeMDuP3GHFRbCiEaa+L0Qiw/fkK6gmP9HK7PEEFkioMpMFbQ7yc="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549227,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 40,
+   "prompt_tokens": 1202,
+   "total_tokens": 2254,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 7.64490865800326,
+ "attempts": 1
+}

@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_023",
+ "run": 2,
+ "timestamp_utc": "2026-11-01T16:08:15.679265+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1458530 bytes, sha256=fd95d923b0bbed4f81238a7932b1088b4f12335689d333d455704404577c4490>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "7GPnapmxM86i694PmKTjiQ8",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"63,000\",\"subtotal_price\":null,\"items\":[{\"name\":\"6 TWIST DONUT\"},{\"name\":\"1 REDBEAN BREAD\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EucICuQIAWkUfRPGILoRUOfSJXicVO01prJLM3LRx2BoFN/3/H3zcpqcprM8Sr3AXmDA4cnmLUs5K7s+GKpelouCLj3w/tEELlMVbzWoGfjVjDeHFxXqJoLf2y/OfQtaGlpFim6veMmCuWIsF5OFogAvaO87LJlmHe4+X+k9q5NO7K3MynNo48dQn8//Tt0itoSMztVDX6Gz+//etUPnJu/CwlFsCpuZtVvIkCtvJVY1H63ABSR38gMhOxDhAJUAdm5FI9izOAqhNHQBWs8PEAh2XoEI2H+7r3WfxqC8tsAymh3yeNg7/V64iSj4K7feENMMwXAiz4Auks+p4dwOKPxyYEHCIlkdRL/roLQGegjufOJZb68y5Pib2MTyHHNPrS45cu623bYjTOwlfetk1CltOsQPRNkQk+bISSTRmqUy7hr6GXUQ1+hm7Z/7hYR8ryYzXjDS8mZo+1oA1rjJkRseM26G038twSySBNl2CCbpjXVDWdbBaNcITj3AGOXiaytS/EsAu/JWFsJ09YJSaDlzXD7l49iEi1imm9odqx0+rjXRPdIacblktsv9hdjC81LLnqnWa1xg7/rnZAt9vw+R7tUhkgSmGpfL64fU3PFfti9QnhaJHEC/GLeoyUECQ7gQMgmPb0VsLKJNXj7Zp95QuJLGGEMwkiePdizpv5lJGKskL8pECI6DFyI7ouoinL0YmhdlpcDb87pPssSG8VnNy++xXotkqe6mXBCeocyvKdJjwo6zeUIdD8zWt94PW9pGbJDYDb6LMReqLGZdcI0pLEtThhNa0mn5WuH5IjxOOTDwqveLBgziTUwkYv5C2bkTaa9ZNsQjkFB3qrWChdGr4J7CCQgdUMh8OAMPRi3WWaNB5B0KXhEG2EFwF4nlFXvB1rDhlZw2AMM8k/VPguaW/cxolHuQifyu6LBa7gtL92kv6t207AxpFlet2ItwzpHfyAITtcuzelC7YZk77Lg8tEF/h0tODzc2hIDtV5eDvCmopX4cPo4p56yVIb1PnWrfx5/njMag7S5ThigByoImk5NtI4ByeePSaFC5Z1AmRaFNCP9dhnyHnTLiKuLPSA26J14M8xBMHHnF+uikNqJ5w6hF0Bz+87kHDbZ+8BjbAhossGEoaaCcoSKAYoz89wVb4OnZQJUiiH51LPbd2I55jElVlIwdoeRi/hvy/nArLAWqxI2kL5ugsjYxOLa7uzQ3sA+zE7p+9HKKrZ655kgBQaF62DyBEpmjazGiiWJYZr4Z9QzDAf+korJFBf/K8/RieLknyVr1dsiCzjxVgv9/ykpT8aLFC8y/+C1Pmfo58BVxP2fymn+Z8jejeMUFxVUqigiGP07SYJTnHeFzmhn9WcLjqMA9xGgqz2zl66Jckrh18vJr+JVmaowVx3fcYs6aTu3dKWfb+sPfv6+ipuOSlbrf5qq9T0m7GYBE1AxnkeJiP3PZ/Yjb+U+gbzRDm1Uql/Zch5xdU84babdSO0m/4AHFOxePN1Q="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549295,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 38,
+   "prompt_tokens": 1202,
+   "total_tokens": 1584,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.604508641998109,
+ "attempts": 1
+}

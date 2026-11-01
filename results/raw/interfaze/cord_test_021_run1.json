@@ -1,0 +1,873 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_021",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T14:28:14.672165+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1480803 bytes, sha256=f4ec833b7b577f39211046770ae40e89f24c2486fe425898a06849384dea5c0f>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-1a7384ca-eb72-4d0a-b6bc-8c280978388c",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"RP38,000\",\"subtotal_price\":null,\"items\":[{\"name\":\"NASI GOR SFD TLR\"},{\"name\":\"ES TEH TAWAR\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793543294,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 749,
+   "prompt_tokens": 10974,
+   "total_tokens": 11723,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "[x] 1 35.000 Rp35.000\nNASI GOR SFD TLR\n3.000 Rp3.000\n[x] ES TEH TAWAR\n*** TOTAL RP38,000\nCASH\nRp50.000\nCHANGE\nRp12.000",
+     "sections": [
+      {
+       "text": "[x] 1 35.000 Rp35.000\nNASI GOR SFD TLR\n3.000 Rp3.000\n[x] ES TEH TAWAR\n*** TOTAL RP38,000\nCASH\nRp50.000\nCHANGE\nRp12.000",
+       "lines": [
+        {
+         "text": "[x] 1 35.000 Rp35.000",
+         "words": [
+          {
+           "text": "[x]",
+           "bounds": {
+            "top_left": {
+             "x": 128,
+             "y": 518
+            },
+            "top_right": {
+             "x": 169,
+             "y": 518
+            },
+            "bottom_right": {
+             "x": 169,
+             "y": 571
+            },
+            "bottom_left": {
+             "x": 128,
+             "y": 571
+            },
+            "width": 41,
+            "height": 53
+           },
+           "confidence": 1
+          },
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 234,
+             "y": 545
+            },
+            "top_right": {
+             "x": 251,
+             "y": 544
+            },
+            "bottom_right": {
+             "x": 249,
+             "y": 579
+            },
+            "bottom_left": {
+             "x": 232,
+             "y": 578
+            },
+            "width": 17,
+            "height": 34
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "35.000",
+           "bounds": {
+            "top_left": {
+             "x": 278,
+             "y": 543
+            },
+            "top_right": {
+             "x": 372,
+             "y": 541
+            },
+            "bottom_right": {
+             "x": 371,
+             "y": 580
+            },
+            "bottom_left": {
+             "x": 277,
+             "y": 580
+            },
+            "width": 94,
+            "height": 38
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Rp35.000",
+           "bounds": {
+            "top_left": {
+             "x": 538,
+             "y": 542
+            },
+            "top_right": {
+             "x": 664,
+             "y": 542
+            },
+            "bottom_right": {
+             "x": 663,
+             "y": 577
+            },
+            "bottom_left": {
+             "x": 538,
+             "y": 577
+            },
+            "width": 125.5,
+            "height": 35
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 128,
+           "y": 518
+          },
+          "top_right": {
+           "x": 664,
+           "y": 518
+          },
+          "bottom_right": {
+           "x": 664,
+           "y": 580
+          },
+          "bottom_left": {
+           "x": 128,
+           "y": 580
+          },
+          "width": 536,
+          "height": 62
+         }
+        },
+        {
+         "text": "NASI GOR SFD TLR",
+         "words": [
+          {
+           "text": "NASI",
+           "bounds": {
+            "top_left": {
+             "x": 230,
+             "y": 583
+            },
+            "top_right": {
+             "x": 296,
+             "y": 584
+            },
+            "bottom_right": {
+             "x": 296,
+             "y": 617
+            },
+            "bottom_left": {
+             "x": 230,
+             "y": 618
+            },
+            "width": 66,
+            "height": 34
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "GOR",
+           "bounds": {
+            "top_left": {
+             "x": 307,
+             "y": 584
+            },
+            "top_right": {
+             "x": 353,
+             "y": 584
+            },
+            "bottom_right": {
+             "x": 354,
+             "y": 617
+            },
+            "bottom_left": {
+             "x": 308,
+             "y": 617
+            },
+            "width": 46,
+            "height": 33
+           },
+           "confidence": 1
+          },
+          {
+           "text": "SFD",
+           "bounds": {
+            "top_left": {
+             "x": 370,
+             "y": 584
+            },
+            "top_right": {
+             "x": 418,
+             "y": 583
+            },
+            "bottom_right": {
+             "x": 418,
+             "y": 617
+            },
+            "bottom_left": {
+             "x": 370,
+             "y": 617
+            },
+            "width": 48,
+            "height": 33.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "TLR",
+           "bounds": {
+            "top_left": {
+             "x": 432,
+             "y": 583
+            },
+            "top_right": {
+             "x": 478,
+             "y": 583
+            },
+            "bottom_right": {
+             "x": 477,
+             "y": 617
+            },
+            "bottom_left": {
+             "x": 431,
+             "y": 617
+            },
+            "width": 46,
+            "height": 34
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 230,
+           "y": 583
+          },
+          "top_right": {
+           "x": 478,
+           "y": 583
+          },
+          "bottom_right": {
+           "x": 478,
+           "y": 618
+          },
+          "bottom_left": {
+           "x": 230,
+           "y": 618
+          },
+          "width": 248,
+          "height": 34
+         }
+        },
+        {
+         "text": "3.000 Rp3.000",
+         "words": [
+          {
+           "text": "3.000",
+           "bounds": {
+            "top_left": {
+             "x": 285,
+             "y": 621
+            },
+            "top_right": {
+             "x": 356,
+             "y": 621
+            },
+            "bottom_right": {
+             "x": 357,
+             "y": 657
+            },
+            "bottom_left": {
+             "x": 285,
+             "y": 658
+            },
+            "width": 71.5,
+            "height": 36.5
+           },
+           "confidence": 0.91
+          },
+          {
+           "text": "Rp3.000",
+           "bounds": {
+            "top_left": {
+             "x": 555,
+             "y": 622
+            },
+            "top_right": {
+             "x": 665,
+             "y": 621
+            },
+            "bottom_right": {
+             "x": 665,
+             "y": 654
+            },
+            "bottom_left": {
+             "x": 555,
+             "y": 654
+            },
+            "width": 110,
+            "height": 32.5
+           },
+           "confidence": 0.7
+          }
+         ],
+         "average_confidence": 0.81,
+         "bounds": {
+          "top_left": {
+           "x": 285,
+           "y": 621
+          },
+          "top_right": {
+           "x": 665,
+           "y": 621
+          },
+          "bottom_right": {
+           "x": 665,
+           "y": 658
+          },
+          "bottom_left": {
+           "x": 285,
+           "y": 658
+          },
+          "width": 380,
+          "height": 36.5
+         }
+        },
+        {
+         "text": "[x] ES TEH TAWAR",
+         "words": [
+          {
+           "text": "[x]",
+           "bounds": {
+            "top_left": {
+             "x": 134,
+             "y": 652
+            },
+            "top_right": {
+             "x": 168,
+             "y": 652
+            },
+            "bottom_right": {
+             "x": 168,
+             "y": 685
+            },
+            "bottom_left": {
+             "x": 134,
+             "y": 685
+            },
+            "width": 34,
+            "height": 33
+           },
+           "confidence": 1
+          },
+          {
+           "text": "ES",
+           "bounds": {
+            "top_left": {
+             "x": 231,
+             "y": 663
+            },
+            "top_right": {
+             "x": 263,
+             "y": 663
+            },
+            "bottom_right": {
+             "x": 263,
+             "y": 696
+            },
+            "bottom_left": {
+             "x": 231,
+             "y": 696
+            },
+            "width": 32,
+            "height": 33
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "TEH",
+           "bounds": {
+            "top_left": {
+             "x": 279,
+             "y": 663
+            },
+            "top_right": {
+             "x": 324,
+             "y": 663
+            },
+            "bottom_right": {
+             "x": 323,
+             "y": 696
+            },
+            "bottom_left": {
+             "x": 279,
+             "y": 696
+            },
+            "width": 44.5,
+            "height": 33
+           },
+           "confidence": 1
+          },
+          {
+           "text": "TAWAR",
+           "bounds": {
+            "top_left": {
+             "x": 340,
+             "y": 663
+            },
+            "top_right": {
+             "x": 417,
+             "y": 662
+            },
+            "bottom_right": {
+             "x": 416,
+             "y": 695
+            },
+            "bottom_left": {
+             "x": 339,
+             "y": 696
+            },
+            "width": 77,
+            "height": 33
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 134,
+           "y": 652
+          },
+          "top_right": {
+           "x": 417,
+           "y": 652
+          },
+          "bottom_right": {
+           "x": 417,
+           "y": 696
+          },
+          "bottom_left": {
+           "x": 134,
+           "y": 696
+          },
+          "width": 283,
+          "height": 44
+         }
+        },
+        {
+         "text": "*** TOTAL RP38,000",
+         "words": [
+          {
+           "text": "***",
+           "bounds": {
+            "top_left": {
+             "x": 229,
+             "y": 751
+            },
+            "top_right": {
+             "x": 271,
+             "y": 750
+            },
+            "bottom_right": {
+             "x": 271,
+             "y": 782
+            },
+            "bottom_left": {
+             "x": 229,
+             "y": 782
+            },
+            "width": 42,
+            "height": 31.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 278,
+             "y": 750
+            },
+            "top_right": {
+             "x": 353,
+             "y": 750
+            },
+            "bottom_right": {
+             "x": 352,
+             "y": 782
+            },
+            "bottom_left": {
+             "x": 277,
+             "y": 782
+            },
+            "width": 75,
+            "height": 32
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "RP38,000",
+           "bounds": {
+            "top_left": {
+             "x": 417,
+             "y": 748
+            },
+            "top_right": {
+             "x": 654,
+             "y": 748
+            },
+            "bottom_right": {
+             "x": 654,
+             "y": 782
+            },
+            "bottom_left": {
+             "x": 417,
+             "y": 782
+            },
+            "width": 237,
+            "height": 34
+           },
+           "confidence": 0.59
+          }
+         ],
+         "average_confidence": 0.86,
+         "bounds": {
+          "top_left": {
+           "x": 229,
+           "y": 748
+          },
+          "top_right": {
+           "x": 654,
+           "y": 748
+          },
+          "bottom_right": {
+           "x": 654,
+           "y": 782
+          },
+          "bottom_left": {
+           "x": 229,
+           "y": 782
+          },
+          "width": 425,
+          "height": 32
+         }
+        },
+        {
+         "text": "CASH",
+         "words": [
+          {
+           "text": "CASH",
+           "bounds": {
+            "top_left": {
+             "x": 231,
+             "y": 789
+            },
+            "top_right": {
+             "x": 305,
+             "y": 789
+            },
+            "bottom_right": {
+             "x": 305,
+             "y": 823
+            },
+            "bottom_left": {
+             "x": 231,
+             "y": 822
+            },
+            "width": 74,
+            "height": 33.5
+           },
+           "confidence": 0.92
+          }
+         ],
+         "average_confidence": 0.92,
+         "bounds": {
+          "top_left": {
+           "x": 231,
+           "y": 789
+          },
+          "top_right": {
+           "x": 305,
+           "y": 789
+          },
+          "bottom_right": {
+           "x": 305,
+           "y": 823
+          },
+          "bottom_left": {
+           "x": 231,
+           "y": 823
+          },
+          "width": 74,
+          "height": 33.5
+         }
+        },
+        {
+         "text": "Rp50.000",
+         "words": [
+          {
+           "text": "Rp50.000",
+           "bounds": {
+            "top_left": {
+             "x": 541,
+             "y": 787
+            },
+            "top_right": {
+             "x": 667,
+             "y": 787
+            },
+            "bottom_right": {
+             "x": 667,
+             "y": 823
+            },
+            "bottom_left": {
+             "x": 541,
+             "y": 823
+            },
+            "width": 126,
+            "height": 36
+           },
+           "confidence": 0.92
+          }
+         ],
+         "average_confidence": 0.92,
+         "bounds": {
+          "top_left": {
+           "x": 541,
+           "y": 787
+          },
+          "top_right": {
+           "x": 667,
+           "y": 787
+          },
+          "bottom_right": {
+           "x": 667,
+           "y": 823
+          },
+          "bottom_left": {
+           "x": 541,
+           "y": 823
+          },
+          "width": 126,
+          "height": 36
+         }
+        },
+        {
+         "text": "CHANGE",
+         "words": [
+          {
+           "text": "CHANGE",
+           "bounds": {
+            "top_left": {
+             "x": 229,
+             "y": 832
+            },
+            "top_right": {
+             "x": 321,
+             "y": 832
+            },
+            "bottom_right": {
+             "x": 321,
+             "y": 865
+            },
+            "bottom_left": {
+             "x": 229,
+             "y": 864
+            },
+            "width": 92,
+            "height": 32.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 229,
+           "y": 832
+          },
+          "top_right": {
+           "x": 321,
+           "y": 832
+          },
+          "bottom_right": {
+           "x": 321,
+           "y": 865
+          },
+          "bottom_left": {
+           "x": 229,
+           "y": 865
+          },
+          "width": 92,
+          "height": 32.5
+         }
+        },
+        {
+         "text": "Rp12.000",
+         "words": [
+          {
+           "text": "Rp12.000",
+           "bounds": {
+            "top_left": {
+             "x": 542,
+             "y": 831
+            },
+            "top_right": {
+             "x": 670,
+             "y": 829
+            },
+            "bottom_right": {
+             "x": 669,
+             "y": 864
+            },
+            "bottom_left": {
+             "x": 541,
+             "y": 864
+            },
+            "width": 128,
+            "height": 34
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 541,
+           "y": 829
+          },
+          "top_right": {
+           "x": 670,
+           "y": 829
+          },
+          "bottom_right": {
+           "x": 670,
+           "y": 864
+          },
+          "bottom_left": {
+           "x": 541,
+           "y": 864
+          },
+          "width": 129,
+          "height": 34
+         }
+        }
+       ],
+       "page": 1,
+       "width": 960,
+       "height": 1280
+      }
+     ],
+     "width": 960,
+     "height": 1280
+    }
+   }
+  ]
+ },
+ "latency_s": 14.68292431000009,
+ "attempts": 1
+}

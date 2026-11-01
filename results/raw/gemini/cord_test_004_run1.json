@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_004",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T16:07:08.074485+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1643699 bytes, sha256=8f3eee7068c96e86cdb2e4b5c53085cb5e1439462edd55c373548cb1962801ad>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "qGPnat2LONGp694PteC8sQM",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"174,600\",\"subtotal_price\":\"194,000\",\"items\":[{\"name\":\"ICE BLACKCOFFE\"},{\"name\":\"AVOCADO COFFEE\"},{\"name\":\"CHIKEN KATSU FF\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "Ep0HCpoHAWkUfRO+HIWfB0zv4zZswOLTRGvtBYue0j64885u4zhGcTuygRhXU4ULB8Oo09Bwrcr8UyORko+b8Jrn6X62Mdy4sBqajSXIIj20Dz9ICHGIecKjiLjNkmVDE6W1MZQS+3P394Llve0AUqYY2FjT5QRloqhFpdr9Z+GJcGT+I2f9QETf+Kpy73Fx/BfzbiuFOpO3UgpfScFr4VR/5kPz1uwkK7KT2/WnHoY3bqcnuWdLJIKs3V9rE2YadCEzgoVD3kF+F+cfzsfp3sPmpFv3w3IY5ON7E+Zlwfw9+S1jwbPgbpYLc/lRsH+GU4l5/PjWOUdKhQs047e73rFH9/C8ROJVmoFT7o30f92jR3yYVArXxECqPMq4LwGHGg0DOlIQ7ugOvsD6mO9eXXsNbR00bSnOi8sf12hz7WNTrB91UHmynjgal/b2S8IJKBPJ+a/OBCLifFKCZQaG25ti0WHnrRVFTXzDyxPg1MMvIr9/rz2kERjEqp1O8SmOYWE6zGHrNbh5xCDQ/vGzINNbVzcV4FwOWSraFwDxl/pNMsugLpzEkwx5zGFdhd26hGJ0l0x0wPJXl53bPqU0/ZYOzZij43doaTozl6SjzvARJNYn54aL4vVT1PVet3B+qAg/NsGwhTXqcWPiCYZOy8cddiO7SRGEHj0h1m7Cda+NQ0vLQNegWP5HqQOxgYbcszlQhyow40vWE5MhnsuJeOJLoIwOSK1BsdhEo/ZknholhnxLE+VkclKi87T8+sINjxG7jGU+Vf1ZTiIlndsq3FCdpsIgAQ5JEQ4SzEWNh9iXUa5RKYTcMZMNamz0TigDYYZ4nXPjbp5hIrMb/5V9Icw93D7MK0BLO58ARK9L+ijt+7JkxnVgCApBZwW7MmOOTmOx9F6H0scgE9uVIdQdbs6rEqTkyhoCrQCvIDkErgXEO2uulnr9c0vb+CXAizXaYQ2m6Pnok0vBmd2quYDe8X/vjQEhf7ljFp9AiUY1ijzgfMH+nFm2jL2Vs3he/H78J+89Rhm2HEC81I8E9R9sECG8yMMRBAfvw+t+Fyn8Jf4DFNWFoU8oKGlwIe66g7oB2yxHH96ig8eNnzEHgc/B/kGNfYgHXOd/TJ1sycfwldLJQ7wyEnr7rR3UP4927CRMAYZrkeunZxU9bs2mPlzNMatsljzYIV2HTAwiuCMjuDQikytUgJnAH5k2ViyogQwD2bVuPsoP7zqX3e3zmNqMWw=="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549227,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 53,
+   "prompt_tokens": 1202,
+   "total_tokens": 1577,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 4.158840654003143,
+ "attempts": 1
+}

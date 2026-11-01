@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_004",
+ "run": 2,
+ "timestamp_utc": "2026-11-01T16:07:45.719226+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1643699 bytes, sha256=8f3eee7068c96e86cdb2e4b5c53085cb5e1439462edd55c373548cb1962801ad>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "zmPnasiLFrim694Pt6S7sQQ",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"174,600\",\"subtotal_price\":\"194,000\",\"items\":[{\"name\":\"ICE BLACKCOFFE\"},{\"name\":\"AVOCADO COFFEE\"},{\"name\":\"CHIKEN KATSU FF\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EosHCogHAWkUfRPDZzSoh/NbobLwoR8VYMJ/PM4LBE19dqbABHjqNuqJHtU+ptnK2gkIl2atCFl0GH8ThZH9RnV6OOMb9f1+Ce3veZLYxp5ILdmJAllp25RW8e9PH60WZOs8OEdxaq5uRvup7UaKpaDx78mFUgLK6bxqbulKroxbNEoNLIQcExkQnQsjjvoqgXb0MUo/Uil3o64HnTgeOyvX3jYB+Wde8X+tD+eGZR7AI8TZD83ioFsxs+43XA/aoM6f3RMPGmUgq9y7wUnqpa2FAuyLeExz6N1Tmx30QI6S/RaUBmFESGT11Bg8Kt5eJRkfPoSgN7g3Et8FoFDf6uIvx8w3EKhdlg38Rz1O5T9ZjaXZ2uJDtoC7NkWVJzNLjSZxhXZm0CQFx+fAN3+He3DEFjiWQWCbH08sUqQdRYufAGaD1Bx8zA/ctC8rwt4JKWe7njRFNDyjCCVft4EmKJRdQsCTtwbN7FpUBROvzYBYSD2wIVYRwinziQTcKSsvEnfcWavMjQ2Z/4R2eLvLErL+Usvy0be4lG/RxNIgXOcOI8nnw+lbByIoM/mGqqfYWWFqZ6bSt2TpnUOWHVtgzUUDk7nmqbrDsYpVDMexWp9Oxh1a3lUT8snu4qvR7782ovNY6U+uar0fIoCMq10eBYCvO0QAkd0iS/xFH99dxV9qO4xcOo5l6/e0oxUUCfMYQjVQ9J+l0Wgon+xvIzHmcW2dddNWuIrk3YGMs929pBvJhMfsLaTOJNlgJmyzB9mTvsDlSz6H11bYo4uNYKedUNY9JTL3xwWVteq3R8i41VVl0rbhxZWAsfkpZUZQPqqoE+oA5HG6lavrBU6rVHqKPxertLq+oyXZzAT2/ZVIrVKNDQwbtRINV6zpaU4EtnWzkiqWwjEBrZVWUv+k6on/DeWLpfU6cu+UHsux5iYZ9EMHGXeJdp63V9KOzHmegD+jQpetUSL3lFn9gDE19u2wsdGTUIs4kLtbJ+VqV6alY8j16ZB4v5Jd9NtSf3SKRA8p8QoJB0xWgi8+/Twf15FrXM4F95wYwc2ubMr+EzpSrce1IidwexhwSt0jusSXZ7Zrp6ycYIYOv1HJq1yrOrjqx+46CZ1zaHCNs9Wj8feFSDxQicU4PndTsHW4E7aSLGnqUSq0dSok2FcwKm/auAslRqFTCliu81W3V3cG6Q8l6G7jZXauhNsKsURmDdNC2A=="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549265,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 53,
+   "prompt_tokens": 1202,
+   "total_tokens": 1615,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 4.167149640001298,
+ "attempts": 1
+}

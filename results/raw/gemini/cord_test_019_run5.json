@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_019",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T16:09:51.470895+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 746233 bytes, sha256=b076921ed83bdf900cab539f219cac8dddfaa4a99c13f7d66d7303d9f8c4c8c7>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "TGTnaruoFf7j694PxJTcuA8",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"176000\",\"subtotal_price\":\"160000\",\"items\":[{\"name\":\"4 AMBUSH DBL CHS\"},{\"name\":\"10 AMBUSH CHS BUR\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EpoICpcIAWkUfRMXYfOtHBkLcBZkLutFdC827nOu1ri+EzDRywuHgxT24Q+8aX6zaBmPvPqHaAGURzDpDujiSRy3RlzXobDIIGYBpzNJcfpTdg0jcWU9MgLvAnZy8kwVg+N6hC0rcT4jd7KfZa/8jkmagedlTDmh1MTpdZIoacO0vLgaZ0ookrt6XA1LGe1dtBJ9KnnH0x1h+Aox4XjWTrL/8sRgkGlHmIKe5ksRJCc7LrVwB+MSF4UQ7R6J0RoAFGYO6QEDeMCzKeIsdA4sgmlqBkxUce9mymnI37aXybhH7rFn2t1/TtmhL4NZl/Bvwo0AMLrclMHh/5Yg7jQNvMxnHD1YELzAtrku2goFIhOAr0aQ1ZuhU8tRqrS5LjLuQz6S+QQwidY4ckfdKSyxZb4zBDBFAD7IeJF+9ybwKBCeMqj1rQgfJ9fWuveAl1aA58gjhaLD+dWN8SxUw5QZFVpLnyVdEH0l/Aonwpc0N6mKEDmVoD6E/TrVd4wZS3DeMX1Rd80STqag4jTksdYQMMV/NQo6fKIvR9Gqj2u3XMjaYJBr78iLprGG9YnZ+GDFGGccJEtpWj4l5esLJMTkNb5kR78/DV81Ckg4l+ns5tawNkJvDhi+JcKFDZAwGi+42s4pFCaK3RoxKTFu0T46ImfKkUKEmgrke7qfd3ll7GggUdin4Rv57pcTqnrehVGFCcgAkso4+G5VLKIE2IOL9o3UWQTqKL8ZlhYe4QfUZs2eL32WM2KJhOxJDLeH6zysOi77QrqUiTgijeXEgBL0ItWJfD6yGtPAaLrIe8Mk6b8mFxhZ2RmY14KDxSzEBO6AW9z6hOCXi0M7kFqt7cw3NJHQB6DGbkHRbG0jX1jDoqTiGzfw4qy8axo0HcbG5ZR/xKw5v+xiYPlbDmYJjTPtf/AtBXNs/yAcjB9Ov1AVNnmaQdSMce3Wng+DKZLcSBu0OYfhfAMv2f6ift1QGoVtxgUiZvC50iXKWBsI4MSAUhMmfVtHu803C34qj+S6477UESccAdh0TVJZa7zekm0R6GDuJJLM7phJe4i/Pn3FZxgENepX67KgBH1mclk+estk4TgoW7rbv40FITl295YXU1TiopjodbD+4HtifwaWaXvVXXFPnGaygsKPfyZdS3wHFAdaj6rI9UTqwHqMAgUEWh3ZYzRrST4w5hWIURZ5pRBJAvexy8J27skhH6fu2uCdaoDjASnWlIm7dUC/JFyPcDDUZHDTXGuuP37vMZwIg4McE2mdhH9hQduRpe8L+iaLSUh/dzH1tzyTdrhVtawDvfiYAcnTMGUG23g6ViR7gg8Kjh896XbtoJloys34tqxljol/CzZGmzFF4ED5SQDWMvKs1Sw4ew0H6UsdgCi4fVrXQZhny5knBK5JAskT"
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549391,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 49,
+   "prompt_tokens": 1202,
+   "total_tokens": 1649,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.776665678000427,
+ "attempts": 1
+}

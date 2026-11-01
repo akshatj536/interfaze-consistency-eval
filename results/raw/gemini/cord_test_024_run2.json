@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_024",
+ "run": 2,
+ "timestamp_utc": "2026-11-01T16:08:15.621933+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 883056 bytes, sha256=57989ab2c73a37b1c80d1774a07ed3e8adfbc1145566d3f7efb683c1bfe48824>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "7WPnaueqA-Kw694PyuTQgAM",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"Rp.118.000\",\"subtotal_price\":null,\"items\":[{\"name\":\"5001-Corn Flakes Cookies\"},{\"name\":\"5003-Chokoreto Cookies\"},{\"name\":\"6002-Plastic Bag Medium\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EvMGCvAGAWkUfRO7sBjgnQnGc9yO9gv9iaaQBVrO5i8khjuVmGsHadwRVu2QNCVhO4J5m9ySkUxMfiiYpny+/cWytqA0dQQkXH+qnSdBaUBMvU4CMWZifokdGeYpdyzPzu7hEwTNFlcoV6F1UnXxkpuTN52Zmy689KI/uaFH2aVhVVgkINNkI2/cMz08CJn6Z7i2WoTV7usScIkQ0aXw+LK2RVwWbePRrPd7cO7zWJ0IREFZrNcyKvr+NwQau4m8PK9VJWcsjGrWpvDhpNa0IXt8j8NjSyskGscRFOkfRhcVXpMb4E+S5SRAfUaPNN4vEIIyJAWF7IAsqvY3z1c/rKwZvBJg9c22EA3vZMO57CJMcj1N4VxMfvGH/FXE53jy5bvXgXorkgeznKX46/0cluXqrWn9hVCR0JTZdA8V9d6Dnm//coyvbsOnuD7JYypl44RBiQYYhl0S7m5c6ouiqXu3EkksrgvY3v5hso6/DylZwt6WwA7fX4Cu7AnyEos5+flIc5JurXhYS1txsOaf4yQcp9iezOKPdEdif6vo+CjZJMFGnRk7CIOGswkWYFvB1KeI3aPXdMTpRL0lEj9RZw7ibVdmYfF8J9RhmxnDaYy5+dtX0cl32iC87nymGHaCP3RnKKsT/i76cb2ci8JDHbFk1Yl6k5eIL1InTRj53d1S1zKvVGdC+yqY1886zaLlCOGez+3wbI5B31dEJgPc4zmqEBJV9NAa5QjnnpX1YVc/nQrwtURhcxc0Y0Q8XoEazGXje0itjjApCA6N5+lF6mgDFpy1hFTEnYcIK7pOlxx+ommXu+GtRH9k7RP1f2gINOkZ62FU1mcegRziixiD7ZSMvRk9fFYAEpyjiw2G6W32V7Q5EOQE8F2dyZJGWcjHoipW6itcoFoMv5hKeUbtXuOIy/pVQXy379RRDBDtVIfSwyS60zTqBzQRgJ5I98E+GkkGKTR3HZW1UAhC6PfUVEVgZc8SOrL4gReLy1pumcf/vQAfry7Alel2QYoz/6rI49vJacSG0bGU/XpXKh3nwgJVxbBLbDIS5P4WxlShok744MYi4s80UHzQQ96tKx76oiW0Rwpi6Qmlvwq8LSkjSeZKZWNmMaHfXyzdSD6Iq7W2K6eGJxQR+7juSuyUjnwcobr18owVrW/v6qMdFn0jZSuY8Qtfaw=="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549295,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 61,
+   "prompt_tokens": 1202,
+   "total_tokens": 1577,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.231643635997898,
+ "attempts": 1
+}

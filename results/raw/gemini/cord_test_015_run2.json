@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_015",
+ "run": 2,
+ "timestamp_utc": "2026-11-01T16:08:02.419828+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 857077 bytes, sha256=f1cd67a7d67d04ba8d5b685553b1b5addbf2039d5954ab08c92139c0ad88a796>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "32PnauCvG86i694PmKTjiQ8",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"63.000\",\"subtotal_price\":null,\"items\":[{\"name\":\"Lemon Tea (L)\"},{\"name\":\"Caramel Small\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EscICsQIAWkUfROI3EpD+ILUyBrRIx6KwaLw2r/WM9rqGRhZiAP9cAhlHJv2JpuZKMkObf046hlxvUWw9znr1Qj4/+bWsilJpoV7xtro9Lk3tnmnavpeLIGQaiEvGLOtesu3RpYw10MH1QhX1+qPeDdSnu6jJw/2WTydc2OnYL8vk0pjy2v/HQF8Bn36/QclAxbHlqyIKTrnpsfb+yl2laGPk6r+XN/ALUbYhaYOVhtfNKrzVCjR2X0vtkHqllepk8EdjOZPCa8+/3TKkHPsUheDBZUyVHuT9DhAEGWX2Rj1UMCybDF54yOAf7IH1+JNwQ40sHldJx6NNl7r55o7mf7B7ZmxJvY/B4NbWkJdpDIYkEqkDDAXFRMvRNCFOtyXpnQvKs8WaPg7dHjWDna0MyZzHAxtAoEFCJvHDsag6eAeEFNXQKoiZQF4gb8FJztBJpWNhj39urXHK/zHbB04y9MHieUbg9Wl2KFKEWmH36Q7pZvDLT6QOOJhzKyjf4bN/0HmAguLJgtd/o3P4ejR5OzOc5O8YdDa4DjKQEuA6C5RcSLpTP6KQFy2GILo/huCLiWdD8Jy82lR+r9ibCTh0wZ1u/Nyo1NrUJw4shUEl63X1sqEEZ6quSKdxZn9eCWHVNklbEnIUD0iNGXlH6cst65arlRBqIjZkQ6GRLdogRNUHe405iK3FtyFkloaIOwOgYLjeW2pbVS32YcIMaITxNPtBplwJE8pKBD1Zi+WOFtkePz9Epe/A41h4yqQJDr6fkfyzOX6UvclhsafZm/8yS5nBqXiSW5lT3i7vWGjHgGCEonxB+To5r07pcpPGsDk6kYxCP1L0qZavk6emsrZrVlT+wx/WLLlUR9n6J6IssKooR5jA1k5ONp2BSANj0OX7iGu+sBYOX3hPenvasB0z8v1Md1XMmzqSoO05E3eJ0DSgACA4+k2g0yH08vXJMzR3MZQm0Poq3x4Y8YVm/GD9ywLOa2DLOvZWCwzaxW5SFrPa19Ony1lrNnmKjOrcICciinAtss1Zotyg3+5SzOTdMlEe5EnfXjZJDs6Cy7eGNONk+m5FcBxr7Xs5paWC4aCn3iCzkEsdB9udvbWF9jxVFa9RFBGPqCFEM7c2x/dgjNPySueONRHTcCOiiXfPYIAhJehQmozE+6XWF/COdtxhbSjn7+d7UyFPAAhbFIhWOz1/z6hbr4nkpb11p3gL+CXivUFzRTMXJaoJR1eJG1q3Qpt9f8A6cwvDC6tuxWuAIcOrtb/1JTtMF76GKVUuqKQc5O2E5b56H7n/OOzpF6eZ/DE93ihwZaKNoq3+9MAZ4bChLYkE2L7TufJgtzv6QUhXyms8p49LaTaZ1l3oQoSCekO22IZpKrjWiIzx4aThKJbPgnXpoB2fKHgQxSx4Mj9eAWN8Zta6amzMnBvUIZralMkuSOovLd3RjRt2vr5AkD+zXTKNcKgJGPW"
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549282,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 36,
+   "prompt_tokens": 1202,
+   "total_tokens": 1578,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.6843378510020557,
+ "attempts": 1
+}

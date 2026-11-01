@@ -1,0 +1,681 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_018",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T14:25:02.614520+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 828925 bytes, sha256=88c35bbd2e2a634e89f2c5bfd30f7b530b1082c1f4e6e7cb3cb913f0b46c3868>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-6f6c6d6b-436b-4e65-90c2-c67d6b93121e",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"156000\",\"subtotal_price\":\"156000\",\"items\":[{\"name\":\"Propolis Cair 1\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793543102,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 700,
+   "prompt_tokens": 10958,
+   "total_tokens": 11658,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "Propolis Cair 1\n156000\n156000\nSub Total\n156000\nTunai\n156000\nKembalian\nRp. 0",
+     "sections": [
+      {
+       "text": "Propolis Cair 1\n156000\n156000\nSub Total\n156000\nTunai\n156000\nKembalian\nRp. 0",
+       "lines": [
+        {
+         "text": "Propolis Cair 1",
+         "words": [
+          {
+           "text": "Propolis",
+           "bounds": {
+            "top_left": {
+             "x": 21,
+             "y": 323
+            },
+            "top_right": {
+             "x": 103,
+             "y": 323
+            },
+            "bottom_right": {
+             "x": 102,
+             "y": 346
+            },
+            "bottom_left": {
+             "x": 21,
+             "y": 345
+            },
+            "width": 81.5,
+            "height": 22.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Cair",
+           "bounds": {
+            "top_left": {
+             "x": 108,
+             "y": 323
+            },
+            "top_right": {
+             "x": 151,
+             "y": 323
+            },
+            "bottom_right": {
+             "x": 150,
+             "y": 345
+            },
+            "bottom_left": {
+             "x": 107,
+             "y": 346
+            },
+            "width": 43,
+            "height": 22.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 155,
+             "y": 323
+            },
+            "top_right": {
+             "x": 166,
+             "y": 323
+            },
+            "bottom_right": {
+             "x": 165,
+             "y": 345
+            },
+            "bottom_left": {
+             "x": 155,
+             "y": 345
+            },
+            "width": 10.5,
+            "height": 22
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 21,
+           "y": 323
+          },
+          "top_right": {
+           "x": 166,
+           "y": 323
+          },
+          "bottom_right": {
+           "x": 166,
+           "y": 346
+          },
+          "bottom_left": {
+           "x": 21,
+           "y": 346
+          },
+          "width": 145,
+          "height": 22.5
+         }
+        },
+        {
+         "text": "156000",
+         "words": [
+          {
+           "text": "156000",
+           "bounds": {
+            "top_left": {
+             "x": 25,
+             "y": 350
+            },
+            "top_right": {
+             "x": 95,
+             "y": 350
+            },
+            "bottom_right": {
+             "x": 94,
+             "y": 370
+            },
+            "bottom_left": {
+             "x": 25,
+             "y": 370
+            },
+            "width": 69.5,
+            "height": 20
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 25,
+           "y": 350
+          },
+          "top_right": {
+           "x": 95,
+           "y": 350
+          },
+          "bottom_right": {
+           "x": 95,
+           "y": 370
+          },
+          "bottom_left": {
+           "x": 25,
+           "y": 370
+          },
+          "width": 70,
+          "height": 20
+         }
+        },
+        {
+         "text": "156000",
+         "words": [
+          {
+           "text": "156000",
+           "bounds": {
+            "top_left": {
+             "x": 253,
+             "y": 334
+            },
+            "top_right": {
+             "x": 323,
+             "y": 334
+            },
+            "bottom_right": {
+             "x": 322,
+             "y": 354
+            },
+            "bottom_left": {
+             "x": 253,
+             "y": 355
+            },
+            "width": 69.5,
+            "height": 20.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 253,
+           "y": 334
+          },
+          "top_right": {
+           "x": 323,
+           "y": 334
+          },
+          "bottom_right": {
+           "x": 323,
+           "y": 355
+          },
+          "bottom_left": {
+           "x": 253,
+           "y": 355
+          },
+          "width": 70,
+          "height": 20.5
+         }
+        },
+        {
+         "text": "Sub Total",
+         "words": [
+          {
+           "text": "Sub",
+           "bounds": {
+            "top_left": {
+             "x": 23,
+             "y": 413
+            },
+            "top_right": {
+             "x": 59,
+             "y": 414
+            },
+            "bottom_right": {
+             "x": 59,
+             "y": 434
+            },
+            "bottom_left": {
+             "x": 23,
+             "y": 434
+            },
+            "width": 36,
+            "height": 20.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "Total",
+           "bounds": {
+            "top_left": {
+             "x": 69,
+             "y": 414
+            },
+            "top_right": {
+             "x": 114,
+             "y": 413
+            },
+            "bottom_right": {
+             "x": 114,
+             "y": 433
+            },
+            "bottom_left": {
+             "x": 68,
+             "y": 434
+            },
+            "width": 45.5,
+            "height": 20
+           },
+           "confidence": 0.57
+          }
+         ],
+         "average_confidence": 0.79,
+         "bounds": {
+          "top_left": {
+           "x": 23,
+           "y": 413
+          },
+          "top_right": {
+           "x": 114,
+           "y": 413
+          },
+          "bottom_right": {
+           "x": 114,
+           "y": 434
+          },
+          "bottom_left": {
+           "x": 23,
+           "y": 434
+          },
+          "width": 91,
+          "height": 20.5
+         }
+        },
+        {
+         "text": "156000",
+         "words": [
+          {
+           "text": "156000",
+           "bounds": {
+            "top_left": {
+             "x": 255,
+             "y": 423
+            },
+            "top_right": {
+             "x": 326,
+             "y": 423
+            },
+            "bottom_right": {
+             "x": 326,
+             "y": 447
+            },
+            "bottom_left": {
+             "x": 254,
+             "y": 448
+            },
+            "width": 71.5,
+            "height": 24.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 254,
+           "y": 423
+          },
+          "top_right": {
+           "x": 326,
+           "y": 423
+          },
+          "bottom_right": {
+           "x": 326,
+           "y": 448
+          },
+          "bottom_left": {
+           "x": 254,
+           "y": 448
+          },
+          "width": 72,
+          "height": 24.5
+         }
+        },
+        {
+         "text": "Tunai",
+         "words": [
+          {
+           "text": "Tunai",
+           "bounds": {
+            "top_left": {
+             "x": 23,
+             "y": 491
+            },
+            "top_right": {
+             "x": 77,
+             "y": 491
+            },
+            "bottom_right": {
+             "x": 77,
+             "y": 512
+            },
+            "bottom_left": {
+             "x": 23,
+             "y": 512
+            },
+            "width": 54,
+            "height": 21
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 23,
+           "y": 491
+          },
+          "top_right": {
+           "x": 77,
+           "y": 491
+          },
+          "bottom_right": {
+           "x": 77,
+           "y": 512
+          },
+          "bottom_left": {
+           "x": 23,
+           "y": 512
+          },
+          "width": 54,
+          "height": 21
+         }
+        },
+        {
+         "text": "156000",
+         "words": [
+          {
+           "text": "156000",
+           "bounds": {
+            "top_left": {
+             "x": 256,
+             "y": 503
+            },
+            "top_right": {
+             "x": 325,
+             "y": 503
+            },
+            "bottom_right": {
+             "x": 324,
+             "y": 525
+            },
+            "bottom_left": {
+             "x": 256,
+             "y": 525
+            },
+            "width": 68.5,
+            "height": 22
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 256,
+           "y": 503
+          },
+          "top_right": {
+           "x": 325,
+           "y": 503
+          },
+          "bottom_right": {
+           "x": 325,
+           "y": 525
+          },
+          "bottom_left": {
+           "x": 256,
+           "y": 525
+          },
+          "width": 69,
+          "height": 22
+         }
+        },
+        {
+         "text": "Kembalian",
+         "words": [
+          {
+           "text": "Kembalian",
+           "bounds": {
+            "top_left": {
+             "x": 20,
+             "y": 559
+            },
+            "top_right": {
+             "x": 125,
+             "y": 559
+            },
+            "bottom_right": {
+             "x": 124,
+             "y": 580
+            },
+            "bottom_left": {
+             "x": 19,
+             "y": 580
+            },
+            "width": 105,
+            "height": 21
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 19,
+           "y": 559
+          },
+          "top_right": {
+           "x": 125,
+           "y": 559
+          },
+          "bottom_right": {
+           "x": 125,
+           "y": 580
+          },
+          "bottom_left": {
+           "x": 19,
+           "y": 580
+          },
+          "width": 106,
+          "height": 21
+         }
+        },
+        {
+         "text": "Rp. 0",
+         "words": [
+          {
+           "text": "Rp.",
+           "bounds": {
+            "top_left": {
+             "x": 275,
+             "y": 557
+            },
+            "top_right": {
+             "x": 310,
+             "y": 557
+            },
+            "bottom_right": {
+             "x": 310,
+             "y": 580
+            },
+            "bottom_left": {
+             "x": 275,
+             "y": 579
+            },
+            "width": 35,
+            "height": 22.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "0",
+           "bounds": {
+            "top_left": {
+             "x": 315,
+             "y": 557
+            },
+            "top_right": {
+             "x": 327,
+             "y": 557
+            },
+            "bottom_right": {
+             "x": 327,
+             "y": 580
+            },
+            "bottom_left": {
+             "x": 315,
+             "y": 580
+            },
+            "width": 12,
+            "height": 23
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 275,
+           "y": 557
+          },
+          "top_right": {
+           "x": 327,
+           "y": 557
+          },
+          "bottom_right": {
+           "x": 327,
+           "y": 580
+          },
+          "bottom_left": {
+           "x": 275,
+           "y": 580
+          },
+          "width": 52,
+          "height": 23
+         }
+        }
+       ],
+       "page": 1,
+       "width": 576,
+       "height": 864
+      }
+     ],
+     "width": 576,
+     "height": 864
+    }
+   }
+  ]
+ },
+ "latency_s": 10.964744902994426,
+ "attempts": 1
+}

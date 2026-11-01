@@ -1,0 +1,779 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_009",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T15:54:07.520954+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 816325 bytes, sha256=0411c4d9beb9be65165fdb70c2b60f8bbf9035cc9661be2b8d4c73bbfcff7972>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-e119cb40-2dfd-4ea9-b169-bd11ce5eb5db",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"36000\",\"subtotal_price\":\"36000\",\"items\":[{\"name\":\"Bumbu Kaldu Ayam 1\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793548447,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 714,
+   "prompt_tokens": 10963,
+   "total_tokens": 11677,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "Bumbu Kaldu Ayam 1\n36000\n36000\nSub Total\n36000\nDiscount (0 %)\nTunai\n50000\nKembalian\n14000",
+     "sections": [
+      {
+       "text": "Bumbu Kaldu Ayam 1\n36000\n36000\nSub Total\n36000\nDiscount (0 %)\nTunai\n50000\nKembalian\n14000",
+       "lines": [
+        {
+         "text": "Bumbu Kaldu Ayam 1",
+         "words": [
+          {
+           "text": "Bumbu",
+           "bounds": {
+            "top_left": {
+             "x": 34,
+             "y": 324
+            },
+            "top_right": {
+             "x": 101,
+             "y": 325
+            },
+            "bottom_right": {
+             "x": 101,
+             "y": 347
+            },
+            "bottom_left": {
+             "x": 33,
+             "y": 345
+            },
+            "width": 67.5,
+            "height": 21.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Kaldu",
+           "bounds": {
+            "top_left": {
+             "x": 106,
+             "y": 325
+            },
+            "top_right": {
+             "x": 162,
+             "y": 325
+            },
+            "bottom_right": {
+             "x": 161,
+             "y": 348
+            },
+            "bottom_left": {
+             "x": 106,
+             "y": 347
+            },
+            "width": 55.5,
+            "height": 22.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Ayam",
+           "bounds": {
+            "top_left": {
+             "x": 167,
+             "y": 325
+            },
+            "top_right": {
+             "x": 214,
+             "y": 326
+            },
+            "bottom_right": {
+             "x": 213,
+             "y": 349
+            },
+            "bottom_left": {
+             "x": 166,
+             "y": 348
+            },
+            "width": 47,
+            "height": 23
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 228,
+             "y": 326
+            },
+            "top_right": {
+             "x": 237,
+             "y": 326
+            },
+            "bottom_right": {
+             "x": 236,
+             "y": 350
+            },
+            "bottom_left": {
+             "x": 227,
+             "y": 349
+            },
+            "width": 9,
+            "height": 23.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 33,
+           "y": 324
+          },
+          "top_right": {
+           "x": 237,
+           "y": 324
+          },
+          "bottom_right": {
+           "x": 237,
+           "y": 350
+          },
+          "bottom_left": {
+           "x": 33,
+           "y": 350
+          },
+          "width": 204,
+          "height": 23
+         }
+        },
+        {
+         "text": "36000",
+         "words": [
+          {
+           "text": "36000",
+           "bounds": {
+            "top_left": {
+             "x": 34,
+             "y": 349
+            },
+            "top_right": {
+             "x": 92,
+             "y": 350
+            },
+            "bottom_right": {
+             "x": 92,
+             "y": 369
+            },
+            "bottom_left": {
+             "x": 34,
+             "y": 368
+            },
+            "width": 58,
+            "height": 19
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 34,
+           "y": 349
+          },
+          "top_right": {
+           "x": 92,
+           "y": 349
+          },
+          "bottom_right": {
+           "x": 92,
+           "y": 369
+          },
+          "bottom_left": {
+           "x": 34,
+           "y": 369
+          },
+          "width": 58,
+          "height": 19
+         }
+        },
+        {
+         "text": "36000",
+         "words": [
+          {
+           "text": "36000",
+           "bounds": {
+            "top_left": {
+             "x": 266,
+             "y": 337
+            },
+            "top_right": {
+             "x": 322,
+             "y": 338
+            },
+            "bottom_right": {
+             "x": 321,
+             "y": 358
+            },
+            "bottom_left": {
+             "x": 265,
+             "y": 358
+            },
+            "width": 56,
+            "height": 20.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 265,
+           "y": 337
+          },
+          "top_right": {
+           "x": 322,
+           "y": 337
+          },
+          "bottom_right": {
+           "x": 322,
+           "y": 358
+          },
+          "bottom_left": {
+           "x": 265,
+           "y": 358
+          },
+          "width": 57,
+          "height": 20.5
+         }
+        },
+        {
+         "text": "Sub Total",
+         "words": [
+          {
+           "text": "Sub",
+           "bounds": {
+            "top_left": {
+             "x": 32,
+             "y": 412
+            },
+            "top_right": {
+             "x": 68,
+             "y": 412
+            },
+            "bottom_right": {
+             "x": 67,
+             "y": 432
+            },
+            "bottom_left": {
+             "x": 32,
+             "y": 431
+            },
+            "width": 35.5,
+            "height": 19.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Total",
+           "bounds": {
+            "top_left": {
+             "x": 80,
+             "y": 412
+            },
+            "top_right": {
+             "x": 123,
+             "y": 412
+            },
+            "bottom_right": {
+             "x": 122,
+             "y": 432
+            },
+            "bottom_left": {
+             "x": 79,
+             "y": 432
+            },
+            "width": 43,
+            "height": 20
+           },
+           "confidence": 0.73
+          }
+         ],
+         "average_confidence": 0.86,
+         "bounds": {
+          "top_left": {
+           "x": 32,
+           "y": 412
+          },
+          "top_right": {
+           "x": 123,
+           "y": 412
+          },
+          "bottom_right": {
+           "x": 123,
+           "y": 432
+          },
+          "bottom_left": {
+           "x": 32,
+           "y": 432
+          },
+          "width": 91,
+          "height": 20
+         }
+        },
+        {
+         "text": "36000",
+         "words": [
+          {
+           "text": "36000",
+           "bounds": {
+            "top_left": {
+             "x": 267,
+             "y": 425
+            },
+            "top_right": {
+             "x": 321,
+             "y": 425
+            },
+            "bottom_right": {
+             "x": 321,
+             "y": 443
+            },
+            "bottom_left": {
+             "x": 267,
+             "y": 443
+            },
+            "width": 54,
+            "height": 18
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 267,
+           "y": 425
+          },
+          "top_right": {
+           "x": 321,
+           "y": 425
+          },
+          "bottom_right": {
+           "x": 321,
+           "y": 443
+          },
+          "bottom_left": {
+           "x": 267,
+           "y": 443
+          },
+          "width": 54,
+          "height": 18
+         }
+        },
+        {
+         "text": "Discount (0 %)",
+         "words": [
+          {
+           "text": "Discount",
+           "bounds": {
+            "top_left": {
+             "x": 30,
+             "y": 448
+            },
+            "top_right": {
+             "x": 116,
+             "y": 449
+            },
+            "bottom_right": {
+             "x": 116,
+             "y": 473
+            },
+            "bottom_left": {
+             "x": 29,
+             "y": 474
+            },
+            "width": 86.5,
+            "height": 25
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "(0",
+           "bounds": {
+            "top_left": {
+             "x": 121,
+             "y": 449
+            },
+            "top_right": {
+             "x": 141,
+             "y": 449
+            },
+            "bottom_right": {
+             "x": 141,
+             "y": 473
+            },
+            "bottom_left": {
+             "x": 121,
+             "y": 473
+            },
+            "width": 20,
+            "height": 24
+           },
+           "confidence": 1
+          },
+          {
+           "text": "%)",
+           "bounds": {
+            "top_left": {
+             "x": 154,
+             "y": 449
+            },
+            "top_right": {
+             "x": 174,
+             "y": 449
+            },
+            "bottom_right": {
+             "x": 174,
+             "y": 472
+            },
+            "bottom_left": {
+             "x": 154,
+             "y": 473
+            },
+            "width": 20,
+            "height": 23.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 29,
+           "y": 448
+          },
+          "top_right": {
+           "x": 174,
+           "y": 448
+          },
+          "bottom_right": {
+           "x": 174,
+           "y": 474
+          },
+          "bottom_left": {
+           "x": 29,
+           "y": 474
+          },
+          "width": 145,
+          "height": 24
+         }
+        },
+        {
+         "text": "Tunai",
+         "words": [
+          {
+           "text": "Tunai",
+           "bounds": {
+            "top_left": {
+             "x": 32,
+             "y": 483
+            },
+            "top_right": {
+             "x": 85,
+             "y": 483
+            },
+            "bottom_right": {
+             "x": 85,
+             "y": 508
+            },
+            "bottom_left": {
+             "x": 32,
+             "y": 508
+            },
+            "width": 53,
+            "height": 25
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 32,
+           "y": 483
+          },
+          "top_right": {
+           "x": 85,
+           "y": 483
+          },
+          "bottom_right": {
+           "x": 85,
+           "y": 508
+          },
+          "bottom_left": {
+           "x": 32,
+           "y": 508
+          },
+          "width": 53,
+          "height": 25
+         }
+        },
+        {
+         "text": "50000",
+         "words": [
+          {
+           "text": "50000",
+           "bounds": {
+            "top_left": {
+             "x": 264,
+             "y": 494
+            },
+            "top_right": {
+             "x": 324,
+             "y": 494
+            },
+            "bottom_right": {
+             "x": 324,
+             "y": 519
+            },
+            "bottom_left": {
+             "x": 264,
+             "y": 519
+            },
+            "width": 60,
+            "height": 25
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 264,
+           "y": 494
+          },
+          "top_right": {
+           "x": 324,
+           "y": 494
+          },
+          "bottom_right": {
+           "x": 324,
+           "y": 519
+          },
+          "bottom_left": {
+           "x": 264,
+           "y": 519
+          },
+          "width": 60,
+          "height": 25
+         }
+        },
+        {
+         "text": "Kembalian",
+         "words": [
+          {
+           "text": "Kembalian",
+           "bounds": {
+            "top_left": {
+             "x": 29,
+             "y": 564
+            },
+            "top_right": {
+             "x": 132,
+             "y": 563
+            },
+            "bottom_right": {
+             "x": 131,
+             "y": 584
+            },
+            "bottom_left": {
+             "x": 29,
+             "y": 584
+            },
+            "width": 102.5,
+            "height": 20.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 29,
+           "y": 563
+          },
+          "top_right": {
+           "x": 132,
+           "y": 563
+          },
+          "bottom_right": {
+           "x": 132,
+           "y": 584
+          },
+          "bottom_left": {
+           "x": 29,
+           "y": 584
+          },
+          "width": 103,
+          "height": 20.5
+         }
+        },
+        {
+         "text": "14000",
+         "words": [
+          {
+           "text": "14000",
+           "bounds": {
+            "top_left": {
+             "x": 268,
+             "y": 573
+            },
+            "top_right": {
+             "x": 322,
+             "y": 573
+            },
+            "bottom_right": {
+             "x": 322,
+             "y": 592
+            },
+            "bottom_left": {
+             "x": 268,
+             "y": 592
+            },
+            "width": 54,
+            "height": 19
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 268,
+           "y": 573
+          },
+          "top_right": {
+           "x": 322,
+           "y": 573
+          },
+          "bottom_right": {
+           "x": 322,
+           "y": 592
+          },
+          "bottom_left": {
+           "x": 268,
+           "y": 592
+          },
+          "width": 54,
+          "height": 19
+         }
+        }
+       ],
+       "page": 1,
+       "width": 576,
+       "height": 864
+      }
+     ],
+     "width": 576,
+     "height": 864
+    }
+   }
+  ]
+ },
+ "latency_s": 13.809722360005253,
+ "attempts": 1
+}

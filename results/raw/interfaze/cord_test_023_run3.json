@@ -1,0 +1,679 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_023",
+ "run": 3,
+ "timestamp_utc": "2026-11-01T15:20:51.794777+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1458530 bytes, sha256=fd95d923b0bbed4f81238a7932b1088b4f12335689d333d455704404577c4490>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-0f2d508a-26a4-4cbf-b171-0418a1a914d1",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"63,000\",\"subtotal_price\":null,\"items\":[{\"name\":\"6 TWIST DONUT\"},{\"name\":\"1 REDBEAN BREAD\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793546451,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 707,
+   "prompt_tokens": 10961,
+   "total_tokens": 11668,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "6 TWIST DONUT\n54,000\n1 REDBEAN BREAD\n9,000\nTOTAL 63,000\nCASH\n70,000\nCHANGE 7,000",
+     "sections": [
+      {
+       "text": "6 TWIST DONUT\n54,000\n1 REDBEAN BREAD\n9,000\nTOTAL 63,000\nCASH\n70,000\nCHANGE 7,000",
+       "lines": [
+        {
+         "text": "6 TWIST DONUT",
+         "words": [
+          {
+           "text": "6",
+           "bounds": {
+            "top_left": {
+             "x": 192,
+             "y": 602
+            },
+            "top_right": {
+             "x": 204,
+             "y": 602
+            },
+            "bottom_right": {
+             "x": 204,
+             "y": 626
+            },
+            "bottom_left": {
+             "x": 191,
+             "y": 626
+            },
+            "width": 12.5,
+            "height": 24
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "TWIST",
+           "bounds": {
+            "top_left": {
+             "x": 218,
+             "y": 602
+            },
+            "top_right": {
+             "x": 280,
+             "y": 602
+            },
+            "bottom_right": {
+             "x": 280,
+             "y": 627
+            },
+            "bottom_left": {
+             "x": 217,
+             "y": 627
+            },
+            "width": 62.5,
+            "height": 25
+           },
+           "confidence": 1
+          },
+          {
+           "text": "DONUT",
+           "bounds": {
+            "top_left": {
+             "x": 292,
+             "y": 602
+            },
+            "top_right": {
+             "x": 355,
+             "y": 601
+            },
+            "bottom_right": {
+             "x": 355,
+             "y": 626
+            },
+            "bottom_left": {
+             "x": 292,
+             "y": 627
+            },
+            "width": 63,
+            "height": 25
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 191,
+           "y": 601
+          },
+          "top_right": {
+           "x": 355,
+           "y": 601
+          },
+          "bottom_right": {
+           "x": 355,
+           "y": 627
+          },
+          "bottom_left": {
+           "x": 191,
+           "y": 627
+          },
+          "width": 164,
+          "height": 25
+         }
+        },
+        {
+         "text": "54,000",
+         "words": [
+          {
+           "text": "54,000",
+           "bounds": {
+            "top_left": {
+             "x": 563,
+             "y": 599
+            },
+            "top_right": {
+             "x": 638,
+             "y": 598
+            },
+            "bottom_right": {
+             "x": 638,
+             "y": 623
+            },
+            "bottom_left": {
+             "x": 563,
+             "y": 624
+            },
+            "width": 75,
+            "height": 25
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 563,
+           "y": 598
+          },
+          "top_right": {
+           "x": 638,
+           "y": 598
+          },
+          "bottom_right": {
+           "x": 638,
+           "y": 624
+          },
+          "bottom_left": {
+           "x": 563,
+           "y": 624
+          },
+          "width": 75,
+          "height": 25
+         }
+        },
+        {
+         "text": "1 REDBEAN BREAD",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 194,
+             "y": 633
+            },
+            "top_right": {
+             "x": 206,
+             "y": 633
+            },
+            "bottom_right": {
+             "x": 206,
+             "y": 657
+            },
+            "bottom_left": {
+             "x": 193,
+             "y": 657
+            },
+            "width": 12.5,
+            "height": 24
+           },
+           "confidence": 1
+          },
+          {
+           "text": "REDBEAN",
+           "bounds": {
+            "top_left": {
+             "x": 215,
+             "y": 633
+            },
+            "top_right": {
+             "x": 305,
+             "y": 633
+            },
+            "bottom_right": {
+             "x": 304,
+             "y": 657
+            },
+            "bottom_left": {
+             "x": 214,
+             "y": 657
+            },
+            "width": 90,
+            "height": 24
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "BREAD",
+           "bounds": {
+            "top_left": {
+             "x": 316,
+             "y": 633
+            },
+            "top_right": {
+             "x": 379,
+             "y": 633
+            },
+            "bottom_right": {
+             "x": 378,
+             "y": 657
+            },
+            "bottom_left": {
+             "x": 316,
+             "y": 657
+            },
+            "width": 62.5,
+            "height": 24
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 193,
+           "y": 633
+          },
+          "top_right": {
+           "x": 379,
+           "y": 633
+          },
+          "bottom_right": {
+           "x": 379,
+           "y": 657
+          },
+          "bottom_left": {
+           "x": 193,
+           "y": 657
+          },
+          "width": 186,
+          "height": 24
+         }
+        },
+        {
+         "text": "9,000",
+         "words": [
+          {
+           "text": "9,000",
+           "bounds": {
+            "top_left": {
+             "x": 575,
+             "y": 629
+            },
+            "top_right": {
+             "x": 638,
+             "y": 629
+            },
+            "bottom_right": {
+             "x": 638,
+             "y": 656
+            },
+            "bottom_left": {
+             "x": 575,
+             "y": 656
+            },
+            "width": 63,
+            "height": 27
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 575,
+           "y": 629
+          },
+          "top_right": {
+           "x": 638,
+           "y": 629
+          },
+          "bottom_right": {
+           "x": 638,
+           "y": 656
+          },
+          "bottom_left": {
+           "x": 575,
+           "y": 656
+          },
+          "width": 63,
+          "height": 27
+         }
+        },
+        {
+         "text": "TOTAL 63,000",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 215,
+             "y": 696
+            },
+            "top_right": {
+             "x": 336,
+             "y": 694
+            },
+            "bottom_right": {
+             "x": 337,
+             "y": 741
+            },
+            "bottom_left": {
+             "x": 215,
+             "y": 743
+            },
+            "width": 121.5,
+            "height": 47
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "63,000",
+           "bounds": {
+            "top_left": {
+             "x": 490,
+             "y": 693
+            },
+            "top_right": {
+             "x": 640,
+             "y": 692
+            },
+            "bottom_right": {
+             "x": 639,
+             "y": 742
+            },
+            "bottom_left": {
+             "x": 488,
+             "y": 743
+            },
+            "width": 150.5,
+            "height": 50
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 215,
+           "y": 692
+          },
+          "top_right": {
+           "x": 640,
+           "y": 692
+          },
+          "bottom_right": {
+           "x": 640,
+           "y": 743
+          },
+          "bottom_left": {
+           "x": 215,
+           "y": 743
+          },
+          "width": 425,
+          "height": 50
+         }
+        },
+        {
+         "text": "CASH",
+         "words": [
+          {
+           "text": "CASH",
+           "bounds": {
+            "top_left": {
+             "x": 216,
+             "y": 743
+            },
+            "top_right": {
+             "x": 264,
+             "y": 743
+            },
+            "bottom_right": {
+             "x": 264,
+             "y": 769
+            },
+            "bottom_left": {
+             "x": 216,
+             "y": 769
+            },
+            "width": 48,
+            "height": 26
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 216,
+           "y": 743
+          },
+          "top_right": {
+           "x": 264,
+           "y": 743
+          },
+          "bottom_right": {
+           "x": 264,
+           "y": 769
+          },
+          "bottom_left": {
+           "x": 216,
+           "y": 769
+          },
+          "width": 48,
+          "height": 26
+         }
+        },
+        {
+         "text": "70,000",
+         "words": [
+          {
+           "text": "70,000",
+           "bounds": {
+            "top_left": {
+             "x": 566,
+             "y": 740
+            },
+            "top_right": {
+             "x": 641,
+             "y": 740
+            },
+            "bottom_right": {
+             "x": 641,
+             "y": 768
+            },
+            "bottom_left": {
+             "x": 566,
+             "y": 768
+            },
+            "width": 75,
+            "height": 28
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 566,
+           "y": 740
+          },
+          "top_right": {
+           "x": 641,
+           "y": 740
+          },
+          "bottom_right": {
+           "x": 641,
+           "y": 768
+          },
+          "bottom_left": {
+           "x": 566,
+           "y": 768
+          },
+          "width": 75,
+          "height": 28
+         }
+        },
+        {
+         "text": "CHANGE 7,000",
+         "words": [
+          {
+           "text": "CHANGE",
+           "bounds": {
+            "top_left": {
+             "x": 213,
+             "y": 776
+            },
+            "top_right": {
+             "x": 363,
+             "y": 775
+            },
+            "bottom_right": {
+             "x": 363,
+             "y": 823
+            },
+            "bottom_left": {
+             "x": 212,
+             "y": 823
+            },
+            "width": 150.5,
+            "height": 47.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "7,000",
+           "bounds": {
+            "top_left": {
+             "x": 516,
+             "y": 773
+            },
+            "top_right": {
+             "x": 638,
+             "y": 773
+            },
+            "bottom_right": {
+             "x": 638,
+             "y": 825
+            },
+            "bottom_left": {
+             "x": 516,
+             "y": 825
+            },
+            "width": 122,
+            "height": 52
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 212,
+           "y": 773
+          },
+          "top_right": {
+           "x": 638,
+           "y": 773
+          },
+          "bottom_right": {
+           "x": 638,
+           "y": 825
+          },
+          "bottom_left": {
+           "x": 212,
+           "y": 825
+          },
+          "width": 426,
+          "height": 52
+         }
+        }
+       ],
+       "page": 1,
+       "width": 864,
+       "height": 1296
+      }
+     ],
+     "width": 864,
+     "height": 1296
+    }
+   }
+  ]
+ },
+ "latency_s": 23.13215296999988,
+ "attempts": 1
+}

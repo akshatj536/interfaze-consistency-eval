@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_021",
+ "run": 4,
+ "timestamp_utc": "2026-11-01T16:09:22.388705+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1480803 bytes, sha256=f4ec833b7b577f39211046770ae40e89f24c2486fe425898a06849384dea5c0f>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "L2TnavGdHqrs694PvJ2rsAY",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"Rp38.000\",\"subtotal_price\":null,\"items\":[{\"name\":\"NASI GOR SFD TLR\"},{\"name\":\"ES TEH TAWAR\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EqgHCqUHAWkUfRPCEsNbT+pRUnPmevgjV0i2ytoOvUyzTeX0Q0L5l8KKCd2DGwoA6qz6MBpL7PEOVVrn05+r8U2ZZNNq/6WP0MR0SBwG80hAPK3zxdZ3FdE5Xq2lKp1sOtHV2V/bcenV2YCmbuJoa8c3Ez+pA6JSPCAimHPambto6F/I3k2MJD9zbrzXOT0I3l10mVzSjWx8Rum2WdOR3CBq19PfcdRC3xasfp75eVpPxI5ZUxyy7YewJCUh+SF4PTWFBAtksKQihkGFTnDaAiTNninSACCqS8mQB4tL4IgIyq4tvqtsv6zyvqA22aKPTtP41y2i6iJNMqHvfiEYl9889wOlQbo7KTMN15Z+OFhJH6QSMaVvbxJ8Cv0aeTjnSXNf3Ca1RijFn8bQJsYK1jFM5FbujUMtzsg/tEtQ70H4Vfq5pBGPwyjcJUeRrkRn5VnZwx5nyII9vgT4nrUPQCbyhEJ9ehgnnJu8oQ4XONP3OmJ8kQWo51f/m9TcNV7zKGI1VD87LRBlB3X+56PVk420x/fHHflkQJwBGvagR8GpcRrDdA1Rz3BOYOBwM7L5XD5bknTZUSFaS4e2ov05cP2soRL86PAw9LgOzYwpy080NmW/KBJxf0T9aNuS5NokH3rDcJyAWIe+MrGzEtrU2p05/68jRA/4v8lSyZNM3SiykWOTLcSBYV2mcF/zzlpm/R2IWl7vgz3140ocH67vBPnDMmLYWvacoZySc1CaRRpUlYxf4iXpZQbBxQyFa369HRHqcWzA+bf6bP6F5tngqgWmc8V4F9Ftzw+SsbnyZw+Op0YHzMisvvWGZa2mWJxbsc7+Jjb3xuvYlnma/y/eZN5oYfk0fyWwQMc85q11ZCG6YPVzGOrSv7z44kYkzeL8kOVXztJsrfMP5bp/RkaeDxcOqaGaXnaZsHvsCl4DVhtWkofuQUP5zi8hOvqetcmrE+c7ZJtIwoE+P7NUy/7Hyvqz7D+OXjjQdbaunm4TAxB9n9u5IabJJhKnxI/TEqhWSiTyKcc+KLBBVMkWE1QVI2p4Eve+ugP0oCZ2Gj9m93fdBfs0blsyIiNc4cTpKZb3jSArQiIi9JHaTUvuKwE+LB9ESgdWHwOXOXHLhjMU+2I1P95NO6eoLzt8kVpaVF9T1x9e5q9YpoUB80xFvAm/2glqGsbjV4aL8r4f77vSY6RbufB12fIwACsrvieiHMZXEYc+9xCXOkIWvEQdtEFxDNfZJJNAGLtJROGl"
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549362,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 41,
+   "prompt_tokens": 1186,
+   "total_tokens": 1559,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.6446939390007174,
+ "attempts": 1
+}

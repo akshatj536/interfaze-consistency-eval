@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_024",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T16:10:00.788974+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 883056 bytes, sha256=57989ab2c73a37b1c80d1774a07ed3e8adfbc1145566d3f7efb683c1bfe48824>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "VWTnap7wK9zs694PuueK4AM",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"Rp.118.000\",\"subtotal_price\":null,\"items\":[{\"name\":\"5001-Corn Flakes Cookies\"},{\"name\":\"5003-Chokoreto Cookies\"},{\"name\":\"6002-Plastic Bag Medium\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EoYICoMIAWkUfRO8Y1fD81Lp1IpLKQPgcy+grrlzjG3U8E2iDbI9QyPqzwEqhjBPrLNRKAzd2Ef4+kyQZBlZVKF/voSKIr8fToKybHC/B3o206K/AXIu3bo8HvOru+XEJKW0X/k4Sj9RQHQVD9sLWZEnX+X8ZRvMJL9nHQVMc4ATUjWxBv6N5NC+PhMss9jI5pv/9/iqwl5CJXirXboZS9e2wREBpYRPB8WTpaLmUSmZtIzBl09cSNMm58sBIQJtoBI6E4VqpW8QjrWQJAc9SBeSLIlxGYdKlOg+D83/jjWsrjHT/EBBz+5zwEuAXynasDuaVk6WiiJ9zw0bL+pSzOKzWGatcfRRV8obq/H7LFh4j3YGzhoknxnWygWOLFFEAimay4CxNU52Tm2/APA0P3d59+s1DvcEdXCOuAXeHMUdjYxrKMaMuq6J7owaX+SZMCwBHyF8O0IEoptG9S4E3dBwDTI9nDnd5rcA0w0ZheMWzj0Ta2neEME5+21oDz5iqZuzLsdaC+CsfZcZMY2LwU1Qp1vd15rifLa3nXUnfwAOCpyH8v8fE4sBGc6mAnAtGSZeNkTdrVukwMwgtavudbGV67U98H0/Jbu7Oa7TpBTtr5qyHNbWP1Rq49s2KdzYf+DifV+HffTINIzw4i2gtsB7rQtjKfH3Jhsye8yO+WNW5ni+9SpdnMraV89g8NSr6+NmttgwB/JxqR9EIcC2V5GQarNKlI9oMH9nAs/uX8K8totrSLhszY0V2gmir4uPmjeLq+DrjFcqEnjfR+eIkCSyI56CjOKmQjz/lwqHPk22g8yhHanlOAgLMirOCDAh5ctONbqW+UagjRksc1jzM9FQgMjPCPX7PkVhGLzCBIihsJVfmoDvZNJLEYDK+3DdQMk7LwUdH2Iq69179xipCRCpwRsj0x0wQ8dGpdVxsdvdqZFxwZBytAr/fsDnusqiOJ/T0naQ4RuzOEWPlEJygM6JprFrZTs1K2lssg0nKaXCTVf0h6nyPnQTknMdNf0fsuBZQ1SJyPN7iPAP94ClPUVQ3jX5yHAI1BGW/Ztr2WPiaszWdE9+XQI5cN6r9cpltGXehbJf8o6bHcm8lymzC66qm17Zu7ZhLWx54o/+KVQNynH6etzq82nVhNNwkJ1uUdg6JwUakjBirlYaTOERextgJGwEAin60D/DN8y3coqVLxf6/jNT5cpChgxvA7ojd6+Sn1WlF/1740CDN8EEIUj+TWiIJehJ7sATnrfGS/a/8V8VVMyEtAYn3RkUGpNUELe5pOG0ORifNI5tvPZgKz7YLSXF32aNP4XIOaesI69zGbqeKZ5EpLU6G05xlnbC4rzpmj07/08d140NPla1BTBLIH09G15Ueg=="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549400,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 61,
+   "prompt_tokens": 1202,
+   "total_tokens": 1627,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.757444991999364,
+ "attempts": 1
+}

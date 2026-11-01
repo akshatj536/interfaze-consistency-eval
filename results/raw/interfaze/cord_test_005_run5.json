@@ -1,0 +1,779 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_005",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T15:53:53.268652+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 7725898 bytes, sha256=0b63b666b54ea615d1d05733ee2c6fc24f20e1a6c77b333872fa80fff28b2c48>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-1a3b92bc-f744-4fbf-91fc-fc48d3e4245d",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"31.000\",\"subtotal_price\":\"28.182\",\"items\":[{\"name\":\"TRAD KY TOAST CARTE\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793548433,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 701,
+   "prompt_tokens": 10996,
+   "total_tokens": 11697,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "TRAD KY TOAST CARTE 28.182\nITEMS 1.00\nSUBTTL\n28.182\nPB-1 10%\n2.818\nTOTAL\n31.000\nCASH\n31.000",
+     "sections": [
+      {
+       "text": "TRAD KY TOAST CARTE 28.182\nITEMS 1.00\nSUBTTL\n28.182\nPB-1 10%\n2.818\nTOTAL\n31.000\nCASH\n31.000",
+       "lines": [
+        {
+         "text": "TRAD KY TOAST CARTE 28.182",
+         "words": [
+          {
+           "text": "TRAD",
+           "bounds": {
+            "top_left": {
+             "x": 700,
+             "y": 1857
+            },
+            "top_right": {
+             "x": 826,
+             "y": 1860
+            },
+            "bottom_right": {
+             "x": 824,
+             "y": 1920
+            },
+            "bottom_left": {
+             "x": 697,
+             "y": 1921
+            },
+            "width": 126.5,
+            "height": 62
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "KY",
+           "bounds": {
+            "top_left": {
+             "x": 859,
+             "y": 1860
+            },
+            "top_right": {
+             "x": 930,
+             "y": 1861
+            },
+            "bottom_right": {
+             "x": 928,
+             "y": 1920
+            },
+            "bottom_left": {
+             "x": 857,
+             "y": 1920
+            },
+            "width": 71,
+            "height": 59.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "TOAST",
+           "bounds": {
+            "top_left": {
+             "x": 967,
+             "y": 1862
+            },
+            "top_right": {
+             "x": 1133,
+             "y": 1863
+            },
+            "bottom_right": {
+             "x": 1132,
+             "y": 1923
+            },
+            "bottom_left": {
+             "x": 965,
+             "y": 1921
+            },
+            "width": 166.5,
+            "height": 59.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "CARTE",
+           "bounds": {
+            "top_left": {
+             "x": 1162,
+             "y": 1863
+            },
+            "top_right": {
+             "x": 1328,
+             "y": 1864
+            },
+            "bottom_right": {
+             "x": 1328,
+             "y": 1926
+            },
+            "bottom_left": {
+             "x": 1161,
+             "y": 1923
+            },
+            "width": 166.5,
+            "height": 61
+           },
+           "confidence": 1
+          },
+          {
+           "text": "28.182",
+           "bounds": {
+            "top_left": {
+             "x": 1630,
+             "y": 1866
+            },
+            "top_right": {
+             "x": 1830,
+             "y": 1868
+            },
+            "bottom_right": {
+             "x": 1830,
+             "y": 1929
+            },
+            "bottom_left": {
+             "x": 1630,
+             "y": 1929
+            },
+            "width": 200,
+            "height": 62
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 697,
+           "y": 1857
+          },
+          "top_right": {
+           "x": 1830,
+           "y": 1857
+          },
+          "bottom_right": {
+           "x": 1830,
+           "y": 1929
+          },
+          "bottom_left": {
+           "x": 697,
+           "y": 1929
+          },
+          "width": 1133,
+          "height": 61
+         }
+        },
+        {
+         "text": "ITEMS 1.00",
+         "words": [
+          {
+           "text": "ITEMS",
+           "bounds": {
+            "top_left": {
+             "x": 998,
+             "y": 1938
+            },
+            "top_right": {
+             "x": 1162,
+             "y": 1939
+            },
+            "bottom_right": {
+             "x": 1162,
+             "y": 2002
+            },
+            "bottom_left": {
+             "x": 998,
+             "y": 2000
+            },
+            "width": 164,
+            "height": 62.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "1.00",
+           "bounds": {
+            "top_left": {
+             "x": 1199,
+             "y": 1940
+            },
+            "top_right": {
+             "x": 1327,
+             "y": 1943
+            },
+            "bottom_right": {
+             "x": 1327,
+             "y": 2002
+            },
+            "bottom_left": {
+             "x": 1199,
+             "y": 2002
+            },
+            "width": 128,
+            "height": 60.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 998,
+           "y": 1938
+          },
+          "top_right": {
+           "x": 1327,
+           "y": 1938
+          },
+          "bottom_right": {
+           "x": 1327,
+           "y": 2002
+          },
+          "bottom_left": {
+           "x": 998,
+           "y": 2002
+          },
+          "width": 329,
+          "height": 62.5
+         }
+        },
+        {
+         "text": "SUBTTL",
+         "words": [
+          {
+           "text": "SUBTTL",
+           "bounds": {
+            "top_left": {
+             "x": 699,
+             "y": 2008
+            },
+            "top_right": {
+             "x": 1064,
+             "y": 2013
+            },
+            "bottom_right": {
+             "x": 1064,
+             "y": 2075
+            },
+            "bottom_left": {
+             "x": 697,
+             "y": 2070
+            },
+            "width": 366,
+            "height": 62
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 697,
+           "y": 2008
+          },
+          "top_right": {
+           "x": 1064,
+           "y": 2008
+          },
+          "bottom_right": {
+           "x": 1064,
+           "y": 2075
+          },
+          "bottom_left": {
+           "x": 697,
+           "y": 2075
+          },
+          "width": 367,
+          "height": 62
+         }
+        },
+        {
+         "text": "28.182",
+         "words": [
+          {
+           "text": "28.182",
+           "bounds": {
+            "top_left": {
+             "x": 1632,
+             "y": 2018
+            },
+            "top_right": {
+             "x": 1832,
+             "y": 2018
+            },
+            "bottom_right": {
+             "x": 1832,
+             "y": 2081
+            },
+            "bottom_left": {
+             "x": 1630,
+             "y": 2081
+            },
+            "width": 201,
+            "height": 63
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 1630,
+           "y": 2018
+          },
+          "top_right": {
+           "x": 1832,
+           "y": 2018
+          },
+          "bottom_right": {
+           "x": 1832,
+           "y": 2081
+          },
+          "bottom_left": {
+           "x": 1630,
+           "y": 2081
+          },
+          "width": 202,
+          "height": 63
+         }
+        },
+        {
+         "text": "PB-1 10%",
+         "words": [
+          {
+           "text": "PB-1",
+           "bounds": {
+            "top_left": {
+             "x": 692,
+             "y": 2089
+            },
+            "top_right": {
+             "x": 831,
+             "y": 2089
+            },
+            "bottom_right": {
+             "x": 830,
+             "y": 2150
+            },
+            "bottom_left": {
+             "x": 692,
+             "y": 2148
+            },
+            "width": 138.5,
+            "height": 60
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "10%",
+           "bounds": {
+            "top_left": {
+             "x": 871,
+             "y": 2090
+            },
+            "top_right": {
+             "x": 968,
+             "y": 2091
+            },
+            "bottom_right": {
+             "x": 966,
+             "y": 2147
+            },
+            "bottom_left": {
+             "x": 870,
+             "y": 2150
+            },
+            "width": 96.5,
+            "height": 58
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 692,
+           "y": 2089
+          },
+          "top_right": {
+           "x": 968,
+           "y": 2089
+          },
+          "bottom_right": {
+           "x": 968,
+           "y": 2150
+          },
+          "bottom_left": {
+           "x": 692,
+           "y": 2150
+          },
+          "width": 276,
+          "height": 60
+         }
+        },
+        {
+         "text": "2.818",
+         "words": [
+          {
+           "text": "2.818",
+           "bounds": {
+            "top_left": {
+             "x": 1663,
+             "y": 2093
+            },
+            "top_right": {
+             "x": 1829,
+             "y": 2094
+            },
+            "bottom_right": {
+             "x": 1829,
+             "y": 2160
+            },
+            "bottom_left": {
+             "x": 1663,
+             "y": 2159
+            },
+            "width": 166,
+            "height": 66
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 1663,
+           "y": 2093
+          },
+          "top_right": {
+           "x": 1829,
+           "y": 2093
+          },
+          "bottom_right": {
+           "x": 1829,
+           "y": 2160
+          },
+          "bottom_left": {
+           "x": 1663,
+           "y": 2160
+          },
+          "width": 166,
+          "height": 66
+         }
+        },
+        {
+         "text": "TOTAL",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 704,
+             "y": 2165
+            },
+            "top_right": {
+             "x": 998,
+             "y": 2168
+            },
+            "bottom_right": {
+             "x": 994,
+             "y": 2229
+            },
+            "bottom_left": {
+             "x": 701,
+             "y": 2229
+            },
+            "width": 293.5,
+            "height": 62.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 701,
+           "y": 2165
+          },
+          "top_right": {
+           "x": 998,
+           "y": 2165
+          },
+          "bottom_right": {
+           "x": 998,
+           "y": 2229
+          },
+          "bottom_left": {
+           "x": 701,
+           "y": 2229
+          },
+          "width": 297,
+          "height": 62.5
+         }
+        },
+        {
+         "text": "31.000",
+         "words": [
+          {
+           "text": "31.000",
+           "bounds": {
+            "top_left": {
+             "x": 1431,
+             "y": 2171
+            },
+            "top_right": {
+             "x": 1800,
+             "y": 2173
+            },
+            "bottom_right": {
+             "x": 1800,
+             "y": 2238
+            },
+            "bottom_left": {
+             "x": 1433,
+             "y": 2236
+            },
+            "width": 368,
+            "height": 65
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 1431,
+           "y": 2171
+          },
+          "top_right": {
+           "x": 1800,
+           "y": 2171
+          },
+          "bottom_right": {
+           "x": 1800,
+           "y": 2238
+          },
+          "bottom_left": {
+           "x": 1431,
+           "y": 2238
+          },
+          "width": 369,
+          "height": 65
+         }
+        },
+        {
+         "text": "CASH",
+         "words": [
+          {
+           "text": "CASH",
+           "bounds": {
+            "top_left": {
+             "x": 692,
+             "y": 2245
+            },
+            "top_right": {
+             "x": 925,
+             "y": 2245
+            },
+            "bottom_right": {
+             "x": 921,
+             "y": 2307
+            },
+            "bottom_left": {
+             "x": 692,
+             "y": 2308
+            },
+            "width": 231,
+            "height": 62.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 692,
+           "y": 2245
+          },
+          "top_right": {
+           "x": 925,
+           "y": 2245
+          },
+          "bottom_right": {
+           "x": 925,
+           "y": 2308
+          },
+          "bottom_left": {
+           "x": 692,
+           "y": 2308
+          },
+          "width": 233,
+          "height": 62.5
+         }
+        },
+        {
+         "text": "31.000",
+         "words": [
+          {
+           "text": "31.000",
+           "bounds": {
+            "top_left": {
+             "x": 1431,
+             "y": 2247
+            },
+            "top_right": {
+             "x": 1799,
+             "y": 2249
+            },
+            "bottom_right": {
+             "x": 1799,
+             "y": 2314
+            },
+            "bottom_left": {
+             "x": 1431,
+             "y": 2313
+            },
+            "width": 368,
+            "height": 65.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 1431,
+           "y": 2247
+          },
+          "top_right": {
+           "x": 1799,
+           "y": 2247
+          },
+          "bottom_right": {
+           "x": 1799,
+           "y": 2314
+          },
+          "bottom_left": {
+           "x": 1431,
+           "y": 2314
+          },
+          "width": 368,
+          "height": 65.5
+         }
+        }
+       ],
+       "page": 1,
+       "width": 2304,
+       "height": 4096
+      }
+     ],
+     "width": 2304,
+     "height": 4096
+    }
+   }
+  ]
+ },
+ "latency_s": 14.777150217996677,
+ "attempts": 1
+}

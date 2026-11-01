@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_004",
+ "run": 3,
+ "timestamp_utc": "2026-11-01T16:08:22.590325+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1643699 bytes, sha256=8f3eee7068c96e86cdb2e4b5c53085cb5e1439462edd55c373548cb1962801ad>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "8mPnavbaLJmE694PloTxoA8",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"174,600\",\"subtotal_price\":\"194,000\",\"items\":[{\"name\":\"ICE BLACKCOFFE\"},{\"name\":\"AVOCADO COFFEE\"},{\"name\":\"CHIKEN KATSU FF\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EtcKCtQKAWkUfRNuRhiUOqQ7IFsQwk+KEt+P2KeI4n+KHfuCLYlcFgWYv7CDurtvGguSQCHcvLq95agVQAfzY0h0lBsq7gmCphHBvia9XXL830f2rUpYQEpbmGnaJ+Z/lSR9f5TNK9ZR7LpMmR+CLrBWY3IVYIZSyCJ361+HSDFxyHZbztdvUOSyTwTGwluQj/ohiFWjTBxwdb3LJtKgZFziHeJW9gURKBvYVqkrjPONZFzSWwqEryEfFSaH+XBDXWt8Z2hXFc+cCaJAUXdzC5v5GnYtypt7VF3oM7Vg0MjRexcEZZbtcB1XPXmOrMstvE5sgRMg6/xLf4YCHVHqPZfxszo6mvGRBlCpKSsdOeseElwvzyLij3DGl347MBnws23b5GsjFBJ86J25PWHFXySb0szV7geEDZ19YOnj/PtQoadFmwUkrEz2vUjniRXSwbWaohxJXTYzoQ95+MvW/mzkHdxlCfLCN7fB7vOOTHOIfpywbXM3GpvD1MdBTZIAno1Uec/CQbxU3AJrBbv+dmzdLthFnlYY9BatmML7cQHaUOHmacNOuOJ1YODYBz4rJDfxoTvWbK/IIlRI8RqqzfiA+BnCOp0LkqogyFX+MvozzqcmulgofFUDZhaHLbfLUqzDTWw5xxzdQ4EWn5PB8ukeLJgjznIVoQ4xs8zTy/B1PUSyQ1c+VsYICd0FLaOPeh26FfosuBYaLGyvxKMNZgW5gowUy+B9Qx7gPDjSRNI5HKVCnHEQHgQE86vlc5RCmDbnWEX8NyaTWKbhiFX1Zofhfs5I1hRe99TY8jpabgFwqGQJ/Jixfye8n0Cn+yLQKhDE5KU3KPJSGjwUOgBSTJy+Nka/BGKHxgFF9FtLqIFrEcdioFSNI1YjgyDa3OJGY41w3lzKTtgO/htbbd9gw57+j1BVVLUkiFoYwKapjGnKM9B6ao7vIrg0i0kBJkhqzFE68dOywWPHG6ieewzf8ELWK7zT+RDKdqtV+y6YOnxrXhtk3vyfKYEiNjxQ8NXhTykvCAOs/r7tDymSoh3ZGIsDNBF7Xyp0DbExEEu6KMXHv0bKG0L33/z2kq0JnK03u4ctjUdb8Av3onI/swSMoPZatN6gMGXdaoSdCIsnLjY9FSna+FqLwxSV1nF+PstJOXeeSRYe3e0gNbwtxuLvuCZRx76i3Ms4f8aviTyafffE4c7/lF2CH7TPkcVc32ScGKHn4ApuGSDtpwB9WkT/gbWeB8El9OIJ14+8Fwwf87Hc9n1OOmSyZeG3S7lBrTWGG80MJF4TQjgk9x2dSyhRTA4GCa7AgbH2cGqTY8nX92d+CfrDIyaWaMKJIXcZ7Qbuxx2GHxsdDVNnbHEFogdDv/t1FRfWFuvhfZuusDiHMARI8NsLub88/5L/gU5AECwQgCCdmX7X3An4VmkmSdcA3vmK/FUniAePOhT+B4W3tYHvCAONl2ZeZ0ZSw+iq7L9zG2bmyKagnH4RuBQOCyPWY0ctKJQp18p130tKgqABJppSPu7qIzXk2EQLiW/5QRmGQ7wV76BGViy+m9BQj7rvxFCsZoiglVhcGd08vdfCYCZgDuczLFgYVlIIoDwDX6HeKEg/MafHS6lO1afnZ89BuJyGH6OIbXCNDPcYWLnQBe383OkuKHUDB7JzIQvVsOr0vBy65ZXoucywJItEZJlcDVcXaMElmjp/Cbsas0OolbRbvBGuf01dpcJSAjUGEW1IvOeUuXr7VEp5i2V1kpiT9HNrLipV7JP1Qi8/cDi3Ihdzmmj1p/CQcjaKrSeUgCLaQkg+HS9fudCG7LTXz7eVboM7NZi52akKGTQ="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549302,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 53,
+   "prompt_tokens": 1202,
+   "total_tokens": 1756,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 4.662424389003718,
+ "attempts": 1
+}

@@ -138,7 +138,8 @@ def call_with_retries(client: OpenAI, request: dict) -> dict:
             latency = time.perf_counter() - start
             return {"response": response.model_dump(), "latency_s": latency, "attempts": attempt}
         except RETRYABLE as e:
-            if attempt == MAX_ATTEMPTS:
+            # A per-day quota won't recover within our backoff window, so give up at once.
+            if attempt == MAX_ATTEMPTS or (isinstance(e, openai.RateLimitError) and "PerDay" in str(e)):
                 raise
             wait = min(2 ** attempt, 60) + random.uniform(0, 1)  # 2s, 4s, 8s ... capped, plus jitter
             print(f"  retry {attempt}/{MAX_ATTEMPTS - 1} in {wait:.0f}s ({type(e).__name__})")

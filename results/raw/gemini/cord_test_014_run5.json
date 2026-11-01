@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_014",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T16:09:45.140866+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 3670113 bytes, sha256=9dcf1f9f86c909b762767cb07d1cc0db30773d556154ce42e0210f65270ee39d>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "RmTnasTHGczF694PrdigiA8",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"281,435\",\"subtotal_price\":\"238,000\",\"items\":[{\"name\":\"1 RedVelvet Cheese Slc\"},{\"name\":\"1 Chicken Baked Rice\"},{\"name\":\"1 Fish n Chips\"},{\"name\":\"1 Mushroom Soup\"},{\"name\":\"1 Chamomile\"},{\"name\":\"1 Iced Tea\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EosFCogFAWkUfRO/Lr90OxmoFouqch3IYHCvHd6GVkITLpq7butg5PKnoP3v+ffTmaG56N7HbPWcG89pcjm2q+BPraVjx4lKguZEkVHqc5WdHkrzZwTO+hRKS+H/XJKJmYIU8+vMrOIIG4q1+jkT5fBSj7AOTabC/Kt05nutaSJqAcXHmSqjxCjipfArUcCm0Cmt+701EfBfQo+hmZjQiSPe5d4sNcCVKHDe2qAHvupOWTXD2OhH/oa4lDtFMKECjZe7LKfDExCdgLLyuxHb/m5PrVekwktP3zZZClZXDYCeAFQ248v+1PN3P5k/0JaBdkDjcj6oeshlUI6nKt6lm1UCCZvxEO95MKr+wkqabFnrLJFKTALO7hRf6lhhC0mxxESUenWGbsiJh+VdgkubHEbvHNnyANtxx6PsBRQnOQkzu6gXe+hghcouOdQHFB1QatL/0JFR5qW/4ifuxGnsl5cc7AsBJNbcff9QimxMWFXi8aBkTOjZaxQxuieOIUP+PwdWFxWIDZrHY/LB23Fg4hEu6VbdwpvpFCE7EdfaUW2YihXNFblKhrjPk4sQ+FaI1I6xq1JahJKiY0BQDGRMUco6gYDi7/OHm/q6jlGUWhRxyWk+QLdEYDJVLG3iK3/LO/VEAinLooIsPJ8AAHmda7+Ii4lXovqop0Ez5cwNRilh2ehgM6pPpxngFnmFL1I1TmO7ICeYioH4wimupoGPjpKleQ2XxOBvVdeBSrY3w0chSvQSqftWJN9FI1sIzC93JyL/fZhu8+GCq8ELSMMFCBgfKKvalVkyIj5bEvlwoYLpU6XEqJ9OD6Th5tqg8XekOu1+g3tLIF6Q+Z+YjUeR4ClhV1Co3cWljnN3M2W2"
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549385,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 72,
+   "prompt_tokens": 1222,
+   "total_tokens": 1503,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.675076553001418,
+ "attempts": 1
+}

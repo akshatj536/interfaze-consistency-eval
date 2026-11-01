@@ -1,0 +1,773 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_022",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T14:28:24.543702+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1496615 bytes, sha256=707ccec39b2fc656f51ecc7294078228e727c10a9b6fbf417be86e7c58d70bb2>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-d4f57b4a-88aa-41a3-8d67-b1bc80776f06",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"40,000\",\"subtotal_price\":null,\"items\":[{\"name\":\"2 [MD] SOFT STEAMED CHEESEC\"},{\"name\":\"2 [MD] SOFT STEAMED CHOCOCA\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793543304,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 713,
+   "prompt_tokens": 10975,
+   "total_tokens": 11688,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "2 [MD] SOFT STEAMED CHEESEC 20,000\n2 [MD] SOFT STEAMED CHOCOCA 20,000\nTOTAL 40,000\nCASH\n100,000\nCHANGE 60,000\n-------",
+     "sections": [
+      {
+       "text": "2 [MD] SOFT STEAMED CHEESEC 20,000\n2 [MD] SOFT STEAMED CHOCOCA 20,000\nTOTAL 40,000\nCASH\n100,000\nCHANGE 60,000\n-------",
+       "lines": [
+        {
+         "text": "2 [MD] SOFT STEAMED CHEESEC 20,000",
+         "words": [
+          {
+           "text": "2",
+           "bounds": {
+            "top_left": {
+             "x": 132,
+             "y": 541
+            },
+            "top_right": {
+             "x": 148,
+             "y": 541
+            },
+            "bottom_right": {
+             "x": 147,
+             "y": 571
+            },
+            "bottom_left": {
+             "x": 131,
+             "y": 571
+            },
+            "width": 16,
+            "height": 30
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "[MD]",
+           "bounds": {
+            "top_left": {
+             "x": 163,
+             "y": 541
+            },
+            "top_right": {
+             "x": 227,
+             "y": 541
+            },
+            "bottom_right": {
+             "x": 227,
+             "y": 572
+            },
+            "bottom_left": {
+             "x": 162,
+             "y": 571
+            },
+            "width": 64.5,
+            "height": 30.5
+           },
+           "confidence": 0.89
+          },
+          {
+           "text": "SOFT",
+           "bounds": {
+            "top_left": {
+             "x": 240,
+             "y": 541
+            },
+            "top_right": {
+             "x": 303,
+             "y": 541
+            },
+            "bottom_right": {
+             "x": 302,
+             "y": 572
+            },
+            "bottom_left": {
+             "x": 239,
+             "y": 572
+            },
+            "width": 63,
+            "height": 31
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "STEAMED",
+           "bounds": {
+            "top_left": {
+             "x": 316,
+             "y": 541
+            },
+            "top_right": {
+             "x": 423,
+             "y": 541
+            },
+            "bottom_right": {
+             "x": 422,
+             "y": 573
+            },
+            "bottom_left": {
+             "x": 315,
+             "y": 572
+            },
+            "width": 107,
+            "height": 31.5
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "CHEESEC",
+           "bounds": {
+            "top_left": {
+             "x": 436,
+             "y": 541
+            },
+            "top_right": {
+             "x": 542,
+             "y": 541
+            },
+            "bottom_right": {
+             "x": 541,
+             "y": 573
+            },
+            "bottom_left": {
+             "x": 435,
+             "y": 573
+            },
+            "width": 106,
+            "height": 32
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "20,000",
+           "bounds": {
+            "top_left": {
+             "x": 588,
+             "y": 545
+            },
+            "top_right": {
+             "x": 678,
+             "y": 547
+            },
+            "bottom_right": {
+             "x": 677,
+             "y": 575
+            },
+            "bottom_left": {
+             "x": 587,
+             "y": 574
+            },
+            "width": 90,
+            "height": 28.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.97,
+         "bounds": {
+          "top_left": {
+           "x": 131,
+           "y": 541
+          },
+          "top_right": {
+           "x": 678,
+           "y": 541
+          },
+          "bottom_right": {
+           "x": 678,
+           "y": 575
+          },
+          "bottom_left": {
+           "x": 131,
+           "y": 575
+          },
+          "width": 547,
+          "height": 31
+         }
+        },
+        {
+         "text": "2 [MD] SOFT STEAMED CHOCOCA 20,000",
+         "words": [
+          {
+           "text": "2",
+           "bounds": {
+            "top_left": {
+             "x": 132,
+             "y": 578
+            },
+            "top_right": {
+             "x": 148,
+             "y": 578
+            },
+            "bottom_right": {
+             "x": 147,
+             "y": 608
+            },
+            "bottom_left": {
+             "x": 131,
+             "y": 608
+            },
+            "width": 16,
+            "height": 30
+           },
+           "confidence": 1
+          },
+          {
+           "text": "[MD]",
+           "bounds": {
+            "top_left": {
+             "x": 164,
+             "y": 578
+            },
+            "top_right": {
+             "x": 228,
+             "y": 578
+            },
+            "bottom_right": {
+             "x": 227,
+             "y": 608
+            },
+            "bottom_left": {
+             "x": 163,
+             "y": 608
+            },
+            "width": 64,
+            "height": 30
+           },
+           "confidence": 0.94
+          },
+          {
+           "text": "SOFT",
+           "bounds": {
+            "top_left": {
+             "x": 240,
+             "y": 578
+            },
+            "top_right": {
+             "x": 304,
+             "y": 578
+            },
+            "bottom_right": {
+             "x": 303,
+             "y": 609
+            },
+            "bottom_left": {
+             "x": 239,
+             "y": 609
+            },
+            "width": 64,
+            "height": 31
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "STEAMED",
+           "bounds": {
+            "top_left": {
+             "x": 316,
+             "y": 578
+            },
+            "top_right": {
+             "x": 422,
+             "y": 579
+            },
+            "bottom_right": {
+             "x": 421,
+             "y": 609
+            },
+            "bottom_left": {
+             "x": 315,
+             "y": 609
+            },
+            "width": 106,
+            "height": 30.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "CHOCOCA",
+           "bounds": {
+            "top_left": {
+             "x": 437,
+             "y": 579
+            },
+            "top_right": {
+             "x": 543,
+             "y": 580
+            },
+            "bottom_right": {
+             "x": 541,
+             "y": 610
+            },
+            "bottom_left": {
+             "x": 436,
+             "y": 609
+            },
+            "width": 105.5,
+            "height": 30
+           },
+           "confidence": 0.89
+          },
+          {
+           "text": "20,000",
+           "bounds": {
+            "top_left": {
+             "x": 585,
+             "y": 577
+            },
+            "top_right": {
+             "x": 677,
+             "y": 578
+            },
+            "bottom_right": {
+             "x": 676,
+             "y": 615
+            },
+            "bottom_left": {
+             "x": 585,
+             "y": 613
+            },
+            "width": 91.5,
+            "height": 36.5
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 0.97,
+         "bounds": {
+          "top_left": {
+           "x": 131,
+           "y": 577
+          },
+          "top_right": {
+           "x": 677,
+           "y": 577
+          },
+          "bottom_right": {
+           "x": 677,
+           "y": 615
+          },
+          "bottom_left": {
+           "x": 131,
+           "y": 615
+          },
+          "width": 546,
+          "height": 30.5
+         }
+        },
+        {
+         "text": "TOTAL 40,000",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 159,
+             "y": 651
+            },
+            "top_right": {
+             "x": 311,
+             "y": 652
+            },
+            "bottom_right": {
+             "x": 310,
+             "y": 704
+            },
+            "bottom_left": {
+             "x": 159,
+             "y": 703
+            },
+            "width": 151.5,
+            "height": 52
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "40,000",
+           "bounds": {
+            "top_left": {
+             "x": 500,
+             "y": 653
+            },
+            "top_right": {
+             "x": 670,
+             "y": 654
+            },
+            "bottom_right": {
+             "x": 669,
+             "y": 709
+            },
+            "bottom_left": {
+             "x": 498,
+             "y": 708
+            },
+            "width": 170.5,
+            "height": 55
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 159,
+           "y": 651
+          },
+          "top_right": {
+           "x": 670,
+           "y": 651
+          },
+          "bottom_right": {
+           "x": 670,
+           "y": 709
+          },
+          "bottom_left": {
+           "x": 159,
+           "y": 709
+          },
+          "width": 511,
+          "height": 55
+         }
+        },
+        {
+         "text": "CASH",
+         "words": [
+          {
+           "text": "CASH",
+           "bounds": {
+            "top_left": {
+             "x": 157,
+             "y": 709
+            },
+            "top_right": {
+             "x": 220,
+             "y": 709
+            },
+            "bottom_right": {
+             "x": 220,
+             "y": 739
+            },
+            "bottom_left": {
+             "x": 157,
+             "y": 738
+            },
+            "width": 63,
+            "height": 29.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 157,
+           "y": 709
+          },
+          "top_right": {
+           "x": 220,
+           "y": 709
+          },
+          "bottom_right": {
+           "x": 220,
+           "y": 739
+          },
+          "bottom_left": {
+           "x": 157,
+           "y": 739
+          },
+          "width": 63,
+          "height": 29.5
+         }
+        },
+        {
+         "text": "100,000",
+         "words": [
+          {
+           "text": "100,000",
+           "bounds": {
+            "top_left": {
+             "x": 574,
+             "y": 710
+            },
+            "top_right": {
+             "x": 677,
+             "y": 710
+            },
+            "bottom_right": {
+             "x": 676,
+             "y": 742
+            },
+            "bottom_left": {
+             "x": 574,
+             "y": 741
+            },
+            "width": 102.5,
+            "height": 31.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 574,
+           "y": 710
+          },
+          "top_right": {
+           "x": 677,
+           "y": 710
+          },
+          "bottom_right": {
+           "x": 677,
+           "y": 742
+          },
+          "bottom_left": {
+           "x": 574,
+           "y": 742
+          },
+          "width": 103,
+          "height": 31.5
+         }
+        },
+        {
+         "text": "CHANGE 60,000",
+         "words": [
+          {
+           "text": "CHANGE",
+           "bounds": {
+            "top_left": {
+             "x": 155,
+             "y": 748
+            },
+            "top_right": {
+             "x": 347,
+             "y": 749
+            },
+            "bottom_right": {
+             "x": 346,
+             "y": 806
+            },
+            "bottom_left": {
+             "x": 155,
+             "y": 807
+            },
+            "width": 191.5,
+            "height": 58
+           },
+           "confidence": 1
+          },
+          {
+           "text": "60,000",
+           "bounds": {
+            "top_left": {
+             "x": 503,
+             "y": 748
+            },
+            "top_right": {
+             "x": 679,
+             "y": 747
+            },
+            "bottom_right": {
+             "x": 679,
+             "y": 804
+            },
+            "bottom_left": {
+             "x": 502,
+             "y": 805
+            },
+            "width": 176.5,
+            "height": 57
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 155,
+           "y": 747
+          },
+          "top_right": {
+           "x": 679,
+           "y": 747
+          },
+          "bottom_right": {
+           "x": 679,
+           "y": 807
+          },
+          "bottom_left": {
+           "x": 155,
+           "y": 807
+          },
+          "width": 524,
+          "height": 58
+         }
+        },
+        {
+         "text": "-------",
+         "words": [
+          {
+           "text": "-------",
+           "bounds": {
+            "top_left": {
+             "x": 81,
+             "y": 880
+            },
+            "top_right": {
+             "x": 151,
+             "y": 880
+            },
+            "bottom_right": {
+             "x": 150,
+             "y": 887
+            },
+            "bottom_left": {
+             "x": 81,
+             "y": 888
+            },
+            "width": 69.5,
+            "height": 7.5
+           },
+           "confidence": 0.31
+          }
+         ],
+         "average_confidence": 0.31,
+         "bounds": {
+          "top_left": {
+           "x": 81,
+           "y": 880
+          },
+          "top_right": {
+           "x": 151,
+           "y": 880
+          },
+          "bottom_right": {
+           "x": 151,
+           "y": 888
+          },
+          "bottom_left": {
+           "x": 81,
+           "y": 888
+          },
+          "width": 70,
+          "height": 7.5
+         }
+        }
+       ],
+       "page": 1,
+       "width": 864,
+       "height": 1296
+      }
+     ],
+     "width": 864,
+     "height": 1296
+    }
+   }
+  ]
+ },
+ "latency_s": 9.821724843000993,
+ "attempts": 1
+}

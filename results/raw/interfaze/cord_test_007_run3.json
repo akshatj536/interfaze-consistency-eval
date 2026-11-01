@@ -1,0 +1,831 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_007",
+ "run": 3,
+ "timestamp_utc": "2026-11-01T15:04:45.475241+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 987476 bytes, sha256=810d3545f4105b19757c4b8b35934a477cde8cd1875302d9092315d2f960ef93>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-7cc4e930-0105-4ad3-b1e3-2d933728839b",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"111,000\",\"subtotal_price\":\"100,909\",\"items\":[{\"name\":\"Kupon 15\"},{\"name\":\"ADD CHICKEN BOX\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793545485,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 714,
+   "prompt_tokens": 10983,
+   "total_tokens": 11697,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "Kupon 15\nADD CHICKEN BOX\n100,000\n909\nSubtotal\n100,909\nPB1 (10%)\n10,091\nTotal\n111,000\nCash\nRp.111,000",
+     "sections": [
+      {
+       "text": "Kupon 15\nADD CHICKEN BOX\n100,000\n909\nSubtotal\n100,909\nPB1 (10%)\n10,091\nTotal\n111,000\nCash\nRp.111,000",
+       "lines": [
+        {
+         "text": "Kupon 15",
+         "words": [
+          {
+           "text": "Kupon",
+           "bounds": {
+            "top_left": {
+             "x": 71,
+             "y": 527
+            },
+            "top_right": {
+             "x": 123,
+             "y": 528
+            },
+            "bottom_right": {
+             "x": 123,
+             "y": 551
+            },
+            "bottom_left": {
+             "x": 71,
+             "y": 549
+            },
+            "width": 52,
+            "height": 22.5
+           },
+           "confidence": 0.87
+          },
+          {
+           "text": "15",
+           "bounds": {
+            "top_left": {
+             "x": 134,
+             "y": 528
+            },
+            "top_right": {
+             "x": 154,
+             "y": 528
+            },
+            "bottom_right": {
+             "x": 153,
+             "y": 552
+            },
+            "bottom_left": {
+             "x": 134,
+             "y": 551
+            },
+            "width": 19.5,
+            "height": 23.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.93,
+         "bounds": {
+          "top_left": {
+           "x": 71,
+           "y": 527
+          },
+          "top_right": {
+           "x": 154,
+           "y": 527
+          },
+          "bottom_right": {
+           "x": 154,
+           "y": 552
+          },
+          "bottom_left": {
+           "x": 71,
+           "y": 552
+          },
+          "width": 83,
+          "height": 23.5
+         }
+        },
+        {
+         "text": "ADD CHICKEN BOX",
+         "words": [
+          {
+           "text": "ADD",
+           "bounds": {
+            "top_left": {
+             "x": 71,
+             "y": 552
+            },
+            "top_right": {
+             "x": 104,
+             "y": 553
+            },
+            "bottom_right": {
+             "x": 102,
+             "y": 578
+            },
+            "bottom_left": {
+             "x": 69,
+             "y": 578
+            },
+            "width": 33,
+            "height": 25.5
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "CHICKEN",
+           "bounds": {
+            "top_left": {
+             "x": 113,
+             "y": 554
+            },
+            "top_right": {
+             "x": 183,
+             "y": 556
+            },
+            "bottom_right": {
+             "x": 182,
+             "y": 580
+            },
+            "bottom_left": {
+             "x": 111,
+             "y": 578
+            },
+            "width": 70.5,
+            "height": 24
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "BOX",
+           "bounds": {
+            "top_left": {
+             "x": 190,
+             "y": 556
+            },
+            "top_right": {
+             "x": 221,
+             "y": 557
+            },
+            "bottom_right": {
+             "x": 219,
+             "y": 581
+            },
+            "bottom_left": {
+             "x": 189,
+             "y": 580
+            },
+            "width": 30.5,
+            "height": 24
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 69,
+           "y": 552
+          },
+          "top_right": {
+           "x": 221,
+           "y": 552
+          },
+          "bottom_right": {
+           "x": 221,
+           "y": 581
+          },
+          "bottom_left": {
+           "x": 69,
+           "y": 581
+          },
+          "width": 152,
+          "height": 24
+         }
+        },
+        {
+         "text": "100,000",
+         "words": [
+          {
+           "text": "100,000",
+           "bounds": {
+            "top_left": {
+             "x": 422,
+             "y": 537
+            },
+            "top_right": {
+             "x": 494,
+             "y": 538
+            },
+            "bottom_right": {
+             "x": 493,
+             "y": 561
+            },
+            "bottom_left": {
+             "x": 422,
+             "y": 561
+            },
+            "width": 71.5,
+            "height": 23.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 422,
+           "y": 537
+          },
+          "top_right": {
+           "x": 494,
+           "y": 537
+          },
+          "bottom_right": {
+           "x": 494,
+           "y": 561
+          },
+          "bottom_left": {
+           "x": 422,
+           "y": 561
+          },
+          "width": 72,
+          "height": 23.5
+         }
+        },
+        {
+         "text": "909",
+         "words": [
+          {
+           "text": "909",
+           "bounds": {
+            "top_left": {
+             "x": 463,
+             "y": 566
+            },
+            "top_right": {
+             "x": 496,
+             "y": 567
+            },
+            "bottom_right": {
+             "x": 495,
+             "y": 586
+            },
+            "bottom_left": {
+             "x": 463,
+             "y": 585
+            },
+            "width": 32.5,
+            "height": 19
+           },
+           "confidence": 0.97
+          }
+         ],
+         "average_confidence": 0.97,
+         "bounds": {
+          "top_left": {
+           "x": 463,
+           "y": 566
+          },
+          "top_right": {
+           "x": 496,
+           "y": 566
+          },
+          "bottom_right": {
+           "x": 496,
+           "y": 586
+          },
+          "bottom_left": {
+           "x": 463,
+           "y": 586
+          },
+          "width": 33,
+          "height": 19
+         }
+        },
+        {
+         "text": "Subtotal",
+         "words": [
+          {
+           "text": "Subtotal",
+           "bounds": {
+            "top_left": {
+             "x": 67,
+             "y": 612
+            },
+            "top_right": {
+             "x": 148,
+             "y": 616
+            },
+            "bottom_right": {
+             "x": 146,
+             "y": 637
+            },
+            "bottom_left": {
+             "x": 66,
+             "y": 633
+            },
+            "width": 80.5,
+            "height": 21
+           },
+           "confidence": 0.97
+          }
+         ],
+         "average_confidence": 0.97,
+         "bounds": {
+          "top_left": {
+           "x": 66,
+           "y": 612
+          },
+          "top_right": {
+           "x": 148,
+           "y": 612
+          },
+          "bottom_right": {
+           "x": 148,
+           "y": 637
+          },
+          "bottom_left": {
+           "x": 66,
+           "y": 637
+          },
+          "width": 82,
+          "height": 21
+         }
+        },
+        {
+         "text": "100,909",
+         "words": [
+          {
+           "text": "100,909",
+           "bounds": {
+            "top_left": {
+             "x": 421,
+             "y": 625
+            },
+            "top_right": {
+             "x": 492,
+             "y": 625
+            },
+            "bottom_right": {
+             "x": 491,
+             "y": 647
+            },
+            "bottom_left": {
+             "x": 420,
+             "y": 647
+            },
+            "width": 71,
+            "height": 22
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 420,
+           "y": 625
+          },
+          "top_right": {
+           "x": 492,
+           "y": 625
+          },
+          "bottom_right": {
+           "x": 492,
+           "y": 647
+          },
+          "bottom_left": {
+           "x": 420,
+           "y": 647
+          },
+          "width": 72,
+          "height": 22
+         }
+        },
+        {
+         "text": "PB1 (10%)",
+         "words": [
+          {
+           "text": "PB1",
+           "bounds": {
+            "top_left": {
+             "x": 66,
+             "y": 641
+            },
+            "top_right": {
+             "x": 100,
+             "y": 642
+            },
+            "bottom_right": {
+             "x": 100,
+             "y": 663
+            },
+            "bottom_left": {
+             "x": 66,
+             "y": 662
+            },
+            "width": 34,
+            "height": 21
+           },
+           "confidence": 0.92
+          },
+          {
+           "text": "(10%)",
+           "bounds": {
+            "top_left": {
+             "x": 109,
+             "y": 642
+            },
+            "top_right": {
+             "x": 157,
+             "y": 644
+            },
+            "bottom_right": {
+             "x": 156,
+             "y": 664
+            },
+            "bottom_left": {
+             "x": 108,
+             "y": 663
+            },
+            "width": 48,
+            "height": 20.5
+           },
+           "confidence": 0.95
+          }
+         ],
+         "average_confidence": 0.94,
+         "bounds": {
+          "top_left": {
+           "x": 66,
+           "y": 641
+          },
+          "top_right": {
+           "x": 157,
+           "y": 641
+          },
+          "bottom_right": {
+           "x": 157,
+           "y": 664
+          },
+          "bottom_left": {
+           "x": 66,
+           "y": 664
+          },
+          "width": 91,
+          "height": 21
+         }
+        },
+        {
+         "text": "10,091",
+         "words": [
+          {
+           "text": "10,091",
+           "bounds": {
+            "top_left": {
+             "x": 433,
+             "y": 652
+            },
+            "top_right": {
+             "x": 492,
+             "y": 653
+            },
+            "bottom_right": {
+             "x": 491,
+             "y": 679
+            },
+            "bottom_left": {
+             "x": 433,
+             "y": 678
+            },
+            "width": 58.5,
+            "height": 26
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 433,
+           "y": 652
+          },
+          "top_right": {
+           "x": 492,
+           "y": 652
+          },
+          "bottom_right": {
+           "x": 492,
+           "y": 679
+          },
+          "bottom_left": {
+           "x": 433,
+           "y": 679
+          },
+          "width": 59,
+          "height": 26
+         }
+        },
+        {
+         "text": "Total",
+         "words": [
+          {
+           "text": "Total",
+           "bounds": {
+            "top_left": {
+             "x": 63,
+             "y": 699
+            },
+            "top_right": {
+             "x": 115,
+             "y": 700
+            },
+            "bottom_right": {
+             "x": 114,
+             "y": 721
+            },
+            "bottom_left": {
+             "x": 62,
+             "y": 720
+            },
+            "width": 52,
+            "height": 21
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 62,
+           "y": 699
+          },
+          "top_right": {
+           "x": 115,
+           "y": 699
+          },
+          "bottom_right": {
+           "x": 115,
+           "y": 721
+          },
+          "bottom_left": {
+           "x": 62,
+           "y": 721
+          },
+          "width": 53,
+          "height": 21
+         }
+        },
+        {
+         "text": "111,000",
+         "words": [
+          {
+           "text": "111,000",
+           "bounds": {
+            "top_left": {
+             "x": 419,
+             "y": 711
+            },
+            "top_right": {
+             "x": 489,
+             "y": 710
+            },
+            "bottom_right": {
+             "x": 488,
+             "y": 732
+            },
+            "bottom_left": {
+             "x": 418,
+             "y": 733
+            },
+            "width": 70,
+            "height": 22
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 418,
+           "y": 710
+          },
+          "top_right": {
+           "x": 489,
+           "y": 710
+          },
+          "bottom_right": {
+           "x": 489,
+           "y": 733
+          },
+          "bottom_left": {
+           "x": 418,
+           "y": 733
+          },
+          "width": 71,
+          "height": 22
+         }
+        },
+        {
+         "text": "Cash",
+         "words": [
+          {
+           "text": "Cash",
+           "bounds": {
+            "top_left": {
+             "x": 57,
+             "y": 759
+            },
+            "top_right": {
+             "x": 103,
+             "y": 759
+            },
+            "bottom_right": {
+             "x": 102,
+             "y": 782
+            },
+            "bottom_left": {
+             "x": 57,
+             "y": 781
+            },
+            "width": 45.5,
+            "height": 22.5
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 57,
+           "y": 759
+          },
+          "top_right": {
+           "x": 103,
+           "y": 759
+          },
+          "bottom_right": {
+           "x": 103,
+           "y": 782
+          },
+          "bottom_left": {
+           "x": 57,
+           "y": 782
+          },
+          "width": 46,
+          "height": 22.5
+         }
+        },
+        {
+         "text": "Rp.111,000",
+         "words": [
+          {
+           "text": "Rp.111,000",
+           "bounds": {
+            "top_left": {
+             "x": 386,
+             "y": 767
+            },
+            "top_right": {
+             "x": 490,
+             "y": 763
+            },
+            "bottom_right": {
+             "x": 489,
+             "y": 786
+            },
+            "bottom_left": {
+             "x": 387,
+             "y": 790
+            },
+            "width": 103,
+            "height": 23
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 386,
+           "y": 763
+          },
+          "top_right": {
+           "x": 490,
+           "y": 763
+          },
+          "bottom_right": {
+           "x": 490,
+           "y": 790
+          },
+          "bottom_left": {
+           "x": 386,
+           "y": 790
+          },
+          "width": 104,
+          "height": 23
+         }
+        }
+       ],
+       "page": 1,
+       "width": 576,
+       "height": 864
+      }
+     ],
+     "width": 576,
+     "height": 864
+    }
+   }
+  ]
+ },
+ "latency_s": 10.706347391002055,
+ "attempts": 1
+}

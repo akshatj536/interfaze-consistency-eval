@@ -1,0 +1,1071 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_024",
+ "run": 4,
+ "timestamp_utc": "2026-11-01T15:53:32.844392+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 883056 bytes, sha256=57989ab2c73a37b1c80d1774a07ed3e8adfbc1145566d3f7efb683c1bfe48824>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-21762a58-5a22-4432-b0dd-b47ccb0548bd",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"Rp.118.000\",\"subtotal_price\":null,\"items\":[{\"name\":\"5001-Corn Flakes Cookies\"},{\"name\":\"5003-Chokoreto Cookies\"},{\"name\":\"6002-Plastic Bag Medium\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793548412,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 750,
+   "prompt_tokens": 11024,
+   "total_tokens": 11774,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "5001-Corn Flakes Cookies\nRp.56.000 ×1 Rp.56.000\n5003-Chokoreto Cookies\nRp.62.000 x1 Rp.62.000\n6002-Plastic Bag Medium\nRp.0 ×1\nRp.0\nTotal Item: 3\nTotal.\nRp.118.000\nDebet Card\n[x] 118.000",
+     "sections": [
+      {
+       "text": "5001-Corn Flakes Cookies\nRp.56.000 ×1 Rp.56.000\n5003-Chokoreto Cookies\nRp.62.000 x1 Rp.62.000\n6002-Plastic Bag Medium\nRp.0 ×1\nRp.0\nTotal Item: 3\nTotal.\nRp.118.000\nDebet Card\n[x] 118.000",
+       "lines": [
+        {
+         "text": "5001-Corn Flakes Cookies",
+         "words": [
+          {
+           "text": "5001-Corn",
+           "bounds": {
+            "top_left": {
+             "x": 59,
+             "y": 431
+            },
+            "top_right": {
+             "x": 157,
+             "y": 431
+            },
+            "bottom_right": {
+             "x": 156,
+             "y": 452
+            },
+            "bottom_left": {
+             "x": 59,
+             "y": 452
+            },
+            "width": 97.5,
+            "height": 21
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Flakes",
+           "bounds": {
+            "top_left": {
+             "x": 169,
+             "y": 432
+            },
+            "top_right": {
+             "x": 237,
+             "y": 432
+            },
+            "bottom_right": {
+             "x": 237,
+             "y": 452
+            },
+            "bottom_left": {
+             "x": 169,
+             "y": 452
+            },
+            "width": 68,
+            "height": 20
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "Cookies",
+           "bounds": {
+            "top_left": {
+             "x": 248,
+             "y": 432
+            },
+            "top_right": {
+             "x": 327,
+             "y": 432
+            },
+            "bottom_right": {
+             "x": 327,
+             "y": 453
+            },
+            "bottom_left": {
+             "x": 248,
+             "y": 452
+            },
+            "width": 79,
+            "height": 20.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 59,
+           "y": 431
+          },
+          "top_right": {
+           "x": 327,
+           "y": 431
+          },
+          "bottom_right": {
+           "x": 327,
+           "y": 453
+          },
+          "bottom_left": {
+           "x": 59,
+           "y": 453
+          },
+          "width": 268,
+          "height": 20.5
+         }
+        },
+        {
+         "text": "Rp.56.000 ×1 Rp.56.000",
+         "words": [
+          {
+           "text": "Rp.56.000",
+           "bounds": {
+            "top_left": {
+             "x": 136,
+             "y": 460
+            },
+            "top_right": {
+             "x": 238,
+             "y": 460
+            },
+            "bottom_right": {
+             "x": 239,
+             "y": 485
+            },
+            "bottom_left": {
+             "x": 135,
+             "y": 485
+            },
+            "width": 103,
+            "height": 25
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "×1",
+           "bounds": {
+            "top_left": {
+             "x": 282,
+             "y": 463
+            },
+            "top_right": {
+             "x": 302,
+             "y": 463
+            },
+            "bottom_right": {
+             "x": 302,
+             "y": 481
+            },
+            "bottom_left": {
+             "x": 282,
+             "y": 481
+            },
+            "width": 20,
+            "height": 18
+           },
+           "confidence": 0.6
+          },
+          {
+           "text": "Rp.56.000",
+           "bounds": {
+            "top_left": {
+             "x": 383,
+             "y": 463
+            },
+            "top_right": {
+             "x": 486,
+             "y": 463
+            },
+            "bottom_right": {
+             "x": 486,
+             "y": 487
+            },
+            "bottom_left": {
+             "x": 383,
+             "y": 487
+            },
+            "width": 103,
+            "height": 24
+           },
+           "confidence": 0.92
+          }
+         ],
+         "average_confidence": 0.83,
+         "bounds": {
+          "top_left": {
+           "x": 135,
+           "y": 460
+          },
+          "top_right": {
+           "x": 486,
+           "y": 460
+          },
+          "bottom_right": {
+           "x": 486,
+           "y": 487
+          },
+          "bottom_left": {
+           "x": 135,
+           "y": 487
+          },
+          "width": 351,
+          "height": 24
+         }
+        },
+        {
+         "text": "5003-Chokoreto Cookies",
+         "words": [
+          {
+           "text": "5003-Chokoreto",
+           "bounds": {
+            "top_left": {
+             "x": 57,
+             "y": 491
+            },
+            "top_right": {
+             "x": 213,
+             "y": 492
+            },
+            "bottom_right": {
+             "x": 212,
+             "y": 514
+            },
+            "bottom_left": {
+             "x": 57,
+             "y": 512
+            },
+            "width": 155.5,
+            "height": 21.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Cookies",
+           "bounds": {
+            "top_left": {
+             "x": 224,
+             "y": 492
+            },
+            "top_right": {
+             "x": 304,
+             "y": 492
+            },
+            "bottom_right": {
+             "x": 304,
+             "y": 513
+            },
+            "bottom_left": {
+             "x": 224,
+             "y": 514
+            },
+            "width": 80,
+            "height": 21.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 57,
+           "y": 491
+          },
+          "top_right": {
+           "x": 304,
+           "y": 491
+          },
+          "bottom_right": {
+           "x": 304,
+           "y": 514
+          },
+          "bottom_left": {
+           "x": 57,
+           "y": 514
+          },
+          "width": 247,
+          "height": 21.5
+         }
+        },
+        {
+         "text": "Rp.62.000 x1 Rp.62.000",
+         "words": [
+          {
+           "text": "Rp.62.000",
+           "bounds": {
+            "top_left": {
+             "x": 136,
+             "y": 520
+            },
+            "top_right": {
+             "x": 238,
+             "y": 521
+            },
+            "bottom_right": {
+             "x": 238,
+             "y": 547
+            },
+            "bottom_left": {
+             "x": 135,
+             "y": 546
+            },
+            "width": 102.5,
+            "height": 26
+           },
+           "confidence": 0.9
+          },
+          {
+           "text": "x1",
+           "bounds": {
+            "top_left": {
+             "x": 281,
+             "y": 523
+            },
+            "top_right": {
+             "x": 302,
+             "y": 523
+            },
+            "bottom_right": {
+             "x": 303,
+             "y": 541
+            },
+            "bottom_left": {
+             "x": 281,
+             "y": 542
+            },
+            "width": 21.5,
+            "height": 18.5
+           },
+           "confidence": 0.89
+          },
+          {
+           "text": "Rp.62.000",
+           "bounds": {
+            "top_left": {
+             "x": 382,
+             "y": 523
+            },
+            "top_right": {
+             "x": 488,
+             "y": 523
+            },
+            "bottom_right": {
+             "x": 487,
+             "y": 548
+            },
+            "bottom_left": {
+             "x": 382,
+             "y": 548
+            },
+            "width": 105.5,
+            "height": 25
+           },
+           "confidence": 0.89
+          }
+         ],
+         "average_confidence": 0.89,
+         "bounds": {
+          "top_left": {
+           "x": 135,
+           "y": 520
+          },
+          "top_right": {
+           "x": 488,
+           "y": 520
+          },
+          "bottom_right": {
+           "x": 488,
+           "y": 548
+          },
+          "bottom_left": {
+           "x": 135,
+           "y": 548
+          },
+          "width": 353,
+          "height": 25
+         }
+        },
+        {
+         "text": "6002-Plastic Bag Medium",
+         "words": [
+          {
+           "text": "6002-Plastic",
+           "bounds": {
+            "top_left": {
+             "x": 56,
+             "y": 552
+            },
+            "top_right": {
+             "x": 191,
+             "y": 552
+            },
+            "bottom_right": {
+             "x": 191,
+             "y": 577
+            },
+            "bottom_left": {
+             "x": 56,
+             "y": 573
+            },
+            "width": 135,
+            "height": 23
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Bag",
+           "bounds": {
+            "top_left": {
+             "x": 201,
+             "y": 552
+            },
+            "top_right": {
+             "x": 237,
+             "y": 552
+            },
+            "bottom_right": {
+             "x": 236,
+             "y": 578
+            },
+            "bottom_left": {
+             "x": 200,
+             "y": 577
+            },
+            "width": 36,
+            "height": 25.5
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "Medium",
+           "bounds": {
+            "top_left": {
+             "x": 246,
+             "y": 552
+            },
+            "top_right": {
+             "x": 314,
+             "y": 552
+            },
+            "bottom_right": {
+             "x": 313,
+             "y": 577
+            },
+            "bottom_left": {
+             "x": 246,
+             "y": 578
+            },
+            "width": 67.5,
+            "height": 25.5
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 56,
+           "y": 552
+          },
+          "top_right": {
+           "x": 314,
+           "y": 552
+          },
+          "bottom_right": {
+           "x": 314,
+           "y": 578
+          },
+          "bottom_left": {
+           "x": 56,
+           "y": 578
+          },
+          "width": 258,
+          "height": 25.5
+         }
+        },
+        {
+         "text": "Rp.0 ×1",
+         "words": [
+          {
+           "text": "Rp.0",
+           "bounds": {
+            "top_left": {
+             "x": 190,
+             "y": 582
+            },
+            "top_right": {
+             "x": 237,
+             "y": 582
+            },
+            "bottom_right": {
+             "x": 237,
+             "y": 607
+            },
+            "bottom_left": {
+             "x": 190,
+             "y": 607
+            },
+            "width": 47,
+            "height": 25
+           },
+           "confidence": 0.89
+          },
+          {
+           "text": "×1",
+           "bounds": {
+            "top_left": {
+             "x": 282,
+             "y": 584
+            },
+            "top_right": {
+             "x": 303,
+             "y": 584
+            },
+            "bottom_right": {
+             "x": 304,
+             "y": 602
+            },
+            "bottom_left": {
+             "x": 282,
+             "y": 603
+            },
+            "width": 21.5,
+            "height": 18.5
+           },
+           "confidence": 0.58
+          }
+         ],
+         "average_confidence": 0.74,
+         "bounds": {
+          "top_left": {
+           "x": 190,
+           "y": 582
+          },
+          "top_right": {
+           "x": 304,
+           "y": 582
+          },
+          "bottom_right": {
+           "x": 304,
+           "y": 607
+          },
+          "bottom_left": {
+           "x": 190,
+           "y": 607
+          },
+          "width": 114,
+          "height": 25
+         }
+        },
+        {
+         "text": "Rp.0",
+         "words": [
+          {
+           "text": "Rp.0",
+           "bounds": {
+            "top_left": {
+             "x": 440,
+             "y": 584
+            },
+            "top_right": {
+             "x": 486,
+             "y": 584
+            },
+            "bottom_right": {
+             "x": 486,
+             "y": 608
+            },
+            "bottom_left": {
+             "x": 440,
+             "y": 607
+            },
+            "width": 46,
+            "height": 23.5
+           },
+           "confidence": 0.85
+          }
+         ],
+         "average_confidence": 0.85,
+         "bounds": {
+          "top_left": {
+           "x": 440,
+           "y": 584
+          },
+          "top_right": {
+           "x": 486,
+           "y": 584
+          },
+          "bottom_right": {
+           "x": 486,
+           "y": 608
+          },
+          "bottom_left": {
+           "x": 440,
+           "y": 608
+          },
+          "width": 46,
+          "height": 23.5
+         }
+        },
+        {
+         "text": "Total Item: 3",
+         "words": [
+          {
+           "text": "Total",
+           "bounds": {
+            "top_left": {
+             "x": 54,
+             "y": 643
+            },
+            "top_right": {
+             "x": 112,
+             "y": 644
+            },
+            "bottom_right": {
+             "x": 112,
+             "y": 665
+            },
+            "bottom_left": {
+             "x": 54,
+             "y": 665
+            },
+            "width": 58,
+            "height": 21.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Item:",
+           "bounds": {
+            "top_left": {
+             "x": 123,
+             "y": 644
+            },
+            "top_right": {
+             "x": 178,
+             "y": 644
+            },
+            "bottom_right": {
+             "x": 178,
+             "y": 664
+            },
+            "bottom_left": {
+             "x": 123,
+             "y": 665
+            },
+            "width": 55,
+            "height": 20.5
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "3",
+           "bounds": {
+            "top_left": {
+             "x": 294,
+             "y": 644
+            },
+            "top_right": {
+             "x": 303,
+             "y": 644
+            },
+            "bottom_right": {
+             "x": 303,
+             "y": 663
+            },
+            "bottom_left": {
+             "x": 294,
+             "y": 663
+            },
+            "width": 9,
+            "height": 19
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 54,
+           "y": 643
+          },
+          "top_right": {
+           "x": 303,
+           "y": 643
+          },
+          "bottom_right": {
+           "x": 303,
+           "y": 665
+          },
+          "bottom_left": {
+           "x": 54,
+           "y": 665
+          },
+          "width": 249,
+          "height": 20.5
+         }
+        },
+        {
+         "text": "Total.",
+         "words": [
+          {
+           "text": "Total.",
+           "bounds": {
+            "top_left": {
+             "x": 54,
+             "y": 702
+            },
+            "top_right": {
+             "x": 119,
+             "y": 702
+            },
+            "bottom_right": {
+             "x": 119,
+             "y": 723
+            },
+            "bottom_left": {
+             "x": 54,
+             "y": 723
+            },
+            "width": 65,
+            "height": 21
+           },
+           "confidence": 0.95
+          }
+         ],
+         "average_confidence": 0.95,
+         "bounds": {
+          "top_left": {
+           "x": 54,
+           "y": 702
+          },
+          "top_right": {
+           "x": 119,
+           "y": 702
+          },
+          "bottom_right": {
+           "x": 119,
+           "y": 723
+          },
+          "bottom_left": {
+           "x": 54,
+           "y": 723
+          },
+          "width": 65,
+          "height": 21
+         }
+        },
+        {
+         "text": "Rp.118.000",
+         "words": [
+          {
+           "text": "Rp.118.000",
+           "bounds": {
+            "top_left": {
+             "x": 348,
+             "y": 703
+            },
+            "top_right": {
+             "x": 461,
+             "y": 703
+            },
+            "bottom_right": {
+             "x": 461,
+             "y": 726
+            },
+            "bottom_left": {
+             "x": 348,
+             "y": 726
+            },
+            "width": 113,
+            "height": 23
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 348,
+           "y": 703
+          },
+          "top_right": {
+           "x": 461,
+           "y": 703
+          },
+          "bottom_right": {
+           "x": 461,
+           "y": 726
+          },
+          "bottom_left": {
+           "x": 348,
+           "y": 726
+          },
+          "width": 113,
+          "height": 23
+         }
+        },
+        {
+         "text": "Debet Card",
+         "words": [
+          {
+           "text": "Debet",
+           "bounds": {
+            "top_left": {
+             "x": 54,
+             "y": 761
+            },
+            "top_right": {
+             "x": 110,
+             "y": 762
+            },
+            "bottom_right": {
+             "x": 110,
+             "y": 782
+            },
+            "bottom_left": {
+             "x": 54,
+             "y": 782
+            },
+            "width": 56,
+            "height": 20.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Card",
+           "bounds": {
+            "top_left": {
+             "x": 122,
+             "y": 762
+            },
+            "top_right": {
+             "x": 169,
+             "y": 762
+            },
+            "bottom_right": {
+             "x": 168,
+             "y": 783
+            },
+            "bottom_left": {
+             "x": 121,
+             "y": 783
+            },
+            "width": 47,
+            "height": 21
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 54,
+           "y": 761
+          },
+          "top_right": {
+           "x": 169,
+           "y": 761
+          },
+          "bottom_right": {
+           "x": 169,
+           "y": 783
+          },
+          "bottom_left": {
+           "x": 54,
+           "y": 783
+          },
+          "width": 115,
+          "height": 21
+         }
+        },
+        {
+         "text": "[x] 118.000",
+         "words": [
+          {
+           "text": "[x]",
+           "bounds": {
+            "top_left": {
+             "x": 393,
+             "y": 761
+            },
+            "top_right": {
+             "x": 408,
+             "y": 761
+            },
+            "bottom_right": {
+             "x": 408,
+             "y": 778
+            },
+            "bottom_left": {
+             "x": 393,
+             "y": 778
+            },
+            "width": 15,
+            "height": 17
+           },
+           "confidence": 1
+          },
+          {
+           "text": "118.000",
+           "bounds": {
+            "top_left": {
+             "x": 427,
+             "y": 761
+            },
+            "top_right": {
+             "x": 503,
+             "y": 761
+            },
+            "bottom_right": {
+             "x": 502,
+             "y": 780
+            },
+            "bottom_left": {
+             "x": 428,
+             "y": 781
+            },
+            "width": 75,
+            "height": 19.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 393,
+           "y": 761
+          },
+          "top_right": {
+           "x": 503,
+           "y": 761
+          },
+          "bottom_right": {
+           "x": 503,
+           "y": 781
+          },
+          "bottom_left": {
+           "x": 393,
+           "y": 781
+          },
+          "width": 110,
+          "height": 20
+         }
+        }
+       ],
+       "page": 1,
+       "width": 576,
+       "height": 864
+      }
+     ],
+     "width": 576,
+     "height": 864
+    }
+   }
+  ]
+ },
+ "latency_s": 9.968790808001359,
+ "attempts": 1
+}

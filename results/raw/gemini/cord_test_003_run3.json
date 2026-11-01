@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_003",
+ "run": 3,
+ "timestamp_utc": "2026-11-01T16:08:18.796301+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1278906 bytes, sha256=8f73f0c4803ea8815040a50e3389d4f3fa15e8c28cb6d50ea9854f6f6c22bd63>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "8GPnarHEHMzF694PrdigiA8",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"11,000\",\"subtotal_price\":\"11,000\",\"items\":[{\"name\":\"DONAT GULA\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EvcECvQEAWkUfRN/dA6c07MlJ8utXOBoM9MYTydEKMtFce6VVv2nQ/tQz2dKt62Ehz9lqtxNxZ6JUqq2HU7mztZziUDpQjChDJfu3+A/bRCB6s2bswbGa5FK00CQdZUJwUfnQOtOc1YJKNaL2mlVKk1oJqSXZ6n01bFMD27uAxqSVOdcS2P2zUoxDQyY0q4eVikxwJTvcslDvD7jJxEVJvTSvL00ZOpaHDEiUEWAw1xtCiu69gkWWPW3AxARIgbtJ5vy2eP47ikGyzU9kYe9DV6B63SodHie5/OXTNZHponLt91giw8d77VTno1NrRNKnbv+pFWZzfTjv5M6NeVQjELaB3WuOvYG6kXLFDQVCS1rtxQk4D8xXep2pH6LksbVpcybZRb9KbKlJWMLKORtZ6yULxYGYxsJeeK42ytHJYg6vwzh1Q6zxR88W93xRLjD+HK+2H8GPLwsoNEh9P/b7KamF2WjSqQ1bR7qpGd63v97cjg7J8FBQhTpHYdsUUPwDBTREwBnGLmGk+m5qujaWsjzH7v/Qpwtkt7ADW+kcQbxQ8zrORFrOla1OICZxTcysUDLDIHODChMVKURjyA5tCUZm63l6fHSMYRfX83KnvD1khvvbNEn89SxONVH8Cd2fbNZXKWtsISoVPgPGem/iF1Jh/0FiP5xPLL3zy/oTXk14POXQ5jLsoJCLglOwOO9hhr3DQtM94Pwg8FiQElMG3zHznt+vC9p+q3LcPrR7ZqJPkIAt6fAzKnyxVhPe/5kILbXZ6NErXhFfY2krnYt8c9b/DpH/h2ewbk0X8Vv7n7EQrQnt1i48gDlVlKrzJ/FSR0AOgzx2AebKg=="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549298,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 34,
+   "prompt_tokens": 1202,
+   "total_tokens": 1444,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.105975195998326,
+ "attempts": 1
+}

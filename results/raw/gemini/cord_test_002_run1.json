@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_002",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T16:07:07.714837+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1387299 bytes, sha256=571ac6af26e75de8c06747a8c536c778f19a4562879090813571eddc74603d34>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "pWPnasWdKaX9v_gPpMbh8QQ",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"28,000\",\"subtotal_price\":\"28,000\",\"items\":[{\"name\":\"1  JASMINE MT ( L )\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "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"
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549227,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 39,
+   "prompt_tokens": 1202,
+   "total_tokens": 2155,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 7.427087702002609,
+ "attempts": 1
+}

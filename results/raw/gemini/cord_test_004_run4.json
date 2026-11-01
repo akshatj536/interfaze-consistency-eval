@@ -1,0 +1,108 @@
+{
+ "model_name": "gemini",
+ "receipt_id": "cord_test_004",
+ "run": 4,
+ "timestamp_utc": "2026-11-01T16:09:01.907732+00:00",
+ "request": {
+  "model": "gemini-3.5-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1643699 bytes, sha256=8f3eee7068c96e86cdb2e4b5c53085cb5e1439462edd55c373548cb1962801ad>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {}
+ },
+ "response": {
+  "id": "G2TnaoS2AqXs694Pksqa4AM",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"174,600\",\"subtotal_price\":\"194,000\",\"items\":[{\"name\":\"ICE BLACKCOFFE\"},{\"name\":\"AVOCADO COFFEE\"},{\"name\":\"CHIKEN KATSU FF\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null,
+     "extra_content": {
+      "google": {
+       "thought_signature": "EqwHCqkHAWkUfRPQAxNG15Oq/VnTfMeOJzwud9vW6G1RLtafIKAdQxVDYFcocxkxipo1mDkq/xCKRl9w9P249oS85TaZ+aE65v9v5r4DEc9Oz4o3fOOy8LEy57G80ZAkxGqwWorkQ6cBvKn+0J+EjbhT7UikuuM0dOpK++5AlT+R2SujGoBRbWq9wRUvY3KBNk5GYH+CWcw/UFAL79Q3etjN4wK2X2j+Oufs0RDJWlMxaOBrH9vpW3EHHLruRwxwA8rYMI0kRN+rOoWB+rUIGILuXnqxbBwdNYd0W7+dxHmXRa1tGl59l9XiPpK2IziF234L1AA8DG446SmTcNUsVz/zGHT93vrLUYyjL9WbOgD+LZWsYjz0AfFvP/xtkf8VRZ2e13NS5mKhhrR6FUOlkd+hGfaWy3lt/2naPk6r3KP2iuvt+t3flsIZQoFGxAJTIeiAKcH7T1ZTUNGC+yF998whdP2MuF65njrReaZcVali7QvkJF/p/I/oGiM5ThwHkV+MmfeOb4XEXE7oKl69a59RECnhN4lCyYxKWzmpmqv4M4fzbX3pQ8LI8fOy3CR06Ve6qNVa8qrKkc2eI3MtSw0+2/rCTs/kM6ZIQAy/YGpeLQ8I083qhB3frHFWCkHH3P2tlNg3Q/yhgMKwg8gzjO55ceMfESsZ3/pBEmjfb3ISJ+2nK5FNPVMz5YSxrSo3LHycJqzZ8VOrvVsc9bWQYGQHRu/C6BUYwT0s95n76zSfXly/gSKoRf/Zg9cUcqPadRAvPEtXhJh563JsSlbOAis0/ZOPjAACwNxhVoOe99NikV/IvICucZhcIwub5ZAFgEsfcPuiksRBBGpZKoCiVTdUb9U+QB3UB9MqZx5BQjnISNwtNatTeAvCDRAJ1baNKB+GLHLRx8gr0jVKCdUBrDbq92nsPBLB4visJbufvxW1fEYB8V5gKeHGYthCgz0qgEutPtc1qSx8i9dazQhdPqOWOD1vBc/N+xHmOG0K+1we5Z7o04uJCrXPfHb/pctctnjNzY3wsmn8d85y77BhGhCVLNndfN0wLEsUxxeOp6Yb+jk6TfkT/7N8qdnMsxetmkYZ1mJFt1BSDhQcqOrgss2bRoUHzI1giaJObnbIP6amC6HdwunHjbkhY4UyKZVd8VN4kxt0HMkb6PII7u8YNpLRkT6Klh+smYhuBBhw3D1E/QoPWztCJW+9ChnQuIPlM0P+9GY+Zbs+LM6VWk0UFcyfJk+0dw/7220GjziNaQ=="
+      }
+     }
+    }
+   }
+  ],
+  "created": 1793549341,
+  "model": "gemini-3.5-flash",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 53,
+   "prompt_tokens": 1202,
+   "total_tokens": 1580,
+   "completion_tokens_details": null,
+   "prompt_tokens_details": null
+  }
+ },
+ "latency_s": 3.6646422449994134,
+ "attempts": 1
+}

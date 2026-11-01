@@ -1,0 +1,1875 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_017",
+ "run": 5,
+ "timestamp_utc": "2026-11-01T15:54:27.889269+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1235872 bytes, sha256=4322ab5ec4f0b1365e08af0c31288e65e8cbd2c8eb5241adfb329244acbbb30b>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-e1463c56-37cd-4c42-a455-a871515c7618",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"Rp. 91,000\",\"subtotal_price\":\"91,000\",\"items\":[{\"name\":\"Goblin's Mace\"},{\"name\":\"Mozarella Hot Dog\"},{\"name\":\"Chili Pepper Croquette\"},{\"name\":\"Cheese Croquette\"},{\"name\":\"Plastik Amook\"},{\"name\":\"Plastik Putih Take Away\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793548467,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 744,
+   "prompt_tokens": 11039,
+   "total_tokens": 11783,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "삼진\n어묵\nGoblin's Mace\n25,000\nMozarella Hot\n2\n38,000\nDog\nChili Pepper 1\n14,000\nCroquette\nCheese\n1\n14,000\nCroquette\nPlastik Amook\n0\nPlastik Putih\n1\n0\nTake Away\nSubtotal\n91,000\nDiscount\n(0)\nTOTAL\nRp. 91,000\nDebit\n91,000\nxxxxxxxxXXXX",
+     "sections": [
+      {
+       "text": "삼진\n어묵\nGoblin's Mace\n25,000\nMozarella Hot\n2\n38,000\nDog\nChili Pepper 1\n14,000\nCroquette\nCheese\n1\n14,000\nCroquette\nPlastik Amook\n0\nPlastik Putih\n1\n0\nTake Away\nSubtotal\n91,000\nDiscount\n(0)\nTOTAL\nRp. 91,000\nDebit\n91,000\nxxxxxxxxXXXX",
+       "lines": [
+        {
+         "text": "삼진",
+         "bounds": {
+          "top_left": {
+           "x": 393,
+           "y": 289
+          },
+          "top_right": {
+           "x": 500,
+           "y": 290
+          },
+          "bottom_right": {
+           "x": 499,
+           "y": 341
+          },
+          "bottom_left": {
+           "x": 391,
+           "y": 343
+          },
+          "width": 107.5,
+          "height": 52.5
+         },
+         "average_confidence": 1,
+         "words": [
+          {
+           "text": "삼",
+           "bounds": {
+            "top_left": {
+             "x": 393,
+             "y": 289
+            },
+            "top_right": {
+             "x": 435,
+             "y": 289
+            },
+            "bottom_right": {
+             "x": 435,
+             "y": 343
+            },
+            "bottom_left": {
+             "x": 393,
+             "y": 343
+            },
+            "width": 42,
+            "height": 54
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "진",
+           "bounds": {
+            "top_left": {
+             "x": 450,
+             "y": 289
+            },
+            "top_right": {
+             "x": 485,
+             "y": 289
+            },
+            "bottom_right": {
+             "x": 485,
+             "y": 343
+            },
+            "bottom_left": {
+             "x": 450,
+             "y": 343
+            },
+            "width": 35,
+            "height": 54
+           },
+           "confidence": 1
+          }
+         ]
+        },
+        {
+         "text": "어묵",
+         "bounds": {
+          "top_left": {
+           "x": 400,
+           "y": 344
+          },
+          "top_right": {
+           "x": 500,
+           "y": 346
+          },
+          "bottom_right": {
+           "x": 499,
+           "y": 408
+          },
+          "bottom_left": {
+           "x": 399,
+           "y": 407
+          },
+          "width": 100,
+          "height": 62.5
+         },
+         "average_confidence": 0.98,
+         "words": [
+          {
+           "text": "어",
+           "bounds": {
+            "top_left": {
+             "x": 399,
+             "y": 344
+            },
+            "top_right": {
+             "x": 434,
+             "y": 344
+            },
+            "bottom_right": {
+             "x": 433,
+             "y": 407
+            },
+            "bottom_left": {
+             "x": 399,
+             "y": 406
+            },
+            "width": 34.5,
+            "height": 62.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "묵",
+           "bounds": {
+            "top_left": {
+             "x": 451,
+             "y": 344
+            },
+            "top_right": {
+             "x": 492,
+             "y": 345
+            },
+            "bottom_right": {
+             "x": 491,
+             "y": 408
+            },
+            "bottom_left": {
+             "x": 451,
+             "y": 407
+            },
+            "width": 40.5,
+            "height": 63
+           },
+           "confidence": 0.97
+          }
+         ]
+        },
+        {
+         "text": "Goblin's Mace",
+         "words": [
+          {
+           "text": "Goblin's",
+           "bounds": {
+            "top_left": {
+             "x": 279,
+             "y": 602
+            },
+            "top_right": {
+             "x": 333,
+             "y": 602
+            },
+            "bottom_right": {
+             "x": 334,
+             "y": 618
+            },
+            "bottom_left": {
+             "x": 279,
+             "y": 617
+            },
+            "width": 54.5,
+            "height": 15.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Mace",
+           "bounds": {
+            "top_left": {
+             "x": 337,
+             "y": 602
+            },
+            "top_right": {
+             "x": 373,
+             "y": 602
+            },
+            "bottom_right": {
+             "x": 374,
+             "y": 617
+            },
+            "bottom_left": {
+             "x": 337,
+             "y": 618
+            },
+            "width": 36.5,
+            "height": 15.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 279,
+           "y": 602
+          },
+          "top_right": {
+           "x": 374,
+           "y": 602
+          },
+          "bottom_right": {
+           "x": 374,
+           "y": 618
+          },
+          "bottom_left": {
+           "x": 279,
+           "y": 618
+          },
+          "width": 95,
+          "height": 15.5
+         }
+        },
+        {
+         "text": "25,000",
+         "words": [
+          {
+           "text": "25,000",
+           "bounds": {
+            "top_left": {
+             "x": 571,
+             "y": 602
+            },
+            "top_right": {
+             "x": 614,
+             "y": 601
+            },
+            "bottom_right": {
+             "x": 613,
+             "y": 616
+            },
+            "bottom_left": {
+             "x": 571,
+             "y": 616
+            },
+            "width": 42.5,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 571,
+           "y": 601
+          },
+          "top_right": {
+           "x": 614,
+           "y": 601
+          },
+          "bottom_right": {
+           "x": 614,
+           "y": 616
+          },
+          "bottom_left": {
+           "x": 571,
+           "y": 616
+          },
+          "width": 43,
+          "height": 14.5
+         }
+        },
+        {
+         "text": "Mozarella Hot",
+         "words": [
+          {
+           "text": "Mozarella",
+           "bounds": {
+            "top_left": {
+             "x": 279,
+             "y": 632
+            },
+            "top_right": {
+             "x": 343,
+             "y": 633
+            },
+            "bottom_right": {
+             "x": 343,
+             "y": 648
+            },
+            "bottom_left": {
+             "x": 278,
+             "y": 647
+            },
+            "width": 64.5,
+            "height": 15
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Hot",
+           "bounds": {
+            "top_left": {
+             "x": 348,
+             "y": 633
+            },
+            "top_right": {
+             "x": 373,
+             "y": 634
+            },
+            "bottom_right": {
+             "x": 373,
+             "y": 648
+            },
+            "bottom_left": {
+             "x": 348,
+             "y": 648
+            },
+            "width": 25,
+            "height": 14.5
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 278,
+           "y": 632
+          },
+          "top_right": {
+           "x": 373,
+           "y": 632
+          },
+          "bottom_right": {
+           "x": 373,
+           "y": 648
+          },
+          "bottom_left": {
+           "x": 278,
+           "y": 648
+          },
+          "width": 95,
+          "height": 15
+         }
+        },
+        {
+         "text": "2",
+         "bounds": {
+          "top_left": {
+           "x": 408,
+           "y": 631
+          },
+          "top_right": {
+           "x": 416,
+           "y": 633
+          },
+          "bottom_right": {
+           "x": 417,
+           "y": 647
+          },
+          "bottom_left": {
+           "x": 407,
+           "y": 646
+          },
+          "width": 9,
+          "height": 14.5
+         },
+         "average_confidence": 0.99,
+         "words": [
+          {
+           "text": "2",
+           "bounds": {
+            "top_left": {
+             "x": 409,
+             "y": 631
+            },
+            "top_right": {
+             "x": 417,
+             "y": 632
+            },
+            "bottom_right": {
+             "x": 414,
+             "y": 647
+            },
+            "bottom_left": {
+             "x": 407,
+             "y": 645
+            },
+            "width": 7.5,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          }
+         ]
+        },
+        {
+         "text": "38,000",
+         "words": [
+          {
+           "text": "38,000",
+           "bounds": {
+            "top_left": {
+             "x": 572,
+             "y": 633
+            },
+            "top_right": {
+             "x": 613,
+             "y": 634
+            },
+            "bottom_right": {
+             "x": 613,
+             "y": 647
+            },
+            "bottom_left": {
+             "x": 572,
+             "y": 647
+            },
+            "width": 41,
+            "height": 13.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 572,
+           "y": 633
+          },
+          "top_right": {
+           "x": 613,
+           "y": 633
+          },
+          "bottom_right": {
+           "x": 613,
+           "y": 647
+          },
+          "bottom_left": {
+           "x": 572,
+           "y": 647
+          },
+          "width": 41,
+          "height": 13.5
+         }
+        },
+        {
+         "text": "Dog",
+         "words": [
+          {
+           "text": "Dog",
+           "bounds": {
+            "top_left": {
+             "x": 279,
+             "y": 650
+            },
+            "top_right": {
+             "x": 305,
+             "y": 651
+            },
+            "bottom_right": {
+             "x": 304,
+             "y": 665
+            },
+            "bottom_left": {
+             "x": 279,
+             "y": 663
+            },
+            "width": 25.5,
+            "height": 13.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 279,
+           "y": 650
+          },
+          "top_right": {
+           "x": 305,
+           "y": 650
+          },
+          "bottom_right": {
+           "x": 305,
+           "y": 665
+          },
+          "bottom_left": {
+           "x": 279,
+           "y": 665
+          },
+          "width": 26,
+          "height": 13.5
+         }
+        },
+        {
+         "text": "Chili Pepper 1",
+         "words": [
+          {
+           "text": "Chili",
+           "bounds": {
+            "top_left": {
+             "x": 279,
+             "y": 667
+            },
+            "top_right": {
+             "x": 307,
+             "y": 668
+            },
+            "bottom_right": {
+             "x": 307,
+             "y": 683
+            },
+            "bottom_left": {
+             "x": 279,
+             "y": 683
+            },
+            "width": 28,
+            "height": 15.5
+           },
+           "confidence": 0.93
+          },
+          {
+           "text": "Pepper",
+           "bounds": {
+            "top_left": {
+             "x": 310,
+             "y": 668
+            },
+            "top_right": {
+             "x": 360,
+             "y": 668
+            },
+            "bottom_right": {
+             "x": 360,
+             "y": 682
+            },
+            "bottom_left": {
+             "x": 310,
+             "y": 683
+            },
+            "width": 50,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 409,
+             "y": 667
+            },
+            "top_right": {
+             "x": 417,
+             "y": 668
+            },
+            "bottom_right": {
+             "x": 415,
+             "y": 681
+            },
+            "bottom_left": {
+             "x": 408,
+             "y": 680
+            },
+            "width": 7.5,
+            "height": 13
+           },
+           "confidence": 0.97
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 279,
+           "y": 667
+          },
+          "top_right": {
+           "x": 417,
+           "y": 667
+          },
+          "bottom_right": {
+           "x": 417,
+           "y": 683
+          },
+          "bottom_left": {
+           "x": 279,
+           "y": 683
+          },
+          "width": 138,
+          "height": 14.5
+         }
+        },
+        {
+         "text": "14,000",
+         "words": [
+          {
+           "text": "14,000",
+           "bounds": {
+            "top_left": {
+             "x": 572,
+             "y": 666
+            },
+            "top_right": {
+             "x": 616,
+             "y": 667
+            },
+            "bottom_right": {
+             "x": 615,
+             "y": 682
+            },
+            "bottom_left": {
+             "x": 572,
+             "y": 681
+            },
+            "width": 43.5,
+            "height": 15
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 572,
+           "y": 666
+          },
+          "top_right": {
+           "x": 616,
+           "y": 666
+          },
+          "bottom_right": {
+           "x": 616,
+           "y": 682
+          },
+          "bottom_left": {
+           "x": 572,
+           "y": 682
+          },
+          "width": 44,
+          "height": 15
+         }
+        },
+        {
+         "text": "Croquette",
+         "words": [
+          {
+           "text": "Croquette",
+           "bounds": {
+            "top_left": {
+             "x": 277,
+             "y": 685
+            },
+            "top_right": {
+             "x": 343,
+             "y": 686
+            },
+            "bottom_right": {
+             "x": 342,
+             "y": 700
+            },
+            "bottom_left": {
+             "x": 277,
+             "y": 700
+            },
+            "width": 65.5,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 277,
+           "y": 685
+          },
+          "top_right": {
+           "x": 343,
+           "y": 685
+          },
+          "bottom_right": {
+           "x": 343,
+           "y": 700
+          },
+          "bottom_left": {
+           "x": 277,
+           "y": 700
+          },
+          "width": 66,
+          "height": 14.5
+         }
+        },
+        {
+         "text": "Cheese",
+         "words": [
+          {
+           "text": "Cheese",
+           "bounds": {
+            "top_left": {
+             "x": 277,
+             "y": 703
+            },
+            "top_right": {
+             "x": 328,
+             "y": 703
+            },
+            "bottom_right": {
+             "x": 327,
+             "y": 717
+            },
+            "bottom_left": {
+             "x": 276,
+             "y": 716
+            },
+            "width": 51,
+            "height": 13.5
+           },
+           "confidence": 0.87
+          }
+         ],
+         "average_confidence": 0.87,
+         "bounds": {
+          "top_left": {
+           "x": 276,
+           "y": 703
+          },
+          "top_right": {
+           "x": 328,
+           "y": 703
+          },
+          "bottom_right": {
+           "x": 328,
+           "y": 717
+          },
+          "bottom_left": {
+           "x": 276,
+           "y": 717
+          },
+          "width": 52,
+          "height": 13.5
+         }
+        },
+        {
+         "text": "1",
+         "bounds": {
+          "top_left": {
+           "x": 409,
+           "y": 701
+          },
+          "top_right": {
+           "x": 415,
+           "y": 703
+          },
+          "bottom_right": {
+           "x": 416,
+           "y": 715
+          },
+          "bottom_left": {
+           "x": 407,
+           "y": 715
+          },
+          "width": 7.5,
+          "height": 13
+         },
+         "average_confidence": 0.99,
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 409,
+             "y": 701
+            },
+            "top_right": {
+             "x": 416,
+             "y": 702
+            },
+            "bottom_right": {
+             "x": 414,
+             "y": 716
+            },
+            "bottom_left": {
+             "x": 407,
+             "y": 715
+            },
+            "width": 7,
+            "height": 14
+           },
+           "confidence": 0.99
+          }
+         ]
+        },
+        {
+         "text": "14,000",
+         "words": [
+          {
+           "text": "14,000",
+           "bounds": {
+            "top_left": {
+             "x": 572,
+             "y": 700
+            },
+            "top_right": {
+             "x": 616,
+             "y": 700
+            },
+            "bottom_right": {
+             "x": 616,
+             "y": 715
+            },
+            "bottom_left": {
+             "x": 572,
+             "y": 716
+            },
+            "width": 44,
+            "height": 15.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 572,
+           "y": 700
+          },
+          "top_right": {
+           "x": 616,
+           "y": 700
+          },
+          "bottom_right": {
+           "x": 616,
+           "y": 716
+          },
+          "bottom_left": {
+           "x": 572,
+           "y": 716
+          },
+          "width": 44,
+          "height": 15.5
+         }
+        },
+        {
+         "text": "Croquette",
+         "words": [
+          {
+           "text": "Croquette",
+           "bounds": {
+            "top_left": {
+             "x": 277,
+             "y": 721
+            },
+            "top_right": {
+             "x": 342,
+             "y": 722
+            },
+            "bottom_right": {
+             "x": 342,
+             "y": 735
+            },
+            "bottom_left": {
+             "x": 276,
+             "y": 735
+            },
+            "width": 65.5,
+            "height": 13.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 276,
+           "y": 721
+          },
+          "top_right": {
+           "x": 342,
+           "y": 721
+          },
+          "bottom_right": {
+           "x": 342,
+           "y": 735
+          },
+          "bottom_left": {
+           "x": 276,
+           "y": 735
+          },
+          "width": 66,
+          "height": 13.5
+         }
+        },
+        {
+         "text": "Plastik Amook",
+         "words": [
+          {
+           "text": "Plastik",
+           "bounds": {
+            "top_left": {
+             "x": 276,
+             "y": 738
+            },
+            "top_right": {
+             "x": 321,
+             "y": 739
+            },
+            "bottom_right": {
+             "x": 321,
+             "y": 753
+            },
+            "bottom_left": {
+             "x": 276,
+             "y": 753
+            },
+            "width": 45,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Amook",
+           "bounds": {
+            "top_left": {
+             "x": 326,
+             "y": 739
+            },
+            "top_right": {
+             "x": 372,
+             "y": 739
+            },
+            "bottom_right": {
+             "x": 372,
+             "y": 753
+            },
+            "bottom_left": {
+             "x": 326,
+             "y": 753
+            },
+            "width": 46,
+            "height": 14
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 276,
+           "y": 738
+          },
+          "top_right": {
+           "x": 372,
+           "y": 738
+          },
+          "bottom_right": {
+           "x": 372,
+           "y": 753
+          },
+          "bottom_left": {
+           "x": 276,
+           "y": 753
+          },
+          "width": 96,
+          "height": 14.5
+         }
+        },
+        {
+         "text": "0",
+         "bounds": {
+          "top_left": {
+           "x": 612,
+           "y": 735
+          },
+          "top_right": {
+           "x": 619,
+           "y": 737
+          },
+          "bottom_right": {
+           "x": 619,
+           "y": 748
+          },
+          "bottom_left": {
+           "x": 611,
+           "y": 749
+          },
+          "width": 7.5,
+          "height": 12.5
+         },
+         "average_confidence": 0.61,
+         "words": [
+          {
+           "text": "0",
+           "bounds": {
+            "top_left": {
+             "x": 612,
+             "y": 735
+            },
+            "top_right": {
+             "x": 619,
+             "y": 735
+            },
+            "bottom_right": {
+             "x": 618,
+             "y": 749
+            },
+            "bottom_left": {
+             "x": 611,
+             "y": 748
+            },
+            "width": 7,
+            "height": 13.5
+           },
+           "confidence": 0.61
+          }
+         ]
+        },
+        {
+         "text": "Plastik Putih",
+         "words": [
+          {
+           "text": "Plastik",
+           "bounds": {
+            "top_left": {
+             "x": 276,
+             "y": 769
+            },
+            "top_right": {
+             "x": 320,
+             "y": 770
+            },
+            "bottom_right": {
+             "x": 320,
+             "y": 785
+            },
+            "bottom_left": {
+             "x": 276,
+             "y": 785
+            },
+            "width": 44,
+            "height": 15.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Putih",
+           "bounds": {
+            "top_left": {
+             "x": 325,
+             "y": 770
+            },
+            "top_right": {
+             "x": 358,
+             "y": 770
+            },
+            "bottom_right": {
+             "x": 358,
+             "y": 785
+            },
+            "bottom_left": {
+             "x": 325,
+             "y": 785
+            },
+            "width": 33,
+            "height": 15
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 276,
+           "y": 769
+          },
+          "top_right": {
+           "x": 358,
+           "y": 769
+          },
+          "bottom_right": {
+           "x": 358,
+           "y": 785
+          },
+          "bottom_left": {
+           "x": 276,
+           "y": 785
+          },
+          "width": 82,
+          "height": 15.5
+         }
+        },
+        {
+         "text": "1",
+         "bounds": {
+          "top_left": {
+           "x": 409,
+           "y": 769
+          },
+          "top_right": {
+           "x": 415,
+           "y": 771
+          },
+          "bottom_right": {
+           "x": 415,
+           "y": 782
+          },
+          "bottom_left": {
+           "x": 408,
+           "y": 782
+          },
+          "width": 6.5,
+          "height": 12
+         },
+         "average_confidence": 0.97,
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 409,
+             "y": 769
+            },
+            "top_right": {
+             "x": 416,
+             "y": 770
+            },
+            "bottom_right": {
+             "x": 414,
+             "y": 783
+            },
+            "bottom_left": {
+             "x": 408,
+             "y": 782
+            },
+            "width": 6.5,
+            "height": 13
+           },
+           "confidence": 0.97
+          }
+         ]
+        },
+        {
+         "text": "0",
+         "words": [
+          {
+           "text": "0",
+           "bounds": {
+            "top_left": {
+             "x": 610,
+             "y": 772
+            },
+            "top_right": {
+             "x": 621,
+             "y": 772
+            },
+            "bottom_right": {
+             "x": 621,
+             "y": 779
+            },
+            "bottom_left": {
+             "x": 610,
+             "y": 779
+            },
+            "width": 11,
+            "height": 7
+           },
+           "confidence": 0.66
+          }
+         ],
+         "average_confidence": 0.66,
+         "bounds": {
+          "top_left": {
+           "x": 610,
+           "y": 772
+          },
+          "top_right": {
+           "x": 621,
+           "y": 772
+          },
+          "bottom_right": {
+           "x": 621,
+           "y": 779
+          },
+          "bottom_left": {
+           "x": 610,
+           "y": 779
+          },
+          "width": 11,
+          "height": 7
+         }
+        },
+        {
+         "text": "Take Away",
+         "words": [
+          {
+           "text": "Take",
+           "bounds": {
+            "top_left": {
+             "x": 276,
+             "y": 788
+            },
+            "top_right": {
+             "x": 306,
+             "y": 789
+            },
+            "bottom_right": {
+             "x": 306,
+             "y": 804
+            },
+            "bottom_left": {
+             "x": 276,
+             "y": 803
+            },
+            "width": 30,
+            "height": 15
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Away",
+           "bounds": {
+            "top_left": {
+             "x": 313,
+             "y": 789
+            },
+            "top_right": {
+             "x": 346,
+             "y": 790
+            },
+            "bottom_right": {
+             "x": 346,
+             "y": 804
+            },
+            "bottom_left": {
+             "x": 313,
+             "y": 804
+            },
+            "width": 33,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 276,
+           "y": 788
+          },
+          "top_right": {
+           "x": 346,
+           "y": 788
+          },
+          "bottom_right": {
+           "x": 346,
+           "y": 804
+          },
+          "bottom_left": {
+           "x": 276,
+           "y": 804
+          },
+          "width": 70,
+          "height": 15
+         }
+        },
+        {
+         "text": "Subtotal",
+         "words": [
+          {
+           "text": "Subtotal",
+           "bounds": {
+            "top_left": {
+             "x": 274,
+             "y": 815
+            },
+            "top_right": {
+             "x": 332,
+             "y": 815
+            },
+            "bottom_right": {
+             "x": 331,
+             "y": 829
+            },
+            "bottom_left": {
+             "x": 275,
+             "y": 830
+            },
+            "width": 57,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 274,
+           "y": 815
+          },
+          "top_right": {
+           "x": 332,
+           "y": 815
+          },
+          "bottom_right": {
+           "x": 332,
+           "y": 830
+          },
+          "bottom_left": {
+           "x": 274,
+           "y": 830
+          },
+          "width": 58,
+          "height": 14.5
+         }
+        },
+        {
+         "text": "91,000",
+         "words": [
+          {
+           "text": "91,000",
+           "bounds": {
+            "top_left": {
+             "x": 575,
+             "y": 811
+            },
+            "top_right": {
+             "x": 622,
+             "y": 811
+            },
+            "bottom_right": {
+             "x": 622,
+             "y": 828
+            },
+            "bottom_left": {
+             "x": 575,
+             "y": 828
+            },
+            "width": 47,
+            "height": 17
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 575,
+           "y": 811
+          },
+          "top_right": {
+           "x": 622,
+           "y": 811
+          },
+          "bottom_right": {
+           "x": 622,
+           "y": 828
+          },
+          "bottom_left": {
+           "x": 575,
+           "y": 828
+          },
+          "width": 47,
+          "height": 17
+         }
+        },
+        {
+         "text": "Discount",
+         "words": [
+          {
+           "text": "Discount",
+           "bounds": {
+            "top_left": {
+             "x": 275,
+             "y": 847
+            },
+            "top_right": {
+             "x": 335,
+             "y": 847
+            },
+            "bottom_right": {
+             "x": 335,
+             "y": 862
+            },
+            "bottom_left": {
+             "x": 275,
+             "y": 862
+            },
+            "width": 60,
+            "height": 15
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 275,
+           "y": 847
+          },
+          "top_right": {
+           "x": 335,
+           "y": 847
+          },
+          "bottom_right": {
+           "x": 335,
+           "y": 862
+          },
+          "bottom_left": {
+           "x": 275,
+           "y": 862
+          },
+          "width": 60,
+          "height": 15
+         }
+        },
+        {
+         "text": "(0)",
+         "words": [
+          {
+           "text": "(0)",
+           "bounds": {
+            "top_left": {
+             "x": 604,
+             "y": 844
+            },
+            "top_right": {
+             "x": 622,
+             "y": 844
+            },
+            "bottom_right": {
+             "x": 622,
+             "y": 862
+            },
+            "bottom_left": {
+             "x": 604,
+             "y": 862
+            },
+            "width": 18,
+            "height": 18
+           },
+           "confidence": 0.93
+          }
+         ],
+         "average_confidence": 0.93,
+         "bounds": {
+          "top_left": {
+           "x": 604,
+           "y": 844
+          },
+          "top_right": {
+           "x": 622,
+           "y": 844
+          },
+          "bottom_right": {
+           "x": 622,
+           "y": 862
+          },
+          "bottom_left": {
+           "x": 604,
+           "y": 862
+          },
+          "width": 18,
+          "height": 18
+         }
+        },
+        {
+         "text": "TOTAL",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 275,
+             "y": 878
+            },
+            "top_right": {
+             "x": 333,
+             "y": 879
+            },
+            "bottom_right": {
+             "x": 332,
+             "y": 896
+            },
+            "bottom_left": {
+             "x": 275,
+             "y": 897
+            },
+            "width": 57.5,
+            "height": 18
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 275,
+           "y": 878
+          },
+          "top_right": {
+           "x": 333,
+           "y": 878
+          },
+          "bottom_right": {
+           "x": 333,
+           "y": 897
+          },
+          "bottom_left": {
+           "x": 275,
+           "y": 897
+          },
+          "width": 58,
+          "height": 18
+         }
+        },
+        {
+         "text": "Rp. 91,000",
+         "words": [
+          {
+           "text": "Rp.",
+           "bounds": {
+            "top_left": {
+             "x": 529,
+             "y": 875
+            },
+            "top_right": {
+             "x": 561,
+             "y": 876
+            },
+            "bottom_right": {
+             "x": 560,
+             "y": 897
+            },
+            "bottom_left": {
+             "x": 528,
+             "y": 898
+            },
+            "width": 32,
+            "height": 22
+           },
+           "confidence": 1
+          },
+          {
+           "text": "91,000",
+           "bounds": {
+            "top_left": {
+             "x": 565,
+             "y": 876
+            },
+            "top_right": {
+             "x": 624,
+             "y": 875
+            },
+            "bottom_right": {
+             "x": 624,
+             "y": 896
+            },
+            "bottom_left": {
+             "x": 564,
+             "y": 897
+            },
+            "width": 59.5,
+            "height": 21
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 528,
+           "y": 875
+          },
+          "top_right": {
+           "x": 624,
+           "y": 875
+          },
+          "bottom_right": {
+           "x": 624,
+           "y": 898
+          },
+          "bottom_left": {
+           "x": 528,
+           "y": 898
+          },
+          "width": 96,
+          "height": 22
+         }
+        },
+        {
+         "text": "Debit",
+         "words": [
+          {
+           "text": "Debit",
+           "bounds": {
+            "top_left": {
+             "x": 275,
+             "y": 912
+            },
+            "top_right": {
+             "x": 310,
+             "y": 912
+            },
+            "bottom_right": {
+             "x": 310,
+             "y": 926
+            },
+            "bottom_left": {
+             "x": 275,
+             "y": 927
+            },
+            "width": 35,
+            "height": 14.5
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 275,
+           "y": 912
+          },
+          "top_right": {
+           "x": 310,
+           "y": 912
+          },
+          "bottom_right": {
+           "x": 310,
+           "y": 927
+          },
+          "bottom_left": {
+           "x": 275,
+           "y": 927
+          },
+          "width": 35,
+          "height": 14.5
+         }
+        },
+        {
+         "text": "91,000",
+         "words": [
+          {
+           "text": "91,000",
+           "bounds": {
+            "top_left": {
+             "x": 577,
+             "y": 911
+            },
+            "top_right": {
+             "x": 624,
+             "y": 911
+            },
+            "bottom_right": {
+             "x": 624,
+             "y": 927
+            },
+            "bottom_left": {
+             "x": 577,
+             "y": 927
+            },
+            "width": 47,
+            "height": 16
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 577,
+           "y": 911
+          },
+          "top_right": {
+           "x": 624,
+           "y": 911
+          },
+          "bottom_right": {
+           "x": 624,
+           "y": 927
+          },
+          "bottom_left": {
+           "x": 577,
+           "y": 927
+          },
+          "width": 47,
+          "height": 16
+         }
+        },
+        {
+         "text": "xxxxxxxxXXXX",
+         "words": [
+          {
+           "text": "xxxxxxxxXXXX",
+           "bounds": {
+            "top_left": {
+             "x": 500,
+             "y": 943
+            },
+            "top_right": {
+             "x": 622,
+             "y": 943
+            },
+            "bottom_right": {
+             "x": 623,
+             "y": 958
+            },
+            "bottom_left": {
+             "x": 500,
+             "y": 959
+            },
+            "width": 122.5,
+            "height": 15.5
+           },
+           "confidence": 0.65
+          }
+         ],
+         "average_confidence": 0.65,
+         "bounds": {
+          "top_left": {
+           "x": 500,
+           "y": 943
+          },
+          "top_right": {
+           "x": 623,
+           "y": 943
+          },
+          "bottom_right": {
+           "x": 623,
+           "y": 959
+          },
+          "bottom_left": {
+           "x": 500,
+           "y": 959
+          },
+          "width": 123,
+          "height": 15.5
+         }
+        }
+       ],
+       "page": 1,
+       "width": 960,
+       "height": 1280
+      }
+     ],
+     "width": 960,
+     "height": 1280
+    }
+   }
+  ]
+ },
+ "latency_s": 8.746647731000849,
+ "attempts": 1
+}

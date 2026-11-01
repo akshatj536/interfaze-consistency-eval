@@ -1,0 +1,1745 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_013",
+ "run": 3,
+ "timestamp_utc": "2026-11-01T15:12:55.358766+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1562794 bytes, sha256=ca4bf89562b3f55c2c91968ca221a629e48386744a5322596d9c7345648ada13>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-24b299ce-9dbb-4536-a44b-7266ac3c16f6",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"51,300\",\"subtotal_price\":\"46,636\",\"items\":[{\"name\":\"BASO KUAH\"},{\"name\":\"A.MINERAL GELAS\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793545975,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 710,
+   "prompt_tokens": 11057,
+   "total_tokens": 11767,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "NG\nA FUNG\nA\nFUNG®\nA\nFUNG\nA FUNG®\nD JOURNEY\nFUNG\nA FUNG®\nBASO KUAH 1 43.636 43.636\nA.MINERAL GELAS 3.000 3.000\nTOTAL\n46.63\nDPP\n46,636\nTAX 10.00 %\n4.660\nA FUNG\nGRAND TOTAL\n51,300\nTUNAI\n52.000\nKEMBALI\n700",
+     "sections": [
+      {
+       "text": "NG\nA FUNG\nA\nFUNG®\nA\nFUNG\nA FUNG®\nD JOURNEY\nFUNG\nA FUNG®\nBASO KUAH 1 43.636 43.636\nA.MINERAL GELAS 3.000 3.000\nTOTAL\n46.63\nDPP\n46,636\nTAX 10.00 %\n4.660\nA FUNG\nGRAND TOTAL\n51,300\nTUNAI\n52.000\nKEMBALI\n700",
+       "lines": [
+        {
+         "text": "NG",
+         "words": [
+          {
+           "text": "NG",
+           "bounds": {
+            "top_left": {
+             "x": 668,
+             "y": 5
+            },
+            "top_right": {
+             "x": 697,
+             "y": 5
+            },
+            "bottom_right": {
+             "x": 697,
+             "y": 27
+            },
+            "bottom_left": {
+             "x": 668,
+             "y": 27
+            },
+            "width": 29,
+            "height": 22
+           },
+           "confidence": 0.83
+          }
+         ],
+         "average_confidence": 0.83,
+         "bounds": {
+          "top_left": {
+           "x": 668,
+           "y": 5
+          },
+          "top_right": {
+           "x": 697,
+           "y": 5
+          },
+          "bottom_right": {
+           "x": 697,
+           "y": 27
+          },
+          "bottom_left": {
+           "x": 668,
+           "y": 27
+          },
+          "width": 29,
+          "height": 22
+         }
+        },
+        {
+         "text": "A FUNG",
+         "words": [
+          {
+           "text": "A",
+           "bounds": {
+            "top_left": {
+             "x": 318,
+             "y": 25
+            },
+            "top_right": {
+             "x": 329,
+             "y": 25
+            },
+            "bottom_right": {
+             "x": 329,
+             "y": 48
+            },
+            "bottom_left": {
+             "x": 318,
+             "y": 49
+            },
+            "width": 11,
+            "height": 23.5
+           },
+           "confidence": 0.8
+          },
+          {
+           "text": "FUNG",
+           "bounds": {
+            "top_left": {
+             "x": 356,
+             "y": 26
+            },
+            "top_right": {
+             "x": 447,
+             "y": 27
+            },
+            "bottom_right": {
+             "x": 447,
+             "y": 48
+            },
+            "bottom_left": {
+             "x": 356,
+             "y": 48
+            },
+            "width": 91,
+            "height": 21.5
+           },
+           "confidence": 0.78
+          }
+         ],
+         "average_confidence": 0.79,
+         "bounds": {
+          "top_left": {
+           "x": 318,
+           "y": 25
+          },
+          "top_right": {
+           "x": 447,
+           "y": 25
+          },
+          "bottom_right": {
+           "x": 447,
+           "y": 49
+          },
+          "bottom_left": {
+           "x": 318,
+           "y": 49
+          },
+          "width": 129,
+          "height": 23.5
+         }
+        },
+        {
+         "text": "A",
+         "words": [
+          {
+           "text": "A",
+           "bounds": {
+            "top_left": {
+             "x": 681,
+             "y": 65
+            },
+            "top_right": {
+             "x": 717,
+             "y": 65
+            },
+            "bottom_right": {
+             "x": 717,
+             "y": 82
+            },
+            "bottom_left": {
+             "x": 681,
+             "y": 82
+            },
+            "width": 36,
+            "height": 17
+           },
+           "confidence": 0.92
+          }
+         ],
+         "average_confidence": 0.92,
+         "bounds": {
+          "top_left": {
+           "x": 681,
+           "y": 65
+          },
+          "top_right": {
+           "x": 717,
+           "y": 65
+          },
+          "bottom_right": {
+           "x": 717,
+           "y": 82
+          },
+          "bottom_left": {
+           "x": 681,
+           "y": 82
+          },
+          "width": 36,
+          "height": 17
+         }
+        },
+        {
+         "text": "FUNG®",
+         "words": [
+          {
+           "text": "FUNG®",
+           "bounds": {
+            "top_left": {
+             "x": 682,
+             "y": 85
+            },
+            "top_right": {
+             "x": 730,
+             "y": 85
+            },
+            "bottom_right": {
+             "x": 730,
+             "y": 193
+            },
+            "bottom_left": {
+             "x": 682,
+             "y": 193
+            },
+            "width": 48,
+            "height": 108
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 682,
+           "y": 85
+          },
+          "top_right": {
+           "x": 730,
+           "y": 85
+          },
+          "bottom_right": {
+           "x": 730,
+           "y": 193
+          },
+          "bottom_left": {
+           "x": 682,
+           "y": 193
+          },
+          "width": 48,
+          "height": 108
+         }
+        },
+        {
+         "text": "A",
+         "words": [
+          {
+           "text": "A",
+           "bounds": {
+            "top_left": {
+             "x": 698,
+             "y": 214
+            },
+            "top_right": {
+             "x": 714,
+             "y": 214
+            },
+            "bottom_right": {
+             "x": 714,
+             "y": 219
+            },
+            "bottom_left": {
+             "x": 698,
+             "y": 219
+            },
+            "width": 16,
+            "height": 5
+           },
+           "confidence": 0.69
+          }
+         ],
+         "average_confidence": 0.69,
+         "bounds": {
+          "top_left": {
+           "x": 698,
+           "y": 214
+          },
+          "top_right": {
+           "x": 714,
+           "y": 214
+          },
+          "bottom_right": {
+           "x": 714,
+           "y": 219
+          },
+          "bottom_left": {
+           "x": 698,
+           "y": 219
+          },
+          "width": 16,
+          "height": 5
+         }
+        },
+        {
+         "text": "FUNG",
+         "words": [
+          {
+           "text": "FUNG",
+           "bounds": {
+            "top_left": {
+             "x": 698,
+             "y": 221
+            },
+            "top_right": {
+             "x": 717,
+             "y": 221
+            },
+            "bottom_right": {
+             "x": 717,
+             "y": 250
+            },
+            "bottom_left": {
+             "x": 698,
+             "y": 250
+            },
+            "width": 19,
+            "height": 29
+           },
+           "confidence": 0.85
+          }
+         ],
+         "average_confidence": 0.85,
+         "bounds": {
+          "top_left": {
+           "x": 698,
+           "y": 221
+          },
+          "top_right": {
+           "x": 717,
+           "y": 221
+          },
+          "bottom_right": {
+           "x": 717,
+           "y": 250
+          },
+          "bottom_left": {
+           "x": 698,
+           "y": 250
+          },
+          "width": 19,
+          "height": 29
+         }
+        },
+        {
+         "text": "A FUNG®",
+         "bounds": {
+          "top_left": {
+           "x": 696,
+           "y": 245
+          },
+          "top_right": {
+           "x": 732,
+           "y": 245
+          },
+          "bottom_right": {
+           "x": 732,
+           "y": 435
+          },
+          "bottom_left": {
+           "x": 696,
+           "y": 435
+          },
+          "width": 36,
+          "height": 190
+         },
+         "average_confidence": 0.64,
+         "words": [
+          {
+           "text": "A",
+           "bounds": {
+            "top_left": {
+             "x": 697,
+             "y": 266
+            },
+            "top_right": {
+             "x": 729,
+             "y": 266
+            },
+            "bottom_right": {
+             "x": 729,
+             "y": 283
+            },
+            "bottom_left": {
+             "x": 697,
+             "y": 283
+            },
+            "width": 32,
+            "height": 17
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "FUNG®",
+           "bounds": {
+            "top_left": {
+             "x": 697,
+             "y": 303
+            },
+            "top_right": {
+             "x": 733,
+             "y": 303
+            },
+            "bottom_right": {
+             "x": 733,
+             "y": 435
+            },
+            "bottom_left": {
+             "x": 697,
+             "y": 435
+            },
+            "width": 36,
+            "height": 132
+           },
+           "confidence": 0.29
+          }
+         ]
+        },
+        {
+         "text": "D JOURNEY",
+         "words": [
+          {
+           "text": "D",
+           "bounds": {
+            "top_left": {
+             "x": 457,
+             "y": 361
+            },
+            "top_right": {
+             "x": 466,
+             "y": 361
+            },
+            "bottom_right": {
+             "x": 466,
+             "y": 380
+            },
+            "bottom_left": {
+             "x": 457,
+             "y": 380
+            },
+            "width": 9,
+            "height": 19
+           },
+           "confidence": 0.94
+          },
+          {
+           "text": "JOURNEY",
+           "bounds": {
+            "top_left": {
+             "x": 481,
+             "y": 361
+            },
+            "top_right": {
+             "x": 583,
+             "y": 362
+            },
+            "bottom_right": {
+             "x": 584,
+             "y": 379
+            },
+            "bottom_left": {
+             "x": 481,
+             "y": 380
+            },
+            "width": 102.5,
+            "height": 18
+           },
+           "confidence": 0.59
+          }
+         ],
+         "average_confidence": 0.77,
+         "bounds": {
+          "top_left": {
+           "x": 457,
+           "y": 361
+          },
+          "top_right": {
+           "x": 584,
+           "y": 361
+          },
+          "bottom_right": {
+           "x": 584,
+           "y": 380
+          },
+          "bottom_left": {
+           "x": 457,
+           "y": 380
+          },
+          "width": 127,
+          "height": 19
+         }
+        },
+        {
+         "text": "FUNG",
+         "words": [
+          {
+           "text": "FUNG",
+           "bounds": {
+            "top_left": {
+             "x": 702,
+             "y": 467
+            },
+            "top_right": {
+             "x": 722,
+             "y": 467
+            },
+            "bottom_right": {
+             "x": 722,
+             "y": 497
+            },
+            "bottom_left": {
+             "x": 702,
+             "y": 497
+            },
+            "width": 20,
+            "height": 30
+           },
+           "confidence": 0.65
+          }
+         ],
+         "average_confidence": 0.65,
+         "bounds": {
+          "top_left": {
+           "x": 702,
+           "y": 467
+          },
+          "top_right": {
+           "x": 722,
+           "y": 467
+          },
+          "bottom_right": {
+           "x": 722,
+           "y": 497
+          },
+          "bottom_left": {
+           "x": 702,
+           "y": 497
+          },
+          "width": 20,
+          "height": 30
+         }
+        },
+        {
+         "text": "A FUNG®",
+         "bounds": {
+          "top_left": {
+           "x": 696,
+           "y": 506
+          },
+          "top_right": {
+           "x": 742,
+           "y": 506
+          },
+          "bottom_right": {
+           "x": 742,
+           "y": 694
+          },
+          "bottom_left": {
+           "x": 696,
+           "y": 694
+          },
+          "width": 46,
+          "height": 188
+         },
+         "average_confidence": 0.95,
+         "words": [
+          {
+           "text": "A",
+           "bounds": {
+            "top_left": {
+             "x": 696,
+             "y": 512
+            },
+            "top_right": {
+             "x": 736,
+             "y": 512
+            },
+            "bottom_right": {
+             "x": 736,
+             "y": 535
+            },
+            "bottom_left": {
+             "x": 696,
+             "y": 535
+            },
+            "width": 40,
+            "height": 23
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "FUNG®",
+           "bounds": {
+            "top_left": {
+             "x": 696,
+             "y": 553
+            },
+            "top_right": {
+             "x": 742,
+             "y": 553
+            },
+            "bottom_right": {
+             "x": 742,
+             "y": 694
+            },
+            "bottom_left": {
+             "x": 696,
+             "y": 694
+            },
+            "width": 46,
+            "height": 141
+           },
+           "confidence": 0.92
+          }
+         ]
+        },
+        {
+         "text": "BASO KUAH 1 43.636 43.636",
+         "words": [
+          {
+           "text": "BASO",
+           "bounds": {
+            "top_left": {
+             "x": 134,
+             "y": 560
+            },
+            "top_right": {
+             "x": 192,
+             "y": 560
+            },
+            "bottom_right": {
+             "x": 192,
+             "y": 588
+            },
+            "bottom_left": {
+             "x": 134,
+             "y": 587
+            },
+            "width": 58,
+            "height": 27.5
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "KUAH",
+           "bounds": {
+            "top_left": {
+             "x": 209,
+             "y": 560
+            },
+            "top_right": {
+             "x": 267,
+             "y": 559
+            },
+            "bottom_right": {
+             "x": 267,
+             "y": 587
+            },
+            "bottom_left": {
+             "x": 209,
+             "y": 588
+            },
+            "width": 58,
+            "height": 28
+           },
+           "confidence": 0.94
+          },
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 428,
+             "y": 564
+            },
+            "top_right": {
+             "x": 443,
+             "y": 563
+            },
+            "bottom_right": {
+             "x": 442,
+             "y": 591
+            },
+            "bottom_left": {
+             "x": 428,
+             "y": 591
+            },
+            "width": 14.5,
+            "height": 27.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "43.636",
+           "bounds": {
+            "top_left": {
+             "x": 456,
+             "y": 563
+            },
+            "top_right": {
+             "x": 545,
+             "y": 562
+            },
+            "bottom_right": {
+             "x": 544,
+             "y": 592
+            },
+            "bottom_left": {
+             "x": 455,
+             "y": 591
+            },
+            "width": 89,
+            "height": 29
+           },
+           "confidence": 0.95
+          },
+          {
+           "text": "43.636",
+           "bounds": {
+            "top_left": {
+             "x": 614,
+             "y": 565
+            },
+            "top_right": {
+             "x": 699,
+             "y": 568
+            },
+            "bottom_right": {
+             "x": 699,
+             "y": 594
+            },
+            "bottom_left": {
+             "x": 614,
+             "y": 593
+            },
+            "width": 85,
+            "height": 27
+           },
+           "confidence": 0.71
+          }
+         ],
+         "average_confidence": 0.91,
+         "bounds": {
+          "top_left": {
+           "x": 134,
+           "y": 559
+          },
+          "top_right": {
+           "x": 699,
+           "y": 559
+          },
+          "bottom_right": {
+           "x": 699,
+           "y": 594
+          },
+          "bottom_left": {
+           "x": 134,
+           "y": 594
+          },
+          "width": 565,
+          "height": 27.5
+         }
+        },
+        {
+         "text": "A.MINERAL GELAS 3.000 3.000",
+         "words": [
+          {
+           "text": "A.MINERAL",
+           "bounds": {
+            "top_left": {
+             "x": 133,
+             "y": 600
+            },
+            "top_right": {
+             "x": 267,
+             "y": 601
+            },
+            "bottom_right": {
+             "x": 267,
+             "y": 630
+            },
+            "bottom_left": {
+             "x": 132,
+             "y": 629
+            },
+            "width": 134.5,
+            "height": 29
+           },
+           "confidence": 0.94
+          },
+          {
+           "text": "GELAS",
+           "bounds": {
+            "top_left": {
+             "x": 281,
+             "y": 601
+            },
+            "top_right": {
+             "x": 359,
+             "y": 601
+            },
+            "bottom_right": {
+             "x": 358,
+             "y": 632
+            },
+            "bottom_left": {
+             "x": 281,
+             "y": 630
+            },
+            "width": 77.5,
+            "height": 30
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "3.000",
+           "bounds": {
+            "top_left": {
+             "x": 469,
+             "y": 598
+            },
+            "top_right": {
+             "x": 539,
+             "y": 598
+            },
+            "bottom_right": {
+             "x": 539,
+             "y": 634
+            },
+            "bottom_left": {
+             "x": 469,
+             "y": 634
+            },
+            "width": 70,
+            "height": 36
+           },
+           "confidence": 0.92
+          },
+          {
+           "text": "3.000",
+           "bounds": {
+            "top_left": {
+             "x": 628,
+             "y": 606
+            },
+            "top_right": {
+             "x": 697,
+             "y": 607
+            },
+            "bottom_right": {
+             "x": 696,
+             "y": 635
+            },
+            "bottom_left": {
+             "x": 627,
+             "y": 633
+            },
+            "width": 69,
+            "height": 27.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 132,
+           "y": 598
+          },
+          "top_right": {
+           "x": 697,
+           "y": 598
+          },
+          "bottom_right": {
+           "x": 697,
+           "y": 635
+          },
+          "bottom_left": {
+           "x": 132,
+           "y": 635
+          },
+          "width": 565,
+          "height": 30
+         }
+        },
+        {
+         "text": "TOTAL",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 135,
+             "y": 642
+            },
+            "top_right": {
+             "x": 207,
+             "y": 642
+            },
+            "bottom_right": {
+             "x": 207,
+             "y": 670
+            },
+            "bottom_left": {
+             "x": 135,
+             "y": 670
+            },
+            "width": 72,
+            "height": 28
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 135,
+           "y": 642
+          },
+          "top_right": {
+           "x": 207,
+           "y": 642
+          },
+          "bottom_right": {
+           "x": 207,
+           "y": 670
+          },
+          "bottom_left": {
+           "x": 135,
+           "y": 670
+          },
+          "width": 72,
+          "height": 28
+         }
+        },
+        {
+         "text": "46.63",
+         "words": [
+          {
+           "text": "46.63",
+           "bounds": {
+            "top_left": {
+             "x": 615,
+             "y": 646
+            },
+            "top_right": {
+             "x": 689,
+             "y": 650
+            },
+            "bottom_right": {
+             "x": 687,
+             "y": 677
+            },
+            "bottom_left": {
+             "x": 614,
+             "y": 672
+            },
+            "width": 73.5,
+            "height": 26.5
+           },
+           "confidence": 0.91
+          }
+         ],
+         "average_confidence": 0.91,
+         "bounds": {
+          "top_left": {
+           "x": 614,
+           "y": 646
+          },
+          "top_right": {
+           "x": 689,
+           "y": 646
+          },
+          "bottom_right": {
+           "x": 689,
+           "y": 677
+          },
+          "bottom_left": {
+           "x": 614,
+           "y": 677
+          },
+          "width": 75,
+          "height": 26.5
+         }
+        },
+        {
+         "text": "DPP",
+         "words": [
+          {
+           "text": "DPP",
+           "bounds": {
+            "top_left": {
+             "x": 130,
+             "y": 685
+            },
+            "top_right": {
+             "x": 172,
+             "y": 684
+            },
+            "bottom_right": {
+             "x": 173,
+             "y": 710
+            },
+            "bottom_left": {
+             "x": 130,
+             "y": 711
+            },
+            "width": 42.5,
+            "height": 26
+           },
+           "confidence": 0.78
+          }
+         ],
+         "average_confidence": 0.78,
+         "bounds": {
+          "top_left": {
+           "x": 130,
+           "y": 684
+          },
+          "top_right": {
+           "x": 173,
+           "y": 684
+          },
+          "bottom_right": {
+           "x": 173,
+           "y": 711
+          },
+          "bottom_left": {
+           "x": 130,
+           "y": 711
+          },
+          "width": 43,
+          "height": 26
+         }
+        },
+        {
+         "text": "46,636",
+         "words": [
+          {
+           "text": "46,636",
+           "bounds": {
+            "top_left": {
+             "x": 615,
+             "y": 688
+            },
+            "top_right": {
+             "x": 698,
+             "y": 692
+            },
+            "bottom_right": {
+             "x": 698,
+             "y": 716
+            },
+            "bottom_left": {
+             "x": 615,
+             "y": 715
+            },
+            "width": 83,
+            "height": 25.5
+           },
+           "confidence": 0.77
+          }
+         ],
+         "average_confidence": 0.77,
+         "bounds": {
+          "top_left": {
+           "x": 615,
+           "y": 688
+          },
+          "top_right": {
+           "x": 698,
+           "y": 688
+          },
+          "bottom_right": {
+           "x": 698,
+           "y": 716
+          },
+          "bottom_left": {
+           "x": 615,
+           "y": 716
+          },
+          "width": 83,
+          "height": 25.5
+         }
+        },
+        {
+         "text": "TAX 10.00 %",
+         "words": [
+          {
+           "text": "TAX",
+           "bounds": {
+            "top_left": {
+             "x": 135,
+             "y": 726
+            },
+            "top_right": {
+             "x": 177,
+             "y": 726
+            },
+            "bottom_right": {
+             "x": 177,
+             "y": 752
+            },
+            "bottom_left": {
+             "x": 134,
+             "y": 752
+            },
+            "width": 42.5,
+            "height": 26
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "10.00",
+           "bounds": {
+            "top_left": {
+             "x": 194,
+             "y": 726
+            },
+            "top_right": {
+             "x": 266,
+             "y": 725
+            },
+            "bottom_right": {
+             "x": 265,
+             "y": 753
+            },
+            "bottom_left": {
+             "x": 194,
+             "y": 752
+            },
+            "width": 71.5,
+            "height": 27
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "%",
+           "bounds": {
+            "top_left": {
+             "x": 282,
+             "y": 725
+            },
+            "top_right": {
+             "x": 298,
+             "y": 725
+            },
+            "bottom_right": {
+             "x": 298,
+             "y": 754
+            },
+            "bottom_left": {
+             "x": 282,
+             "y": 754
+            },
+            "width": 16,
+            "height": 29
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 134,
+           "y": 725
+          },
+          "top_right": {
+           "x": 298,
+           "y": 725
+          },
+          "bottom_right": {
+           "x": 298,
+           "y": 754
+          },
+          "bottom_left": {
+           "x": 134,
+           "y": 754
+          },
+          "width": 164,
+          "height": 27
+         }
+        },
+        {
+         "text": "4.660",
+         "words": [
+          {
+           "text": "4.660",
+           "bounds": {
+            "top_left": {
+             "x": 629,
+             "y": 727
+            },
+            "top_right": {
+             "x": 706,
+             "y": 717
+            },
+            "bottom_right": {
+             "x": 708,
+             "y": 751
+            },
+            "bottom_left": {
+             "x": 629,
+             "y": 754
+            },
+            "width": 78,
+            "height": 30.5
+           },
+           "confidence": 0.69
+          }
+         ],
+         "average_confidence": 0.69,
+         "bounds": {
+          "top_left": {
+           "x": 629,
+           "y": 717
+          },
+          "top_right": {
+           "x": 708,
+           "y": 717
+          },
+          "bottom_right": {
+           "x": 708,
+           "y": 754
+          },
+          "bottom_left": {
+           "x": 629,
+           "y": 754
+          },
+          "width": 79,
+          "height": 30.5
+         }
+        },
+        {
+         "text": "A FUNG",
+         "bounds": {
+          "top_left": {
+           "x": 681,
+           "y": 747
+          },
+          "top_right": {
+           "x": 732,
+           "y": 747
+          },
+          "bottom_right": {
+           "x": 732,
+           "y": 920
+          },
+          "bottom_left": {
+           "x": 681,
+           "y": 920
+          },
+          "width": 51,
+          "height": 173
+         },
+         "average_confidence": 0.92,
+         "words": [
+          {
+           "text": "A",
+           "bounds": {
+            "top_left": {
+             "x": 695,
+             "y": 768
+            },
+            "top_right": {
+             "x": 730,
+             "y": 768
+            },
+            "bottom_right": {
+             "x": 730,
+             "y": 791
+            },
+            "bottom_left": {
+             "x": 695,
+             "y": 791
+            },
+            "width": 35,
+            "height": 23
+           },
+           "confidence": 0.88
+          },
+          {
+           "text": "FUNG",
+           "bounds": {
+            "top_left": {
+             "x": 681,
+             "y": 804
+            },
+            "top_right": {
+             "x": 728,
+             "y": 804
+            },
+            "bottom_right": {
+             "x": 728,
+             "y": 905
+            },
+            "bottom_left": {
+             "x": 681,
+             "y": 905
+            },
+            "width": 47,
+            "height": 101
+           },
+           "confidence": 0.96
+          }
+         ]
+        },
+        {
+         "text": "GRAND TOTAL",
+         "words": [
+          {
+           "text": "GRAND",
+           "bounds": {
+            "top_left": {
+             "x": 130,
+             "y": 766
+            },
+            "top_right": {
+             "x": 205,
+             "y": 767
+            },
+            "bottom_right": {
+             "x": 205,
+             "y": 793
+            },
+            "bottom_left": {
+             "x": 130,
+             "y": 792
+            },
+            "width": 75,
+            "height": 26
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 222,
+             "y": 767
+            },
+            "top_right": {
+             "x": 292,
+             "y": 767
+            },
+            "bottom_right": {
+             "x": 292,
+             "y": 792
+            },
+            "bottom_left": {
+             "x": 222,
+             "y": 793
+            },
+            "width": 70,
+            "height": 25.5
+           },
+           "confidence": 0.86
+          }
+         ],
+         "average_confidence": 0.93,
+         "bounds": {
+          "top_left": {
+           "x": 130,
+           "y": 766
+          },
+          "top_right": {
+           "x": 292,
+           "y": 766
+          },
+          "bottom_right": {
+           "x": 292,
+           "y": 793
+          },
+          "bottom_left": {
+           "x": 130,
+           "y": 793
+          },
+          "width": 162,
+          "height": 26
+         }
+        },
+        {
+         "text": "51,300",
+         "words": [
+          {
+           "text": "51,300",
+           "bounds": {
+            "top_left": {
+             "x": 610,
+             "y": 765
+            },
+            "top_right": {
+             "x": 695,
+             "y": 766
+            },
+            "bottom_right": {
+             "x": 694,
+             "y": 797
+            },
+            "bottom_left": {
+             "x": 610,
+             "y": 796
+            },
+            "width": 84.5,
+            "height": 31
+           },
+           "confidence": 0.87
+          }
+         ],
+         "average_confidence": 0.87,
+         "bounds": {
+          "top_left": {
+           "x": 610,
+           "y": 765
+          },
+          "top_right": {
+           "x": 695,
+           "y": 765
+          },
+          "bottom_right": {
+           "x": 695,
+           "y": 797
+          },
+          "bottom_left": {
+           "x": 610,
+           "y": 797
+          },
+          "width": 85,
+          "height": 31
+         }
+        },
+        {
+         "text": "TUNAI",
+         "words": [
+          {
+           "text": "TUNAI",
+           "bounds": {
+            "top_left": {
+             "x": 136,
+             "y": 804
+            },
+            "top_right": {
+             "x": 209,
+             "y": 804
+            },
+            "bottom_right": {
+             "x": 209,
+             "y": 830
+            },
+            "bottom_left": {
+             "x": 136,
+             "y": 830
+            },
+            "width": 73,
+            "height": 26
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 136,
+           "y": 804
+          },
+          "top_right": {
+           "x": 209,
+           "y": 804
+          },
+          "bottom_right": {
+           "x": 209,
+           "y": 830
+          },
+          "bottom_left": {
+           "x": 136,
+           "y": 830
+          },
+          "width": 73,
+          "height": 26
+         }
+        },
+        {
+         "text": "52.000",
+         "words": [
+          {
+           "text": "52.000",
+           "bounds": {
+            "top_left": {
+             "x": 609,
+             "y": 805
+            },
+            "top_right": {
+             "x": 694,
+             "y": 806
+            },
+            "bottom_right": {
+             "x": 694,
+             "y": 832
+            },
+            "bottom_left": {
+             "x": 609,
+             "y": 832
+            },
+            "width": 85,
+            "height": 26.5
+           },
+           "confidence": 0.86
+          }
+         ],
+         "average_confidence": 0.86,
+         "bounds": {
+          "top_left": {
+           "x": 609,
+           "y": 805
+          },
+          "top_right": {
+           "x": 694,
+           "y": 805
+          },
+          "bottom_right": {
+           "x": 694,
+           "y": 832
+          },
+          "bottom_left": {
+           "x": 609,
+           "y": 832
+          },
+          "width": 85,
+          "height": 26.5
+         }
+        },
+        {
+         "text": "KEMBALI",
+         "words": [
+          {
+           "text": "KEMBALI",
+           "bounds": {
+            "top_left": {
+             "x": 136,
+             "y": 843
+            },
+            "top_right": {
+             "x": 237,
+             "y": 842
+            },
+            "bottom_right": {
+             "x": 237,
+             "y": 867
+            },
+            "bottom_left": {
+             "x": 135,
+             "y": 867
+            },
+            "width": 101.5,
+            "height": 24.5
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 135,
+           "y": 842
+          },
+          "top_right": {
+           "x": 237,
+           "y": 842
+          },
+          "bottom_right": {
+           "x": 237,
+           "y": 867
+          },
+          "bottom_left": {
+           "x": 135,
+           "y": 867
+          },
+          "width": 102,
+          "height": 24.5
+         }
+        },
+        {
+         "text": "700",
+         "words": [
+          {
+           "text": "700",
+           "bounds": {
+            "top_left": {
+             "x": 648,
+             "y": 843
+            },
+            "top_right": {
+             "x": 686,
+             "y": 843
+            },
+            "bottom_right": {
+             "x": 687,
+             "y": 866
+            },
+            "bottom_left": {
+             "x": 648,
+             "y": 867
+            },
+            "width": 38.5,
+            "height": 23.5
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 648,
+           "y": 843
+          },
+          "top_right": {
+           "x": 687,
+           "y": 843
+          },
+          "bottom_right": {
+           "x": 687,
+           "y": 867
+          },
+          "bottom_left": {
+           "x": 648,
+           "y": 867
+          },
+          "width": 39,
+          "height": 23.5
+         }
+        }
+       ],
+       "page": 1,
+       "width": 864,
+       "height": 1296
+      }
+     ],
+     "width": 864,
+     "height": 1296
+    }
+   }
+  ]
+ },
+ "latency_s": 120.59470091499679,
+ "attempts": 1
+}

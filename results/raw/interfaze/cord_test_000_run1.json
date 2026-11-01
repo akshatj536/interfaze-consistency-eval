@@ -1,0 +1,991 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_000",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T14:17:09.002313+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 338392 bytes, sha256=8612d04b70f430f3aef07fbbd5200e382dcc4152b344cc2eff9f735f05a257c8>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-d54c7307-7e3e-45fc-940b-7e156780689b",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"60.000\",\"subtotal_price\":\"60.000\",\"items\":[{\"name\":\"901016 -TICKET CP\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793542628,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 705,
+   "prompt_tokens": 11005,
+   "total_tokens": 11710,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "901016 -TICKET CP\n2 60,000 60.000\nTOTAL DISC $ -60.000\nTAX 5.455\nSubtotal 60.000\nTOTAL (Qty 2.00 60.000\n- EDC CIMB NIAGA No: xx7730 60,000\nCUSTOMER THED",
+     "sections": [
+      {
+       "text": "901016 -TICKET CP\n2 60,000 60.000\nTOTAL DISC $ -60.000\nTAX 5.455\nSubtotal 60.000\nTOTAL (Qty 2.00 60.000\n- EDC CIMB NIAGA No: xx7730 60,000\nCUSTOMER THED",
+       "lines": [
+        {
+         "text": "901016 -TICKET CP",
+         "words": [
+          {
+           "text": "901016",
+           "bounds": {
+            "top_left": {
+             "x": 45,
+             "y": 394
+            },
+            "top_right": {
+             "x": 89,
+             "y": 393
+            },
+            "bottom_right": {
+             "x": 89,
+             "y": 408
+            },
+            "bottom_left": {
+             "x": 45,
+             "y": 408
+            },
+            "width": 44,
+            "height": 14.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "-TICKET",
+           "bounds": {
+            "top_left": {
+             "x": 151,
+             "y": 390
+            },
+            "top_right": {
+             "x": 198,
+             "y": 388
+            },
+            "bottom_right": {
+             "x": 198,
+             "y": 404
+            },
+            "bottom_left": {
+             "x": 151,
+             "y": 404
+            },
+            "width": 47,
+            "height": 15
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "CP",
+           "bounds": {
+            "top_left": {
+             "x": 204,
+             "y": 388
+            },
+            "top_right": {
+             "x": 219,
+             "y": 388
+            },
+            "bottom_right": {
+             "x": 219,
+             "y": 403
+            },
+            "bottom_left": {
+             "x": 204,
+             "y": 404
+            },
+            "width": 15,
+            "height": 15.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 45,
+           "y": 388
+          },
+          "top_right": {
+           "x": 219,
+           "y": 388
+          },
+          "bottom_right": {
+           "x": 219,
+           "y": 408
+          },
+          "bottom_left": {
+           "x": 45,
+           "y": 408
+          },
+          "width": 174,
+          "height": 15
+         }
+        },
+        {
+         "text": "2 60,000 60.000",
+         "words": [
+          {
+           "text": "2",
+           "bounds": {
+            "top_left": {
+             "x": 89,
+             "y": 417
+            },
+            "top_right": {
+             "x": 96,
+             "y": 417
+            },
+            "bottom_right": {
+             "x": 96,
+             "y": 430
+            },
+            "bottom_left": {
+             "x": 89,
+             "y": 430
+            },
+            "width": 7,
+            "height": 13
+           },
+           "confidence": 1
+          },
+          {
+           "text": "60,000",
+           "bounds": {
+            "top_left": {
+             "x": 176,
+             "y": 412
+            },
+            "top_right": {
+             "x": 219,
+             "y": 412
+            },
+            "bottom_right": {
+             "x": 219,
+             "y": 427
+            },
+            "bottom_left": {
+             "x": 176,
+             "y": 427
+            },
+            "width": 43,
+            "height": 15
+           },
+           "confidence": 0.86
+          },
+          {
+           "text": "60.000",
+           "bounds": {
+            "top_left": {
+             "x": 306,
+             "y": 412
+            },
+            "top_right": {
+             "x": 349,
+             "y": 411
+            },
+            "bottom_right": {
+             "x": 349,
+             "y": 426
+            },
+            "bottom_left": {
+             "x": 306,
+             "y": 427
+            },
+            "width": 43,
+            "height": 15
+           },
+           "confidence": 0.62
+          }
+         ],
+         "average_confidence": 0.83,
+         "bounds": {
+          "top_left": {
+           "x": 89,
+           "y": 411
+          },
+          "top_right": {
+           "x": 349,
+           "y": 411
+          },
+          "bottom_right": {
+           "x": 349,
+           "y": 430
+          },
+          "bottom_left": {
+           "x": 89,
+           "y": 430
+          },
+          "width": 260,
+          "height": 15
+         }
+        },
+        {
+         "text": "TOTAL DISC $ -60.000",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 149,
+             "y": 463
+            },
+            "top_right": {
+             "x": 184,
+             "y": 461
+            },
+            "bottom_right": {
+             "x": 185,
+             "y": 477
+            },
+            "bottom_left": {
+             "x": 149,
+             "y": 479
+            },
+            "width": 35.5,
+            "height": 16
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "DISC",
+           "bounds": {
+            "top_left": {
+             "x": 191,
+             "y": 461
+            },
+            "top_right": {
+             "x": 221,
+             "y": 461
+            },
+            "bottom_right": {
+             "x": 222,
+             "y": 476
+            },
+            "bottom_left": {
+             "x": 191,
+             "y": 477
+            },
+            "width": 30.5,
+            "height": 15.5
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "$",
+           "bounds": {
+            "top_left": {
+             "x": 228,
+             "y": 461
+            },
+            "top_right": {
+             "x": 236,
+             "y": 460
+            },
+            "bottom_right": {
+             "x": 236,
+             "y": 476
+            },
+            "bottom_left": {
+             "x": 228,
+             "y": 476
+            },
+            "width": 8,
+            "height": 15.5
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "-60.000",
+           "bounds": {
+            "top_left": {
+             "x": 302,
+             "y": 462
+            },
+            "top_right": {
+             "x": 350,
+             "y": 460
+            },
+            "bottom_right": {
+             "x": 350,
+             "y": 476
+            },
+            "bottom_left": {
+             "x": 302,
+             "y": 477
+            },
+            "width": 48,
+            "height": 15.5
+           },
+           "confidence": 0.69
+          }
+         ],
+         "average_confidence": 0.9,
+         "bounds": {
+          "top_left": {
+           "x": 149,
+           "y": 460
+          },
+          "top_right": {
+           "x": 350,
+           "y": 460
+          },
+          "bottom_right": {
+           "x": 350,
+           "y": 479
+          },
+          "bottom_left": {
+           "x": 149,
+           "y": 479
+          },
+          "width": 201,
+          "height": 15.5
+         }
+        },
+        {
+         "text": "TAX 5.455",
+         "words": [
+          {
+           "text": "TAX",
+           "bounds": {
+            "top_left": {
+             "x": 214,
+             "y": 484
+            },
+            "top_right": {
+             "x": 235,
+             "y": 484
+            },
+            "bottom_right": {
+             "x": 235,
+             "y": 499
+            },
+            "bottom_left": {
+             "x": 214,
+             "y": 499
+            },
+            "width": 21,
+            "height": 15
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "5.455",
+           "bounds": {
+            "top_left": {
+             "x": 315,
+             "y": 485
+            },
+            "top_right": {
+             "x": 350,
+             "y": 485
+            },
+            "bottom_right": {
+             "x": 350,
+             "y": 500
+            },
+            "bottom_left": {
+             "x": 315,
+             "y": 501
+            },
+            "width": 35,
+            "height": 15.5
+           },
+           "confidence": 0.61
+          }
+         ],
+         "average_confidence": 0.8,
+         "bounds": {
+          "top_left": {
+           "x": 214,
+           "y": 484
+          },
+          "top_right": {
+           "x": 350,
+           "y": 484
+          },
+          "bottom_right": {
+           "x": 350,
+           "y": 501
+          },
+          "bottom_left": {
+           "x": 214,
+           "y": 501
+          },
+          "width": 136,
+          "height": 15.5
+         }
+        },
+        {
+         "text": "Subtotal 60.000",
+         "words": [
+          {
+           "text": "Subtotal",
+           "bounds": {
+            "top_left": {
+             "x": 178,
+             "y": 511
+            },
+            "top_right": {
+             "x": 234,
+             "y": 509
+            },
+            "bottom_right": {
+             "x": 234,
+             "y": 525
+            },
+            "bottom_left": {
+             "x": 178,
+             "y": 526
+            },
+            "width": 56,
+            "height": 15.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "60.000",
+           "bounds": {
+            "top_left": {
+             "x": 308,
+             "y": 511
+            },
+            "top_right": {
+             "x": 352,
+             "y": 510
+            },
+            "bottom_right": {
+             "x": 352,
+             "y": 525
+            },
+            "bottom_left": {
+             "x": 308,
+             "y": 526
+            },
+            "width": 44,
+            "height": 15
+           },
+           "confidence": 0.69
+          }
+         ],
+         "average_confidence": 0.84,
+         "bounds": {
+          "top_left": {
+           "x": 178,
+           "y": 509
+          },
+          "top_right": {
+           "x": 352,
+           "y": 509
+          },
+          "bottom_right": {
+           "x": 352,
+           "y": 526
+          },
+          "bottom_left": {
+           "x": 178,
+           "y": 526
+          },
+          "width": 174,
+          "height": 15.5
+         }
+        },
+        {
+         "text": "TOTAL (Qty 2.00 60.000",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 48,
+             "y": 539
+            },
+            "top_right": {
+             "x": 113,
+             "y": 537
+            },
+            "bottom_right": {
+             "x": 113,
+             "y": 553
+            },
+            "bottom_left": {
+             "x": 48,
+             "y": 555
+            },
+            "width": 65,
+            "height": 16
+           },
+           "confidence": 1
+          },
+          {
+           "text": "(Qty",
+           "bounds": {
+            "top_left": {
+             "x": 138,
+             "y": 536
+            },
+            "top_right": {
+             "x": 188,
+             "y": 535
+            },
+            "bottom_right": {
+             "x": 188,
+             "y": 552
+            },
+            "bottom_left": {
+             "x": 138,
+             "y": 553
+            },
+            "width": 50,
+            "height": 17
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "2.00",
+           "bounds": {
+            "top_left": {
+             "x": 208,
+             "y": 534
+            },
+            "top_right": {
+             "x": 260,
+             "y": 534
+            },
+            "bottom_right": {
+             "x": 260,
+             "y": 552
+            },
+            "bottom_left": {
+             "x": 208,
+             "y": 552
+            },
+            "width": 52,
+            "height": 18
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "60.000",
+           "bounds": {
+            "top_left": {
+             "x": 280,
+             "y": 534
+            },
+            "top_right": {
+             "x": 363,
+             "y": 534
+            },
+            "bottom_right": {
+             "x": 362,
+             "y": 553
+            },
+            "bottom_left": {
+             "x": 280,
+             "y": 552
+            },
+            "width": 82.5,
+            "height": 18.5
+           },
+           "confidence": 0.83
+          }
+         ],
+         "average_confidence": 0.95,
+         "bounds": {
+          "top_left": {
+           "x": 48,
+           "y": 534
+          },
+          "top_right": {
+           "x": 363,
+           "y": 534
+          },
+          "bottom_right": {
+           "x": 363,
+           "y": 555
+          },
+          "bottom_left": {
+           "x": 48,
+           "y": 555
+          },
+          "width": 315,
+          "height": 18
+         }
+        },
+        {
+         "text": "- EDC CIMB NIAGA No: xx7730 60,000",
+         "words": [
+          {
+           "text": "-",
+           "bounds": {
+            "top_left": {
+             "x": 48,
+             "y": 589
+            },
+            "top_right": {
+             "x": 56,
+             "y": 589
+            },
+            "bottom_right": {
+             "x": 56,
+             "y": 606
+            },
+            "bottom_left": {
+             "x": 48,
+             "y": 606
+            },
+            "width": 8,
+            "height": 17
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "EDC",
+           "bounds": {
+            "top_left": {
+             "x": 61,
+             "y": 589
+            },
+            "top_right": {
+             "x": 84,
+             "y": 588
+            },
+            "bottom_right": {
+             "x": 84,
+             "y": 605
+            },
+            "bottom_left": {
+             "x": 61,
+             "y": 606
+            },
+            "width": 23,
+            "height": 17
+           },
+           "confidence": 1
+          },
+          {
+           "text": "CIMB",
+           "bounds": {
+            "top_left": {
+             "x": 91,
+             "y": 588
+            },
+            "top_right": {
+             "x": 122,
+             "y": 587
+            },
+            "bottom_right": {
+             "x": 122,
+             "y": 604
+            },
+            "bottom_left": {
+             "x": 91,
+             "y": 605
+            },
+            "width": 31,
+            "height": 17
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "NIAGA",
+           "bounds": {
+            "top_left": {
+             "x": 127,
+             "y": 587
+            },
+            "top_right": {
+             "x": 166,
+             "y": 586
+            },
+            "bottom_right": {
+             "x": 166,
+             "y": 603
+            },
+            "bottom_left": {
+             "x": 127,
+             "y": 604
+            },
+            "width": 39,
+            "height": 17
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "No:",
+           "bounds": {
+            "top_left": {
+             "x": 172,
+             "y": 585
+            },
+            "top_right": {
+             "x": 196,
+             "y": 585
+            },
+            "bottom_right": {
+             "x": 196,
+             "y": 602
+            },
+            "bottom_left": {
+             "x": 172,
+             "y": 603
+            },
+            "width": 24,
+            "height": 17.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "xx7730",
+           "bounds": {
+            "top_left": {
+             "x": 201,
+             "y": 584
+            },
+            "top_right": {
+             "x": 246,
+             "y": 583
+            },
+            "bottom_right": {
+             "x": 246,
+             "y": 600
+            },
+            "bottom_left": {
+             "x": 201,
+             "y": 602
+            },
+            "width": 45,
+            "height": 17.5
+           },
+           "confidence": 0.98
+          },
+          {
+           "text": "60,000",
+           "bounds": {
+            "top_left": {
+             "x": 319,
+             "y": 585
+            },
+            "top_right": {
+             "x": 360,
+             "y": 584
+            },
+            "bottom_right": {
+             "x": 361,
+             "y": 600
+            },
+            "bottom_left": {
+             "x": 319,
+             "y": 601
+            },
+            "width": 41.5,
+            "height": 16
+           },
+           "confidence": 0.71
+          }
+         ],
+         "average_confidence": 0.95,
+         "bounds": {
+          "top_left": {
+           "x": 48,
+           "y": 583
+          },
+          "top_right": {
+           "x": 361,
+           "y": 583
+          },
+          "bottom_right": {
+           "x": 361,
+           "y": 606
+          },
+          "bottom_left": {
+           "x": 48,
+           "y": 606
+          },
+          "width": 313,
+          "height": 17
+         }
+        },
+        {
+         "text": "CUSTOMER THED",
+         "words": [
+          {
+           "text": "CUSTOMER",
+           "bounds": {
+            "top_left": {
+             "x": 48,
+             "y": 638
+            },
+            "top_right": {
+             "x": 104,
+             "y": 637
+            },
+            "bottom_right": {
+             "x": 105,
+             "y": 647
+            },
+            "bottom_left": {
+             "x": 48,
+             "y": 647
+            },
+            "width": 56.5,
+            "height": 9.5
+           },
+           "confidence": 0.38
+          },
+          {
+           "text": "THED",
+           "bounds": {
+            "top_left": {
+             "x": 116,
+             "y": 637
+            },
+            "top_right": {
+             "x": 141,
+             "y": 637
+            },
+            "bottom_right": {
+             "x": 142,
+             "y": 647
+            },
+            "bottom_left": {
+             "x": 116,
+             "y": 647
+            },
+            "width": 25.5,
+            "height": 10
+           },
+           "confidence": 0.36
+          }
+         ],
+         "average_confidence": 0.37,
+         "bounds": {
+          "top_left": {
+           "x": 48,
+           "y": 637
+          },
+          "top_right": {
+           "x": 142,
+           "y": 637
+          },
+          "bottom_right": {
+           "x": 142,
+           "y": 647
+          },
+          "bottom_left": {
+           "x": 48,
+           "y": 647
+          },
+          "width": 94,
+          "height": 10
+         }
+        }
+       ],
+       "page": 1,
+       "width": 432,
+       "height": 648
+      }
+     ],
+     "width": 432,
+     "height": 648
+    }
+   }
+  ]
+ },
+ "latency_s": 9.910331582002982,
+ "attempts": 1
+}

@@ -1,0 +1,1543 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_020",
+ "run": 2,
+ "timestamp_utc": "2026-11-01T14:53:41.195899+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1638174 bytes, sha256=6213439292eb4c2ad7e04afab6bb5bc7d1d5925d18dc392c36f233d394ca7c19>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-fc633e4f-02fb-47c0-867b-1b26655f4197",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"377,859\",\"subtotal_price\":\"325,600\",\"items\":[{\"name\":\"1 cashew nuts chkn\"},{\"name\":\"1 garlic pepper beef\"},{\"name\":\"1 red curry beef\"},{\"name\":\"1 phad thai\"},{\"name\":\"4 steamed rice\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793544821,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 776,
+   "prompt_tokens": 11034,
+   "total_tokens": 11810,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "1 cashew nuts chkn\n64,500\n1 garlic pepper beef\n79,500\n1 red curry beef\n69,500\n1 phad thai\n64,500\n4 steamed rice\n47,600\nSUBTOTAL\n325,600\n[x] Service chro\n17,908\n10% PB1\n34,351\nTOTAL 377,859\n------------\n----\n-----",
+     "sections": [
+      {
+       "text": "1 cashew nuts chkn\n64,500\n1 garlic pepper beef\n79,500\n1 red curry beef\n69,500\n1 phad thai\n64,500\n4 steamed rice\n47,600\nSUBTOTAL\n325,600\n[x] Service chro\n17,908\n10% PB1\n34,351\nTOTAL 377,859\n------------\n----\n-----",
+       "lines": [
+        {
+         "text": "1 cashew nuts chkn",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 169,
+             "y": 608
+            },
+            "top_right": {
+             "x": 183,
+             "y": 608
+            },
+            "bottom_right": {
+             "x": 182,
+             "y": 637
+            },
+            "bottom_left": {
+             "x": 168,
+             "y": 638
+            },
+            "width": 14,
+            "height": 29.5
+           },
+           "confidence": 0.94
+          },
+          {
+           "text": "cashew",
+           "bounds": {
+            "top_left": {
+             "x": 198,
+             "y": 608
+            },
+            "top_right": {
+             "x": 291,
+             "y": 607
+            },
+            "bottom_right": {
+             "x": 291,
+             "y": 635
+            },
+            "bottom_left": {
+             "x": 198,
+             "y": 637
+            },
+            "width": 93,
+            "height": 28.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "nuts",
+           "bounds": {
+            "top_left": {
+             "x": 308,
+             "y": 607
+            },
+            "top_right": {
+             "x": 371,
+             "y": 605
+            },
+            "bottom_right": {
+             "x": 371,
+             "y": 633
+            },
+            "bottom_left": {
+             "x": 308,
+             "y": 635
+            },
+            "width": 63,
+            "height": 28
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "chkn",
+           "bounds": {
+            "top_left": {
+             "x": 388,
+             "y": 605
+            },
+            "top_right": {
+             "x": 449,
+             "y": 603
+            },
+            "bottom_right": {
+             "x": 450,
+             "y": 632
+            },
+            "bottom_left": {
+             "x": 388,
+             "y": 633
+            },
+            "width": 61.5,
+            "height": 28.5
+           },
+           "confidence": 0.95
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 168,
+           "y": 603
+          },
+          "top_right": {
+           "x": 450,
+           "y": 603
+          },
+          "bottom_right": {
+           "x": 450,
+           "y": 638
+          },
+          "bottom_left": {
+           "x": 168,
+           "y": 638
+          },
+          "width": 282,
+          "height": 28.5
+         }
+        },
+        {
+         "text": "64,500",
+         "words": [
+          {
+           "text": "64,500",
+           "bounds": {
+            "top_left": {
+             "x": 674,
+             "y": 597
+            },
+            "top_right": {
+             "x": 769,
+             "y": 596
+            },
+            "bottom_right": {
+             "x": 768,
+             "y": 626
+            },
+            "bottom_left": {
+             "x": 674,
+             "y": 625
+            },
+            "width": 94.5,
+            "height": 29
+           },
+           "confidence": 0.88
+          }
+         ],
+         "average_confidence": 0.88,
+         "bounds": {
+          "top_left": {
+           "x": 674,
+           "y": 596
+          },
+          "top_right": {
+           "x": 769,
+           "y": 596
+          },
+          "bottom_right": {
+           "x": 769,
+           "y": 626
+          },
+          "bottom_left": {
+           "x": 674,
+           "y": 626
+          },
+          "width": 95,
+          "height": 29
+         }
+        },
+        {
+         "text": "1 garlic pepper beef",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 170,
+             "y": 639
+            },
+            "top_right": {
+             "x": 186,
+             "y": 639
+            },
+            "bottom_right": {
+             "x": 186,
+             "y": 673
+            },
+            "bottom_left": {
+             "x": 170,
+             "y": 673
+            },
+            "width": 16,
+            "height": 34
+           },
+           "confidence": 0.96
+          },
+          {
+           "text": "garlic",
+           "bounds": {
+            "top_left": {
+             "x": 198,
+             "y": 639
+            },
+            "top_right": {
+             "x": 294,
+             "y": 639
+            },
+            "bottom_right": {
+             "x": 294,
+             "y": 670
+            },
+            "bottom_left": {
+             "x": 198,
+             "y": 673
+            },
+            "width": 96,
+            "height": 32.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "pepper",
+           "bounds": {
+            "top_left": {
+             "x": 311,
+             "y": 638
+            },
+            "top_right": {
+             "x": 406,
+             "y": 636
+            },
+            "bottom_right": {
+             "x": 406,
+             "y": 666
+            },
+            "bottom_left": {
+             "x": 311,
+             "y": 670
+            },
+            "width": 95,
+            "height": 31
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "beef",
+           "bounds": {
+            "top_left": {
+             "x": 419,
+             "y": 636
+            },
+            "top_right": {
+             "x": 485,
+             "y": 634
+            },
+            "bottom_right": {
+             "x": 485,
+             "y": 663
+            },
+            "bottom_left": {
+             "x": 419,
+             "y": 666
+            },
+            "width": 66,
+            "height": 29.5
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 170,
+           "y": 634
+          },
+          "top_right": {
+           "x": 485,
+           "y": 634
+          },
+          "bottom_right": {
+           "x": 485,
+           "y": 673
+          },
+          "bottom_left": {
+           "x": 170,
+           "y": 673
+          },
+          "width": 315,
+          "height": 32.5
+         }
+        },
+        {
+         "text": "79,500",
+         "words": [
+          {
+           "text": "79,500",
+           "bounds": {
+            "top_left": {
+             "x": 676,
+             "y": 630
+            },
+            "top_right": {
+             "x": 769,
+             "y": 627
+            },
+            "bottom_right": {
+             "x": 769,
+             "y": 657
+            },
+            "bottom_left": {
+             "x": 676,
+             "y": 657
+            },
+            "width": 93,
+            "height": 28.5
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 676,
+           "y": 627
+          },
+          "top_right": {
+           "x": 769,
+           "y": 627
+          },
+          "bottom_right": {
+           "x": 769,
+           "y": 657
+          },
+          "bottom_left": {
+           "x": 676,
+           "y": 657
+          },
+          "width": 93,
+          "height": 28.5
+         }
+        },
+        {
+         "text": "1 red curry beef",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 168,
+             "y": 670
+            },
+            "top_right": {
+             "x": 184,
+             "y": 670
+            },
+            "bottom_right": {
+             "x": 184,
+             "y": 702
+            },
+            "bottom_left": {
+             "x": 168,
+             "y": 702
+            },
+            "width": 16,
+            "height": 32
+           },
+           "confidence": 0.85
+          },
+          {
+           "text": "red",
+           "bounds": {
+            "top_left": {
+             "x": 198,
+             "y": 671
+            },
+            "top_right": {
+             "x": 246,
+             "y": 672
+            },
+            "bottom_right": {
+             "x": 247,
+             "y": 703
+            },
+            "bottom_left": {
+             "x": 198,
+             "y": 703
+            },
+            "width": 48.5,
+            "height": 31.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "curry",
+           "bounds": {
+            "top_left": {
+             "x": 263,
+             "y": 672
+            },
+            "top_right": {
+             "x": 343,
+             "y": 671
+            },
+            "bottom_right": {
+             "x": 344,
+             "y": 701
+            },
+            "bottom_left": {
+             "x": 264,
+             "y": 703
+            },
+            "width": 80,
+            "height": 30.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "beef",
+           "bounds": {
+            "top_left": {
+             "x": 356,
+             "y": 671
+            },
+            "top_right": {
+             "x": 422,
+             "y": 667
+            },
+            "bottom_right": {
+             "x": 424,
+             "y": 697
+            },
+            "bottom_left": {
+             "x": 357,
+             "y": 701
+            },
+            "width": 66.5,
+            "height": 30
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.95,
+         "bounds": {
+          "top_left": {
+           "x": 168,
+           "y": 667
+          },
+          "top_right": {
+           "x": 424,
+           "y": 667
+          },
+          "bottom_right": {
+           "x": 424,
+           "y": 703
+          },
+          "bottom_left": {
+           "x": 168,
+           "y": 703
+          },
+          "width": 256,
+          "height": 31.5
+         }
+        },
+        {
+         "text": "69,500",
+         "words": [
+          {
+           "text": "69,500",
+           "bounds": {
+            "top_left": {
+             "x": 676,
+             "y": 664
+            },
+            "top_right": {
+             "x": 769,
+             "y": 660
+            },
+            "bottom_right": {
+             "x": 769,
+             "y": 690
+            },
+            "bottom_left": {
+             "x": 675,
+             "y": 690
+            },
+            "width": 93.5,
+            "height": 28
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 675,
+           "y": 660
+          },
+          "top_right": {
+           "x": 769,
+           "y": 660
+          },
+          "bottom_right": {
+           "x": 769,
+           "y": 690
+          },
+          "bottom_left": {
+           "x": 675,
+           "y": 690
+          },
+          "width": 94,
+          "height": 28
+         }
+        },
+        {
+         "text": "1 phad thai",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 169,
+             "y": 705
+            },
+            "top_right": {
+             "x": 185,
+             "y": 704
+            },
+            "bottom_right": {
+             "x": 185,
+             "y": 737
+            },
+            "bottom_left": {
+             "x": 170,
+             "y": 737
+            },
+            "width": 15.5,
+            "height": 32.5
+           },
+           "confidence": 0.89
+          },
+          {
+           "text": "phad",
+           "bounds": {
+            "top_left": {
+             "x": 199,
+             "y": 704
+            },
+            "top_right": {
+             "x": 264,
+             "y": 704
+            },
+            "bottom_right": {
+             "x": 264,
+             "y": 735
+            },
+            "bottom_left": {
+             "x": 199,
+             "y": 737
+            },
+            "width": 65,
+            "height": 32
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "thai",
+           "bounds": {
+            "top_left": {
+             "x": 282,
+             "y": 704
+            },
+            "top_right": {
+             "x": 345,
+             "y": 706
+            },
+            "bottom_right": {
+             "x": 346,
+             "y": 732
+            },
+            "bottom_left": {
+             "x": 283,
+             "y": 734
+            },
+            "width": 63,
+            "height": 28
+           },
+           "confidence": 0.74
+          }
+         ],
+         "average_confidence": 0.87,
+         "bounds": {
+          "top_left": {
+           "x": 169,
+           "y": 704
+          },
+          "top_right": {
+           "x": 346,
+           "y": 704
+          },
+          "bottom_right": {
+           "x": 346,
+           "y": 737
+          },
+          "bottom_left": {
+           "x": 169,
+           "y": 737
+          },
+          "width": 177,
+          "height": 32
+         }
+        },
+        {
+         "text": "64,500",
+         "words": [
+          {
+           "text": "64,500",
+           "bounds": {
+            "top_left": {
+             "x": 675,
+             "y": 693
+            },
+            "top_right": {
+             "x": 771,
+             "y": 691
+            },
+            "bottom_right": {
+             "x": 772,
+             "y": 722
+            },
+            "bottom_left": {
+             "x": 675,
+             "y": 725
+            },
+            "width": 96.5,
+            "height": 31.5
+           },
+           "confidence": 0.97
+          }
+         ],
+         "average_confidence": 0.97,
+         "bounds": {
+          "top_left": {
+           "x": 675,
+           "y": 691
+          },
+          "top_right": {
+           "x": 772,
+           "y": 691
+          },
+          "bottom_right": {
+           "x": 772,
+           "y": 725
+          },
+          "bottom_left": {
+           "x": 675,
+           "y": 725
+          },
+          "width": 97,
+          "height": 31.5
+         }
+        },
+        {
+         "text": "4 steamed rice",
+         "words": [
+          {
+           "text": "4",
+           "bounds": {
+            "top_left": {
+             "x": 168,
+             "y": 738
+            },
+            "top_right": {
+             "x": 182,
+             "y": 737
+            },
+            "bottom_right": {
+             "x": 182,
+             "y": 766
+            },
+            "bottom_left": {
+             "x": 168,
+             "y": 766
+            },
+            "width": 14,
+            "height": 28.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "steamed",
+           "bounds": {
+            "top_left": {
+             "x": 200,
+             "y": 737
+            },
+            "top_right": {
+             "x": 312,
+             "y": 735
+            },
+            "bottom_right": {
+             "x": 313,
+             "y": 764
+            },
+            "bottom_left": {
+             "x": 200,
+             "y": 766
+            },
+            "width": 112.5,
+            "height": 29
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "rice",
+           "bounds": {
+            "top_left": {
+             "x": 328,
+             "y": 735
+            },
+            "top_right": {
+             "x": 391,
+             "y": 732
+            },
+            "bottom_right": {
+             "x": 393,
+             "y": 761
+            },
+            "bottom_left": {
+             "x": 329,
+             "y": 764
+            },
+            "width": 63.5,
+            "height": 29
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 168,
+           "y": 732
+          },
+          "top_right": {
+           "x": 393,
+           "y": 732
+          },
+          "bottom_right": {
+           "x": 393,
+           "y": 766
+          },
+          "bottom_left": {
+           "x": 168,
+           "y": 766
+          },
+          "width": 225,
+          "height": 29
+         }
+        },
+        {
+         "text": "47,600",
+         "words": [
+          {
+           "text": "47,600",
+           "bounds": {
+            "top_left": {
+             "x": 678,
+             "y": 727
+            },
+            "top_right": {
+             "x": 774,
+             "y": 725
+            },
+            "bottom_right": {
+             "x": 774,
+             "y": 758
+            },
+            "bottom_left": {
+             "x": 678,
+             "y": 758
+            },
+            "width": 96,
+            "height": 32
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 678,
+           "y": 725
+          },
+          "top_right": {
+           "x": 774,
+           "y": 725
+          },
+          "bottom_right": {
+           "x": 774,
+           "y": 758
+          },
+          "bottom_left": {
+           "x": 678,
+           "y": 758
+          },
+          "width": 96,
+          "height": 32
+         }
+        },
+        {
+         "text": "SUBTOTAL",
+         "words": [
+          {
+           "text": "SUBTOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 202,
+             "y": 800
+            },
+            "top_right": {
+             "x": 327,
+             "y": 799
+            },
+            "bottom_right": {
+             "x": 327,
+             "y": 826
+            },
+            "bottom_left": {
+             "x": 202,
+             "y": 829
+            },
+            "width": 125,
+            "height": 28
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 202,
+           "y": 799
+          },
+          "top_right": {
+           "x": 327,
+           "y": 799
+          },
+          "bottom_right": {
+           "x": 327,
+           "y": 829
+          },
+          "bottom_left": {
+           "x": 202,
+           "y": 829
+          },
+          "width": 125,
+          "height": 28
+         }
+        },
+        {
+         "text": "325,600",
+         "words": [
+          {
+           "text": "325,600",
+           "bounds": {
+            "top_left": {
+             "x": 666,
+             "y": 795
+            },
+            "top_right": {
+             "x": 777,
+             "y": 790
+            },
+            "bottom_right": {
+             "x": 776,
+             "y": 820
+            },
+            "bottom_left": {
+             "x": 666,
+             "y": 821
+            },
+            "width": 110.5,
+            "height": 28
+           },
+           "confidence": 0.74
+          }
+         ],
+         "average_confidence": 0.74,
+         "bounds": {
+          "top_left": {
+           "x": 666,
+           "y": 790
+          },
+          "top_right": {
+           "x": 777,
+           "y": 790
+          },
+          "bottom_right": {
+           "x": 777,
+           "y": 821
+          },
+          "bottom_left": {
+           "x": 666,
+           "y": 821
+          },
+          "width": 111,
+          "height": 28
+         }
+        },
+        {
+         "text": "[x] Service chro",
+         "words": [
+          {
+           "text": "[x]",
+           "bounds": {
+            "top_left": {
+             "x": 143,
+             "y": 816
+            },
+            "top_right": {
+             "x": 173,
+             "y": 816
+            },
+            "bottom_right": {
+             "x": 173,
+             "y": 851
+            },
+            "bottom_left": {
+             "x": 143,
+             "y": 851
+            },
+            "width": 30,
+            "height": 35
+           },
+           "confidence": 1
+          },
+          {
+           "text": "Service",
+           "bounds": {
+            "top_left": {
+             "x": 203,
+             "y": 834
+            },
+            "top_right": {
+             "x": 314,
+             "y": 832
+            },
+            "bottom_right": {
+             "x": 314,
+             "y": 864
+            },
+            "bottom_left": {
+             "x": 204,
+             "y": 864
+            },
+            "width": 110.5,
+            "height": 31
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "chro",
+           "bounds": {
+            "top_left": {
+             "x": 331,
+             "y": 832
+            },
+            "top_right": {
+             "x": 395,
+             "y": 830
+            },
+            "bottom_right": {
+             "x": 395,
+             "y": 863
+            },
+            "bottom_left": {
+             "x": 331,
+             "y": 864
+            },
+            "width": 64,
+            "height": 32.5
+           },
+           "confidence": 0.84
+          }
+         ],
+         "average_confidence": 0.92,
+         "bounds": {
+          "top_left": {
+           "x": 143,
+           "y": 816
+          },
+          "top_right": {
+           "x": 395,
+           "y": 816
+          },
+          "bottom_right": {
+           "x": 395,
+           "y": 864
+          },
+          "bottom_left": {
+           "x": 143,
+           "y": 864
+          },
+          "width": 252,
+          "height": 48
+         }
+        },
+        {
+         "text": "17,908",
+         "words": [
+          {
+           "text": "17,908",
+           "bounds": {
+            "top_left": {
+             "x": 685,
+             "y": 823
+            },
+            "top_right": {
+             "x": 779,
+             "y": 823
+            },
+            "bottom_right": {
+             "x": 779,
+             "y": 851
+            },
+            "bottom_left": {
+             "x": 685,
+             "y": 855
+            },
+            "width": 94,
+            "height": 30
+           },
+           "confidence": 0.72
+          }
+         ],
+         "average_confidence": 0.72,
+         "bounds": {
+          "top_left": {
+           "x": 685,
+           "y": 823
+          },
+          "top_right": {
+           "x": 779,
+           "y": 823
+          },
+          "bottom_right": {
+           "x": 779,
+           "y": 855
+          },
+          "bottom_left": {
+           "x": 685,
+           "y": 855
+          },
+          "width": 94,
+          "height": 30
+         }
+        },
+        {
+         "text": "10% PB1",
+         "words": [
+          {
+           "text": "10%",
+           "bounds": {
+            "top_left": {
+             "x": 203,
+             "y": 867
+            },
+            "top_right": {
+             "x": 253,
+             "y": 865
+            },
+            "bottom_right": {
+             "x": 253,
+             "y": 895
+            },
+            "bottom_left": {
+             "x": 203,
+             "y": 896
+            },
+            "width": 50,
+            "height": 29.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "PB1",
+           "bounds": {
+            "top_left": {
+             "x": 265,
+             "y": 865
+            },
+            "top_right": {
+             "x": 311,
+             "y": 864
+            },
+            "bottom_right": {
+             "x": 312,
+             "y": 893
+            },
+            "bottom_left": {
+             "x": 265,
+             "y": 895
+            },
+            "width": 46.5,
+            "height": 29.5
+           },
+           "confidence": 0.71
+          }
+         ],
+         "average_confidence": 0.85,
+         "bounds": {
+          "top_left": {
+           "x": 203,
+           "y": 864
+          },
+          "top_right": {
+           "x": 312,
+           "y": 864
+          },
+          "bottom_right": {
+           "x": 312,
+           "y": 896
+          },
+          "bottom_left": {
+           "x": 203,
+           "y": 896
+          },
+          "width": 109,
+          "height": 29.5
+         }
+        },
+        {
+         "text": "34,351",
+         "words": [
+          {
+           "text": "34,351",
+           "bounds": {
+            "top_left": {
+             "x": 682,
+             "y": 854
+            },
+            "top_right": {
+             "x": 779,
+             "y": 854
+            },
+            "bottom_right": {
+             "x": 779,
+             "y": 888
+            },
+            "bottom_left": {
+             "x": 682,
+             "y": 888
+            },
+            "width": 97,
+            "height": 34
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 682,
+           "y": 854
+          },
+          "top_right": {
+           "x": 779,
+           "y": 854
+          },
+          "bottom_right": {
+           "x": 779,
+           "y": 888
+          },
+          "bottom_left": {
+           "x": 682,
+           "y": 888
+          },
+          "width": 97,
+          "height": 34
+         }
+        },
+        {
+         "text": "TOTAL 377,859",
+         "words": [
+          {
+           "text": "TOTAL",
+           "bounds": {
+            "top_left": {
+             "x": 206,
+             "y": 929
+            },
+            "top_right": {
+             "x": 349,
+             "y": 925
+            },
+            "bottom_right": {
+             "x": 350,
+             "y": 962
+            },
+            "bottom_left": {
+             "x": 206,
+             "y": 966
+            },
+            "width": 143.5,
+            "height": 37
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "377,859",
+           "bounds": {
+            "top_left": {
+             "x": 557,
+             "y": 918
+            },
+            "top_right": {
+             "x": 773,
+             "y": 918
+            },
+            "bottom_right": {
+             "x": 773,
+             "y": 958
+            },
+            "bottom_left": {
+             "x": 556,
+             "y": 958
+            },
+            "width": 216.5,
+            "height": 40
+           },
+           "confidence": 0.88
+          }
+         ],
+         "average_confidence": 0.94,
+         "bounds": {
+          "top_left": {
+           "x": 206,
+           "y": 918
+          },
+          "top_right": {
+           "x": 773,
+           "y": 918
+          },
+          "bottom_right": {
+           "x": 773,
+           "y": 966
+          },
+          "bottom_left": {
+           "x": 206,
+           "y": 966
+          },
+          "width": 567,
+          "height": 40
+         }
+        },
+        {
+         "text": "------------",
+         "words": [
+          {
+           "text": "------------",
+           "bounds": {
+            "top_left": {
+             "x": 214,
+             "y": 1008
+            },
+            "top_right": {
+             "x": 387,
+             "y": 999
+            },
+            "bottom_right": {
+             "x": 387,
+             "y": 1008
+            },
+            "bottom_left": {
+             "x": 215,
+             "y": 1015
+            },
+            "width": 172.5,
+            "height": 8
+           },
+           "confidence": 0.51
+          }
+         ],
+         "average_confidence": 0.51,
+         "bounds": {
+          "top_left": {
+           "x": 214,
+           "y": 999
+          },
+          "top_right": {
+           "x": 387,
+           "y": 999
+          },
+          "bottom_right": {
+           "x": 387,
+           "y": 1015
+          },
+          "bottom_left": {
+           "x": 214,
+           "y": 1015
+          },
+          "width": 173,
+          "height": 8
+         }
+        },
+        {
+         "text": "----",
+         "words": [
+          {
+           "text": "----",
+           "bounds": {
+            "top_left": {
+             "x": 282,
+             "y": 1108
+            },
+            "top_right": {
+             "x": 325,
+             "y": 1107
+            },
+            "bottom_right": {
+             "x": 325,
+             "y": 1116
+            },
+            "bottom_left": {
+             "x": 282,
+             "y": 1119
+            },
+            "width": 43,
+            "height": 10
+           },
+           "confidence": 0.82
+          }
+         ],
+         "average_confidence": 0.82,
+         "bounds": {
+          "top_left": {
+           "x": 282,
+           "y": 1107
+          },
+          "top_right": {
+           "x": 325,
+           "y": 1107
+          },
+          "bottom_right": {
+           "x": 325,
+           "y": 1119
+          },
+          "bottom_left": {
+           "x": 282,
+           "y": 1119
+          },
+          "width": 43,
+          "height": 10
+         }
+        },
+        {
+         "text": "-----",
+         "words": [
+          {
+           "text": "-----",
+           "bounds": {
+            "top_left": {
+             "x": 702,
+             "y": 1100
+            },
+            "top_right": {
+             "x": 766,
+             "y": 1101
+            },
+            "bottom_right": {
+             "x": 766,
+             "y": 1108
+            },
+            "bottom_left": {
+             "x": 701,
+             "y": 1107
+            },
+            "width": 64.5,
+            "height": 7
+           },
+           "confidence": 0.75
+          }
+         ],
+         "average_confidence": 0.75,
+         "bounds": {
+          "top_left": {
+           "x": 701,
+           "y": 1100
+          },
+          "top_right": {
+           "x": 766,
+           "y": 1100
+          },
+          "bottom_right": {
+           "x": 766,
+           "y": 1108
+          },
+          "bottom_left": {
+           "x": 701,
+           "y": 1108
+          },
+          "width": 65,
+          "height": 7
+         }
+        }
+       ],
+       "page": 1,
+       "width": 864,
+       "height": 1296
+      }
+     ],
+     "width": 864,
+     "height": 1296
+    }
+   }
+  ]
+ },
+ "latency_s": 156.835428598999,
+ "attempts": 1
+}

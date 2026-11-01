@@ -1,0 +1,1323 @@
+{
+ "model_name": "interfaze",
+ "receipt_id": "cord_test_008",
+ "run": 1,
+ "timestamp_utc": "2026-11-01T14:18:14.171566+00:00",
+ "request": {
+  "model": "interfaze-1",
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "You are extracting data from a photo of a store receipt.\n\nReturn JSON with these fields:\n- total_price: the final total amount printed on the receipt.\n- subtotal_price: the subtotal amount printed on the receipt, or null if no subtotal is printed.\n- items: one entry per purchased line item, in the order printed, with its name. Do not list sub-items, toppings or modifiers printed beneath an item as separate entries.\n\nCopy every value exactly as printed on the receipt, including currency symbols, commas and dots. Do not reformat."
+     },
+     {
+      "type": "image_url",
+      "image_url": {
+       "url": "<base64 jpeg, 1853544 bytes, sha256=58716693a6c0733358e66e64d7064a5a845424280bb55f9b5fa137b1af8c92fe>"
+      }
+     }
+    ]
+   }
+  ],
+  "response_format": {
+   "type": "json_schema",
+   "json_schema": {
+    "name": "receipt",
+    "strict": true,
+    "schema": {
+     "type": "object",
+     "properties": {
+      "total_price": {
+       "type": "string"
+      },
+      "subtotal_price": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "name": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "name"
+        ],
+        "additionalProperties": false
+       }
+      }
+     },
+     "required": [
+      "total_price",
+      "subtotal_price",
+      "items"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "temperature": 0,
+  "extra_headers": {
+   "x-interfaze-bypass-cache": "true"
+  }
+ },
+ "response": {
+  "id": "req-22cc71f2-5303-47c0-ad07-84d4016258c5",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "logprobs": null,
+    "message": {
+     "content": "{\"total_price\":\"50,000\",\"subtotal_price\":\"45,455\",\"items\":[{\"name\":\"1 [REG] BLACK SAKURA\"},{\"name\":\"1 COOKIE DOH SAUCES\"},{\"name\":\"1 NATA DE COCO\"}]}",
+     "refusal": null,
+     "role": "assistant",
+     "annotations": null,
+     "audio": null,
+     "function_call": null,
+     "tool_calls": null
+    }
+   }
+  ],
+  "created": 1793542694,
+  "model": "interfaze-1",
+  "object": "chat.completion",
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+   "completion_tokens": 727,
+   "prompt_tokens": 11005,
+   "total_tokens": 11732,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 0,
+    "rejected_prediction_tokens": null,
+    "cached_tokens": 0
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cached_tokens": 0
+   }
+  },
+  "vcache": false,
+  "precontext": [
+   {
+    "name": "ocr",
+    "result": {
+     "extracted_text": "1 [REG] BLACK SAKURA\n45,455\n1 COOKIE DOH SAUCES\n0\n1 NATA DE COCO\n0\nSub Total\n45,455\nPB1 (10%)\n4,545\nRounding\n0\nTotal\n50,000\nCard Payment\n50,000\n***\n***",
+     "sections": [
+      {
+       "text": "1 [REG] BLACK SAKURA\n45,455\n1 COOKIE DOH SAUCES\n0\n1 NATA DE COCO\n0\nSub Total\n45,455\nPB1 (10%)\n4,545\nRounding\n0\nTotal\n50,000\nCard Payment\n50,000\n***\n***",
+       "lines": [
+        {
+         "text": "1 [REG] BLACK SAKURA",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 56,
+             "y": 597
+            },
+            "top_right": {
+             "x": 73,
+             "y": 597
+            },
+            "bottom_right": {
+             "x": 72,
+             "y": 635
+            },
+            "bottom_left": {
+             "x": 55,
+             "y": 634
+            },
+            "width": 17,
+            "height": 37.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "[REG]",
+           "bounds": {
+            "top_left": {
+             "x": 80,
+             "y": 597
+            },
+            "top_right": {
+             "x": 194,
+             "y": 596
+            },
+            "bottom_right": {
+             "x": 193,
+             "y": 635
+            },
+            "bottom_left": {
+             "x": 80,
+             "y": 635
+            },
+            "width": 113.5,
+            "height": 38.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "BLACK",
+           "bounds": {
+            "top_left": {
+             "x": 201,
+             "y": 596
+            },
+            "top_right": {
+             "x": 313,
+             "y": 597
+            },
+            "bottom_right": {
+             "x": 313,
+             "y": 634
+            },
+            "bottom_left": {
+             "x": 200,
+             "y": 635
+            },
+            "width": 112.5,
+            "height": 38
+           },
+           "confidence": 1
+          },
+          {
+           "text": "SAKURA",
+           "bounds": {
+            "top_left": {
+             "x": 333,
+             "y": 597
+            },
+            "top_right": {
+             "x": 475,
+             "y": 598
+            },
+            "bottom_right": {
+             "x": 475,
+             "y": 631
+            },
+            "bottom_left": {
+             "x": 333,
+             "y": 634
+            },
+            "width": 142,
+            "height": 35
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 55,
+           "y": 596
+          },
+          "top_right": {
+           "x": 475,
+           "y": 596
+          },
+          "bottom_right": {
+           "x": 475,
+           "y": 635
+          },
+          "bottom_left": {
+           "x": 55,
+           "y": 635
+          },
+          "width": 420,
+          "height": 38
+         }
+        },
+        {
+         "text": "45,455",
+         "words": [
+          {
+           "text": "45,455",
+           "bounds": {
+            "top_left": {
+             "x": 720,
+             "y": 591
+            },
+            "top_right": {
+             "x": 836,
+             "y": 591
+            },
+            "bottom_right": {
+             "x": 836,
+             "y": 628
+            },
+            "bottom_left": {
+             "x": 720,
+             "y": 629
+            },
+            "width": 116,
+            "height": 37.5
+           },
+           "confidence": 0.98
+          }
+         ],
+         "average_confidence": 0.98,
+         "bounds": {
+          "top_left": {
+           "x": 720,
+           "y": 591
+          },
+          "top_right": {
+           "x": 836,
+           "y": 591
+          },
+          "bottom_right": {
+           "x": 836,
+           "y": 629
+          },
+          "bottom_left": {
+           "x": 720,
+           "y": 629
+          },
+          "width": 116,
+          "height": 37.5
+         }
+        },
+        {
+         "text": "1 COOKIE DOH SAUCES",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 55,
+             "y": 640
+            },
+            "top_right": {
+             "x": 72,
+             "y": 640
+            },
+            "bottom_right": {
+             "x": 72,
+             "y": 675
+            },
+            "bottom_left": {
+             "x": 55,
+             "y": 675
+            },
+            "width": 17,
+            "height": 35
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "COOKIE",
+           "bounds": {
+            "top_left": {
+             "x": 81,
+             "y": 640
+            },
+            "top_right": {
+             "x": 226,
+             "y": 640
+            },
+            "bottom_right": {
+             "x": 226,
+             "y": 675
+            },
+            "bottom_left": {
+             "x": 81,
+             "y": 675
+            },
+            "width": 145,
+            "height": 35
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "DOH",
+           "bounds": {
+            "top_left": {
+             "x": 244,
+             "y": 640
+            },
+            "top_right": {
+             "x": 315,
+             "y": 640
+            },
+            "bottom_right": {
+             "x": 315,
+             "y": 674
+            },
+            "bottom_left": {
+             "x": 244,
+             "y": 675
+            },
+            "width": 71,
+            "height": 34.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "SAUCES",
+           "bounds": {
+            "top_left": {
+             "x": 338,
+             "y": 641
+            },
+            "top_right": {
+             "x": 478,
+             "y": 641
+            },
+            "bottom_right": {
+             "x": 477,
+             "y": 674
+            },
+            "bottom_left": {
+             "x": 338,
+             "y": 674
+            },
+            "width": 139.5,
+            "height": 33
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 55,
+           "y": 640
+          },
+          "top_right": {
+           "x": 478,
+           "y": 640
+          },
+          "bottom_right": {
+           "x": 478,
+           "y": 675
+          },
+          "bottom_left": {
+           "x": 55,
+           "y": 675
+          },
+          "width": 423,
+          "height": 35
+         }
+        },
+        {
+         "text": "0",
+         "words": [
+          {
+           "text": "0",
+           "bounds": {
+            "top_left": {
+             "x": 819,
+             "y": 636
+            },
+            "top_right": {
+             "x": 834,
+             "y": 636
+            },
+            "bottom_right": {
+             "x": 834,
+             "y": 665
+            },
+            "bottom_left": {
+             "x": 819,
+             "y": 665
+            },
+            "width": 15,
+            "height": 29
+           },
+           "confidence": 0.9
+          }
+         ],
+         "average_confidence": 0.9,
+         "bounds": {
+          "top_left": {
+           "x": 819,
+           "y": 636
+          },
+          "top_right": {
+           "x": 834,
+           "y": 636
+          },
+          "bottom_right": {
+           "x": 834,
+           "y": 665
+          },
+          "bottom_left": {
+           "x": 819,
+           "y": 665
+          },
+          "width": 15,
+          "height": 29
+         }
+        },
+        {
+         "text": "1 NATA DE COCO",
+         "words": [
+          {
+           "text": "1",
+           "bounds": {
+            "top_left": {
+             "x": 52,
+             "y": 684
+            },
+            "top_right": {
+             "x": 69,
+             "y": 684
+            },
+            "bottom_right": {
+             "x": 69,
+             "y": 718
+            },
+            "bottom_left": {
+             "x": 52,
+             "y": 718
+            },
+            "width": 17,
+            "height": 34
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "NATA",
+           "bounds": {
+            "top_left": {
+             "x": 79,
+             "y": 684
+            },
+            "top_right": {
+             "x": 176,
+             "y": 684
+            },
+            "bottom_right": {
+             "x": 176,
+             "y": 718
+            },
+            "bottom_left": {
+             "x": 79,
+             "y": 718
+            },
+            "width": 97,
+            "height": 34
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "DE",
+           "bounds": {
+            "top_left": {
+             "x": 194,
+             "y": 684
+            },
+            "top_right": {
+             "x": 241,
+             "y": 684
+            },
+            "bottom_right": {
+             "x": 241,
+             "y": 718
+            },
+            "bottom_left": {
+             "x": 194,
+             "y": 718
+            },
+            "width": 47,
+            "height": 34
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "COCO",
+           "bounds": {
+            "top_left": {
+             "x": 258,
+             "y": 684
+            },
+            "top_right": {
+             "x": 359,
+             "y": 683
+            },
+            "bottom_right": {
+             "x": 359,
+             "y": 718
+            },
+            "bottom_left": {
+             "x": 258,
+             "y": 718
+            },
+            "width": 101,
+            "height": 34.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 52,
+           "y": 683
+          },
+          "top_right": {
+           "x": 359,
+           "y": 683
+          },
+          "bottom_right": {
+           "x": 359,
+           "y": 718
+          },
+          "bottom_left": {
+           "x": 52,
+           "y": 718
+          },
+          "width": 307,
+          "height": 34
+         }
+        },
+        {
+         "text": "0",
+         "words": [
+          {
+           "text": "0",
+           "bounds": {
+            "top_left": {
+             "x": 822,
+             "y": 678
+            },
+            "top_right": {
+             "x": 836,
+             "y": 678
+            },
+            "bottom_right": {
+             "x": 836,
+             "y": 708
+            },
+            "bottom_left": {
+             "x": 822,
+             "y": 708
+            },
+            "width": 14,
+            "height": 30
+           },
+           "confidence": 0.74
+          }
+         ],
+         "average_confidence": 0.74,
+         "bounds": {
+          "top_left": {
+           "x": 822,
+           "y": 678
+          },
+          "top_right": {
+           "x": 836,
+           "y": 678
+          },
+          "bottom_right": {
+           "x": 836,
+           "y": 708
+          },
+          "bottom_left": {
+           "x": 822,
+           "y": 708
+          },
+          "width": 14,
+          "height": 30
+         }
+        },
+        {
+         "text": "Sub Total",
+         "words": [
+          {
+           "text": "Sub",
+           "bounds": {
+            "top_left": {
+             "x": 34,
+             "y": 770
+            },
+            "top_right": {
+             "x": 99,
+             "y": 772
+            },
+            "bottom_right": {
+             "x": 98,
+             "y": 808
+            },
+            "bottom_left": {
+             "x": 33,
+             "y": 808
+            },
+            "width": 65,
+            "height": 37
+           },
+           "confidence": 1
+          },
+          {
+           "text": "Total",
+           "bounds": {
+            "top_left": {
+             "x": 119,
+             "y": 772
+            },
+            "top_right": {
+             "x": 206,
+             "y": 772
+            },
+            "bottom_right": {
+             "x": 206,
+             "y": 808
+            },
+            "bottom_left": {
+             "x": 118,
+             "y": 808
+            },
+            "width": 87.5,
+            "height": 36
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 33,
+           "y": 770
+          },
+          "top_right": {
+           "x": 206,
+           "y": 770
+          },
+          "bottom_right": {
+           "x": 206,
+           "y": 808
+          },
+          "bottom_left": {
+           "x": 33,
+           "y": 808
+          },
+          "width": 173,
+          "height": 37
+         }
+        },
+        {
+         "text": "45,455",
+         "words": [
+          {
+           "text": "45,455",
+           "bounds": {
+            "top_left": {
+             "x": 726,
+             "y": 767
+            },
+            "top_right": {
+             "x": 844,
+             "y": 767
+            },
+            "bottom_right": {
+             "x": 844,
+             "y": 804
+            },
+            "bottom_left": {
+             "x": 726,
+             "y": 802
+            },
+            "width": 118,
+            "height": 36
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 726,
+           "y": 767
+          },
+          "top_right": {
+           "x": 844,
+           "y": 767
+          },
+          "bottom_right": {
+           "x": 844,
+           "y": 804
+          },
+          "bottom_left": {
+           "x": 726,
+           "y": 804
+          },
+          "width": 118,
+          "height": 36
+         }
+        },
+        {
+         "text": "PB1 (10%)",
+         "words": [
+          {
+           "text": "PB1",
+           "bounds": {
+            "top_left": {
+             "x": 32,
+             "y": 818
+            },
+            "top_right": {
+             "x": 107,
+             "y": 819
+            },
+            "bottom_right": {
+             "x": 107,
+             "y": 856
+            },
+            "bottom_left": {
+             "x": 32,
+             "y": 856
+            },
+            "width": 75,
+            "height": 37.5
+           },
+           "confidence": 1
+          },
+          {
+           "text": "(10%)",
+           "bounds": {
+            "top_left": {
+             "x": 115,
+             "y": 819
+            },
+            "top_right": {
+             "x": 221,
+             "y": 816
+            },
+            "bottom_right": {
+             "x": 221,
+             "y": 857
+            },
+            "bottom_left": {
+             "x": 115,
+             "y": 856
+            },
+            "width": 106,
+            "height": 39
+           },
+           "confidence": 0.84
+          }
+         ],
+         "average_confidence": 0.92,
+         "bounds": {
+          "top_left": {
+           "x": 32,
+           "y": 816
+          },
+          "top_right": {
+           "x": 221,
+           "y": 816
+          },
+          "bottom_right": {
+           "x": 221,
+           "y": 857
+          },
+          "bottom_left": {
+           "x": 32,
+           "y": 857
+          },
+          "width": 189,
+          "height": 39
+         }
+        },
+        {
+         "text": "4,545",
+         "words": [
+          {
+           "text": "4,545",
+           "bounds": {
+            "top_left": {
+             "x": 750,
+             "y": 810
+            },
+            "top_right": {
+             "x": 848,
+             "y": 810
+            },
+            "bottom_right": {
+             "x": 848,
+             "y": 849
+            },
+            "bottom_left": {
+             "x": 750,
+             "y": 849
+            },
+            "width": 98,
+            "height": 39
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 750,
+           "y": 810
+          },
+          "top_right": {
+           "x": 848,
+           "y": 810
+          },
+          "bottom_right": {
+           "x": 848,
+           "y": 849
+          },
+          "bottom_left": {
+           "x": 750,
+           "y": 849
+          },
+          "width": 98,
+          "height": 39
+         }
+        },
+        {
+         "text": "Rounding",
+         "words": [
+          {
+           "text": "Rounding",
+           "bounds": {
+            "top_left": {
+             "x": 28,
+             "y": 864
+            },
+            "top_right": {
+             "x": 199,
+             "y": 864
+            },
+            "bottom_right": {
+             "x": 198,
+             "y": 903
+            },
+            "bottom_left": {
+             "x": 27,
+             "y": 903
+            },
+            "width": 171,
+            "height": 39
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 27,
+           "y": 864
+          },
+          "top_right": {
+           "x": 199,
+           "y": 864
+          },
+          "bottom_right": {
+           "x": 199,
+           "y": 903
+          },
+          "bottom_left": {
+           "x": 27,
+           "y": 903
+          },
+          "width": 172,
+          "height": 39
+         }
+        },
+        {
+         "text": "0",
+         "words": [
+          {
+           "text": "0",
+           "bounds": {
+            "top_left": {
+             "x": 830,
+             "y": 858
+            },
+            "top_right": {
+             "x": 847,
+             "y": 857
+            },
+            "bottom_right": {
+             "x": 850,
+             "y": 895
+            },
+            "bottom_left": {
+             "x": 830,
+             "y": 896
+            },
+            "width": 18.5,
+            "height": 38
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 830,
+           "y": 857
+          },
+          "top_right": {
+           "x": 850,
+           "y": 857
+          },
+          "bottom_right": {
+           "x": 850,
+           "y": 896
+          },
+          "bottom_left": {
+           "x": 830,
+           "y": 896
+          },
+          "width": 20,
+          "height": 38
+         }
+        },
+        {
+         "text": "Total",
+         "words": [
+          {
+           "text": "Total",
+           "bounds": {
+            "top_left": {
+             "x": 32,
+             "y": 912
+            },
+            "top_right": {
+             "x": 136,
+             "y": 913
+            },
+            "bottom_right": {
+             "x": 136,
+             "y": 952
+            },
+            "bottom_left": {
+             "x": 32,
+             "y": 951
+            },
+            "width": 104,
+            "height": 39
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 32,
+           "y": 912
+          },
+          "top_right": {
+           "x": 136,
+           "y": 912
+          },
+          "bottom_right": {
+           "x": 136,
+           "y": 952
+          },
+          "bottom_left": {
+           "x": 32,
+           "y": 952
+          },
+          "width": 104,
+          "height": 39
+         }
+        },
+        {
+         "text": "50,000",
+         "words": [
+          {
+           "text": "50,000",
+           "bounds": {
+            "top_left": {
+             "x": 717,
+             "y": 907
+            },
+            "top_right": {
+             "x": 850,
+             "y": 905
+            },
+            "bottom_right": {
+             "x": 850,
+             "y": 950
+            },
+            "bottom_left": {
+             "x": 717,
+             "y": 949
+            },
+            "width": 133,
+            "height": 43.5
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 717,
+           "y": 905
+          },
+          "top_right": {
+           "x": 850,
+           "y": 905
+          },
+          "bottom_right": {
+           "x": 850,
+           "y": 950
+          },
+          "bottom_left": {
+           "x": 717,
+           "y": 950
+          },
+          "width": 133,
+          "height": 43.5
+         }
+        },
+        {
+         "text": "Card Payment",
+         "words": [
+          {
+           "text": "Card",
+           "bounds": {
+            "top_left": {
+             "x": 20,
+             "y": 1108
+            },
+            "top_right": {
+             "x": 106,
+             "y": 1107
+            },
+            "bottom_right": {
+             "x": 107,
+             "y": 1149
+            },
+            "bottom_left": {
+             "x": 21,
+             "y": 1149
+            },
+            "width": 86,
+            "height": 41.5
+           },
+           "confidence": 0.99
+          },
+          {
+           "text": "Payment",
+           "bounds": {
+            "top_left": {
+             "x": 120,
+             "y": 1107
+            },
+            "top_right": {
+             "x": 279,
+             "y": 1106
+            },
+            "bottom_right": {
+             "x": 279,
+             "y": 1147
+            },
+            "bottom_left": {
+             "x": 121,
+             "y": 1149
+            },
+            "width": 158.5,
+            "height": 41.5
+           },
+           "confidence": 1
+          }
+         ],
+         "average_confidence": 1,
+         "bounds": {
+          "top_left": {
+           "x": 20,
+           "y": 1106
+          },
+          "top_right": {
+           "x": 279,
+           "y": 1106
+          },
+          "bottom_right": {
+           "x": 279,
+           "y": 1149
+          },
+          "bottom_left": {
+           "x": 20,
+           "y": 1149
+          },
+          "width": 259,
+          "height": 41.5
+         }
+        },
+        {
+         "text": "50,000",
+         "words": [
+          {
+           "text": "50,000",
+           "bounds": {
+            "top_left": {
+             "x": 743,
+             "y": 1101
+            },
+            "top_right": {
+             "x": 862,
+             "y": 1101
+            },
+            "bottom_right": {
+             "x": 862,
+             "y": 1136
+            },
+            "bottom_left": {
+             "x": 743,
+             "y": 1139
+            },
+            "width": 119,
+            "height": 36.5
+           },
+           "confidence": 0.99
+          }
+         ],
+         "average_confidence": 0.99,
+         "bounds": {
+          "top_left": {
+           "x": 743,
+           "y": 1101
+          },
+          "top_right": {
+           "x": 862,
+           "y": 1101
+          },
+          "bottom_right": {
+           "x": 862,
+           "y": 1139
+          },
+          "bottom_left": {
+           "x": 743,
+           "y": 1139
+          },
+          "width": 119,
+          "height": 36.5
+         }
+        },
+        {
+         "text": "***",
+         "words": [
+          {
+           "text": "***",
+           "bounds": {
+            "top_left": {
+             "x": 131,
+             "y": 1203
+            },
+            "top_right": {
+             "x": 174,
+             "y": 1203
+            },
+            "bottom_right": {
+             "x": 174,
+             "y": 1220
+            },
+            "bottom_left": {
+             "x": 131,
+             "y": 1220
+            },
+            "width": 43,
+            "height": 17
+           },
+           "confidence": 0.96
+          }
+         ],
+         "average_confidence": 0.96,
+         "bounds": {
+          "top_left": {
+           "x": 131,
+           "y": 1203
+          },
+          "top_right": {
+           "x": 174,
+           "y": 1203
+          },
+          "bottom_right": {
+           "x": 174,
+           "y": 1220
+          },
+          "bottom_left": {
+           "x": 131,
+           "y": 1220
+          },
+          "width": 43,
+          "height": 17
+         }
+        },
+        {
+         "text": "***",
+         "words": [
+          {
+           "text": "***",
+           "bounds": {
+            "top_left": {
+             "x": 748,
+             "y": 1195
+            },
+            "top_right": {
+             "x": 792,
+             "y": 1195
+            },
+            "bottom_right": {
+             "x": 792,
+             "y": 1213
+            },
+            "bottom_left": {
+             "x": 748,
+             "y": 1213
+            },
+            "width": 44,
+            "height": 18
+           },
+           "confidence": 0.95
+          }
+         ],
+         "average_confidence": 0.95,
+         "bounds": {
+          "top_left": {
+           "x": 748,
+           "y": 1195
+          },
+          "top_right": {
+           "x": 792,
+           "y": 1195
+          },
+          "bottom_right": {
+           "x": 792,
+           "y": 1213
+          },
+          "bottom_left": {
+           "x": 748,
+           "y": 1213
+          },
+          "width": 44,
+          "height": 18
+         }
+        }
+       ],
+       "page": 1,
+       "width": 864,
+       "height": 1296
+      }
+     ],
+     "width": 864,
+     "height": 1296
+    }
+   }
+  ]
+ },
+ "latency_s": 21.715941321999708,
+ "attempts": 1
+}
